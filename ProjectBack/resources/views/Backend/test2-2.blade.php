@@ -49,7 +49,7 @@
 														<p>รูปที่จะใช้สกรีน</p>
 													</div> -->
 													<p><strong>ภาพที่จะใช้สกรีน</strong></p>
-													<div class="img-resize"><span><img src="assets/images/<?php echo $order[0]->orderdetail_picture; ?>" alt="" /></span></div>
+													<div class="img-resize"><span><img src="assets/images/<?php echo $order[0]->picture; ?>" alt="" /></span></div>
 													<!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. </p> -->
 												</div>
 											</div>
@@ -64,6 +64,7 @@
 													<div id="boxCenter">
 														<p><strong>ตัวอย่างการสกรีน</strong></p>
 															<div id="display_image"></div><br>
+															<div class="img-resize"><span><img src="assets/images/<?php echo $order[0]->sample_picture; ?>"  alt="" /></span></div>
 												<!-- <span>*กรุณาเลือกลายรูป*</span><br><br> -->
 															
 																<input type="file" id="image_input" name="sample" accept="image/png, image/jpeg">
@@ -207,6 +208,15 @@
 									
 									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
 									<li><a href="purchase.php">การชำระเงิน</a></li>
+									<li><span class="opener">การจัดการระบบ</span>
+									<ul>
+                                            <li><a href="managementSize.html">จัดการราคาไซส์เสื้อ</a></li>
+                                            <li><a href="managementColorTshirt.html">จัดการสีเสื้อ</a></li>
+                                            <li><a href="managementColor.html">จัดการสีสกรีน</a></li>
+                                            <li><a href="managementBlock.html">จัดการบล็อกพิมพ์</a></li>
+                                            <li><a href="managementTransport.html">จัดการค่าขนส่ง</a></li>
+                                        </ul>
+										</li>
 								</ul>
 							</nav>
 						</div>

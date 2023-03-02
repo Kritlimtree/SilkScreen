@@ -41,25 +41,25 @@
 									</header> -->
 
 									<div class="row gtr-200">
-										<div class="col-6 col-12-medium">
-                                            <h4>ตัวอย่างงาน</h4>
+									<div class="col-6 col-12-medium">
 											<div id="boxCenter">
-												<div id="display_image"><span><img src="<?php echo $_SESSION["example"]; ?>" alt="" /></span></div><br>
-												<!-- <span>*กรุณาเลือกลายรูป*</span><br><br> -->
-												<!-- <input type="file" id="image_input" name="file" accept="image/png, image/jpeg"> -->
-											</div>
-											
+												<div class="displayShirt">												
+													<p><strong>ตัวอย่างสินค้า</strong></p>
+													<div class="img-resize"><span><img src="assets/images/<?php echo $sample[0]->sample_picture; ?>"  alt="" /></span></div>
+												</div>
+											</div>	
 										</div>
 										
 										<div class="col-6 col-12-medium">
 											<!-- <h3>Form</h3> -->
 
-													<form method="post" action="shopping.php" enctype="multipart/form-data">
+													<form method="post" action="confirmsimple" enctype="multipart/form-data">
+														@csrf
 														<div class="row gtr-uniform">
 															<div class="col-12 col-12-small">
 																<h4>ข้าพเจ้าได้ตรวจสอบตัวอย่างของงานแล้วพบว่า</h4>
 															</div>
-
+															 
 															<div class="col-8 col-12-small">
 																<input type="radio" id="demo-priority-low" name="fix" value="1">
 																<label for="demo-priority-low">งานถูกต้อง</label>
@@ -78,6 +78,7 @@
 																<input type="hidden" id="colorInputText">
 															</div>
 															<div class="col-12 col-12-small">
+															<input type="hidden" id="demo-priority-low" name="id" value="<?php echo $sample[0]->id_sample; ?>">
 																<input type="button" class="button primary" value="ยกเลิก"></input>
 																<input type="hidden" name="controller" value="<span id='color'></span>"/>
 																<button type="submit" class="button secondary" name="action" value="check">ยืนยัน</input>

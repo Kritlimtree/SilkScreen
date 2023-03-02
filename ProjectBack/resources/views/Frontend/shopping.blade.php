@@ -43,7 +43,7 @@ body{
     width: 1px;
 }
 .a{
-    text-align: center;
+    padding-left: 1px;
 }
 .b{
     display: inline-block;
@@ -177,71 +177,121 @@ h5{
 																		</tr>
 																	</thead>
 																	<tbody>
-																		
+																		<?php foreach($order as $key => $order1){ ?>
 																		<tr>
-																			<td><a href="checkorder4.php"><img style="width:100px" class="img-fluid" src="" alt="" /></a></td>
-																			<td><a href="checkorder4.php">ตรวจสอบสินค้า</a></td>
-																			<td><a href="purchase_1.php">ชำระเงิน</a></td>
-																			<td><a href="simple.php">ตัวอย่างสินค้า</a></td>
-																			<td>500</a></td>
-																			<td class="text-center"><ul class="a">
-																				
-																			</ul></a></td>
-																		</tr>
-																		<tr>
-																		<td><a href="checkorder3.php"><img style="width:90px" class="img-fluid" src="images/foxx.jpg" alt="" /></a></td>
-																			<td><a href="checkorder3.php">ตรวจสอบสินค้า</a></td>
-																			<td><a href="purchase_1.php">ชำระเงิน</a></td>
-																			<td><a href="simple.php">ตัวอย่างสินค้า</a></td>
-																			<td>1000</a></td>
-																			<td><ul class="a">
-																				<li class="b" title="กำลังประเมินราคา">																	
-																						<i class="d">1</i>																	
+																		<td>
+        
+            <form method="POST" action="{{ route('checkorder4') }}">
+                <input type="hidden" name="id" value="{{ $order1->id_order }}">
+                {!! csrf_field() !!}
+                <button type="submit" class="btn">
+                    <span class="glyphicon glyphicon-trash"><img style="width:100px" class="img-fluid"  src="assets/images/<?php echo $order1->picture ?>"></span>
+                </button>
+            </form>
+            
+
+    </td>
+	<td>
+        
+		<form method="POST" action="{{ route('checkorder4') }}">
+			<input type="hidden" name="id" value="{{ $order1->id_order }}">
+			{!! csrf_field() !!}
+			<button type="submit" class="btn">
+				<span class="glyphicon glyphicon-trash">ตรวจสอบสินค้า</span>
+			</button>
+		</form>
+		
+
+</td>
+<td>
+        
+		<form method="POST" action="{{ route('purchase') }}">
+			<input type="hidden" name="id" value="{{ $order1->id_order }}">
+			{!! csrf_field() !!}
+			<button type="submit" class="btn">
+				<span class="glyphicon glyphicon-trash">ชำระเงิน</span>
+			</button>
+		</form>
+		
+
+</td>	
+<td>
+        
+		<form method="POST" action="{{ route('sample') }}">
+			<input type="hidden" name="id" value="{{ $order1->id_order }}">
+			{!! csrf_field() !!}
+			<button type="submit" class="btn">
+				<span class="glyphicon glyphicon-trash">ตัวอย่างสินค้า</span>
+			</button>
+		</form>
+		
+
+</td>																	 
+																			 
+																			 
+																			<?php if($order1->order_price!=''){ ?>
+																			<td><?php echo $order1->order_price ?></td>
+																			
+																				<?php }else{ ?>
+																					<td>กำลังประเมินราคา</td>
+																					<?php } ?>
+																					<td><ul class="a">
+																					
+																				<li class="b" title="กำลังประเมินราคา">		
+																						<?php if($order1->id_status>='1'){ ?>														
+																						<i class="d">1</i>	
+																						<?php }else{ ?>			
+																							<i class="c">1</i>	
+																							<?php } ?>		
 																				</li>
+																				
 																				<li class="b" title="รอชำระเงินมัดจำ/เต็มจำนวน">																	
-																						<i class="d">2</i>																	
+																				<?php if($order1->id_status>='2'){ ?>														
+																						<i class="d">2</i>	
+																						<?php }else{ ?>			
+																							<i class="c">2</i>	
+																							<?php } ?>																	
 																				</li>
 																				<li class="b" title="รอการชำระเงินส่วนที่เหลือ">																		
-																						<i class="d">3</i>																		
+																				<?php if($order1->id_status>='3'){ ?>														
+																						<i class="d">3</i>	
+																						<?php }else{ ?>			
+																							<i class="c">3</i>	
+																							<?php } ?>																		
+																				</li>
+																				<li class="b" title="กำลังยืนยันการจ่ายเงิน">																		
+																				<?php if($order1->id_status>='4'){ ?>														
+																						<i class="d">4</i>	
+																						<?php }else{ ?>			
+																							<i class="c">4</i>	
+																							<?php } ?>																			
 																				</li>
 																				<li class="b" title="กำลังผลิต">																		
-																						<i class="d">4</i>																		
+																				<?php if($order1->id_status>='5'){ ?>														
+																						<i class="d">5</i>	
+																						<?php }else{ ?>			
+																							<i class="c">5</i>	
+																							<?php } ?>																				
 																				</li>
-																				<li class="b" title="กำลังจัดส่งสินค้า">																		
-																						<i class="d">5</i>																			
+																				<li class="b" title="กำลังจัดส่งสินค้า">																			
+																				<?php if($order1->id_status>='6'){ ?>														
+																						<i class="d">6</i>	
+																						<?php }else{ ?>			
+																							<i class="c">6</i>	
+																							<?php } ?>	
 																				</li>
 																				<li class="b" title="จัดส่งสินค้าสำเร็จ">																			
-																						<i class="c">6</i>
+																				<?php if($order1->id_status>='7'){ ?>														
+																						<i class="d">7</i>	
+																						<?php }else{ ?>			
+																							<i class="c">7</i>	
+																							<?php } ?>	
 																				</li>
 																			</ul></td>
+																			
 																		</tr>
-																		<tr>
-																		<td><a href="checkorder_1.php"><img style="width:90px" class="img-fluid" src="images/logo-design-nepal.png" alt="" /></a></td>
-																			<td><a href="checkorder_1.php">ตรวจสอบสินค้า</a></td>
-																			<td><a href="purchase_1.php">ชำระเงิน</a></td>
-																			<td><a href="simple.php">ตัวอย่างสินค้า</a></td>
-																			<td>500</a></td>
-																			<td><ul class="a">
-																				<li class="b" title="กำลังประเมินราคา">																				
-																						<i class="d">1</i>																				
-																				</li>
-																				<li class="b" title="รอชำระเงินมัดจำ/เต็มจำนวน">																				
-																						<i class="d">2</i>																				
-																				</li>
-																				<li class="b" title="รอการชำระเงินส่วนที่เหลือ">																				
-																						<i class="c">3</i>																		
-																				</li>
-																				<li class="b" title="กำลังผลิต">																				
-																						<i class="c">4</i>																				
-																				</li>
-																				<li class="b" title="กำลังจัดส่งสินค้า">																				
-																						<i class="c">5</i>																				
-																				</li>
-																				<li class="b" title="จัดส่งสินค้าสำเร็จ">
-																						<i class="c">6</i>	
-																				</li>
-																			</ul></td>
-																		</tr>
+																		<?php } ?>
+																		
 																	</tbody>
 																	
 																</table>
@@ -255,9 +305,10 @@ h5{
 								<p>1 กำลังประเมินราคา</p>
 																<p>2 รอชำระเงินมัดจำ/เต็มจำนวน</p>
 																<p>3 รอการชำระเงินส่วนที่เหลือ</p>
-																<p>4 กำลังผลิต</p>
-																<p>5 กำลังจัดส่งสินค้า</p>
-																<p>6 จัดส่งสินค้าสำเร็จ</p>
+																<p>4 กำลังยืนยันการจ่ายเงิน</p>
+																<p>5 กำลังผลิต</p>
+																<p>6 กำลังจัดส่งสินค้า</p>
+																<p>7 จัดส่งสินค้าสำเร็จ</p>
 						</div>
 					</div>
 

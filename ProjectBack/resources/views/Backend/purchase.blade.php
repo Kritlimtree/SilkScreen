@@ -161,9 +161,9 @@ hr {
 
 	.model {
   display: show;
-  position: ;
+   
   height: 80px;
-  width: ;: 80px;
+  width:  80px;
   
   overflow: hidden;
   background-color: white;
@@ -224,85 +224,19 @@ hr {
 											</thead>
 											<tbody>
 												<tr>
-													<td>bts1111220001</td>
-													<td>1000</td>
-													<td>500</td>
-													<td>500</td>
-													<td>500</td>
-													<td>11/11/65</td>
+													<?php foreach($order as $key => $order1){ ?>
+													<td><?php echo $order1->order_id ?></td>
+													<td><?php echo $order1->order_price ?></td>
+													<td><?php echo $order1->order_price*40/100 ?></td>
+													<td></td>
+													<td></td>
+													<td><?php echo $order1->payment_date ?></td>
 													<td><a href="#" class="fa fa-file"></a></td>
 													<td>รอตรวจสอบการมัดจำ</td>
 													<td><a href="detailPurchase.html">คลิ๊กที่นี่</a></td>
-													
-													<!-- <td>
-														<div class="displayShirt2">
-															<div class="img-resize2"><span><img src="" alt="" /></span></div>
-														</div>
-													</td> -->
-													<!-- <td>
-														<div class="positionTable">
-															<input type="button" class="button secondary" onclick="return confirm('ยืนยันการชำระเงินถูกต้อง')" value="การชำระถูกต้อง"></input><br>
-														</div>
-														<div class="positionTable">
-															<input type="button" class="button danger" onclick="popup();" value="การชำระไม่ถูกต้อง"></input><br>
-														</div>
-														
-													</td> -->
+													<?php } ?>
 												</tr>
-												<tr>
-												<td>bts1112220001</td>
-													<td>2000</td>
-													<td>1000</td>
-													<td>500</td>
-													<td>1500</td>
-													<td>12/11/65</td>
-													<td><a href="#" class="fa fa-file"></a></td>
-													<td>รอตรวจสอบการมัดจำ</td>
-													<td><a href="detailPurchase.html">คลิ๊กที่นี่</a></td>
-												</tr>
-												<tr>
-												<td>bts1112220002</td>
-													<td>3000</td>
-													<td>1500</td>
-													<td>1600</td>
-													<td>1400</td>
-													<td>12/11/65</td>
-													<td><a href="#" class="fa fa-file"></a></td>
-													<td>รอชำระเต็มจำนวน</td>
-													<td><a href="detailPurchase.html">คลิ๊กที่นี่</a></td>
-												</tr>
-												<tr>
-												<td>bts1013220001</td>
-													<td>1000</td>
-													<td>500</td>
-													<td>700</td>
-													<td>300</td>
-													<td>13/10/65</td>
-													<td><a href="#" class="fa fa-file"></a></td>
-													<td>รอตรวจสอบการมัดจำ</td>
-													<td><a href="detailPurchase.html">คลิ๊กที่นี่</a></td>
-												</tr>
-												<td>bts1113220002</td>
-													<td>1000</td>
-													<td>500</td>
-													<td>1000</td>
-													<td>0</td>
-													<td>13/11/65</td>
-													<td><a href="#" class="fa fa-file"></a></td>
-													<td>ชำระเรียบร้อย</td>
-													<td><a href="detailPurchase.html">คลิ๊กที่นี่</a></td>
-												</tr>
-												<tr>
-												<td>bts1013220001</td>
-													<td>1000</td>
-													<td>500</td>
-													<td>500</td>
-													<td>0</td>
-													<td>11/11/65</td>
-													<td><a href="#" class="fa fa-file"></a></td>
-													<td>รอตรวจสอบการมัดจำ</td>
-													<td><a href="detailPurchase.html">คลิ๊กที่นี่</a></td>
-												</tr>
+												
 												 
 											</tbody>
 											

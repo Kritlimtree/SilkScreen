@@ -205,6 +205,7 @@ function slider5(){
 																				<?php $c = 0 ; foreach($size as $key => $size) { ?>
 																				<td><?php echo $size ?></td>
 																				<?php $c++; } ?>
+																				<td></td>
 																			</tr>
 																		
 																			<tr>
@@ -212,6 +213,7 @@ function slider5(){
 																				<?php for($i=0;$i<$c;$i++) { ?>
 																				<td><input type="float" id="demo-name" required name="quantity[]" min="1" value="" /></td>
 																				<?php } ?>
+																				<td>ตัว</td>
 																			</tr>
 																			</tr>
 																			
@@ -221,6 +223,7 @@ function slider5(){
 																				<?php for($i=0;$i<$c;$i++) { ?>
 																				<td><input type="float" id="demo-name" required name="top[]" min="1" value="" /></td>
 																				<?php } ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																			 
 																			<tr>
@@ -228,6 +231,7 @@ function slider5(){
 																				<?php for($i=0;$i<$c;$i++) { ?>
 																				<td><input type="float" id="demo-name" required name="left[]" min="1" value="" /></td>
 																				<?php } ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																			 
 																			
@@ -236,11 +240,13 @@ function slider5(){
 																		<tfoot>
 																			<tr>
 																				<td>ขนาดภาพกว้าง(นิ้ว)</td>	
-																				<td><input type="float" id="demo-name" required name="wide" max="11.69" min="1" value="" /></td>						
+																				<td><input type="float" id="demo-name" required name="wide" max="11.69" min="1" value="" /></td>	
+																				<td>นิ้ว</td>					
 																			</tr>
 																			<tr>
 																				<td>ขนาดภาพยาว(นิ้ว)</td>
 																				<td><input type="float" id="demo-name" required name="long" max="16.54" min="1" value="" /></td>
+																				<td>นิ้ว</td>
 																			</tr>
 																		</tfoot>
 																	

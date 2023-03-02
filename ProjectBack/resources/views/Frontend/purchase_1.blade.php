@@ -22,20 +22,25 @@
 		//	echo "var deposit = '$deposit';";
 		//	echo '</script>';
 		//}
-		$price = $_SESSION["sum"];
-		$deposit = $price*40/100;
-		$_SESSION["deposit"] = $deposit;
-		echo '<script type="text/javascript">';
-			echo "var price = '$price';";
-			echo "var deposit = '$deposit';";
-			echo '</script>';
+		 
+		 $deposit = $purchase[0]->order_price*40/100;
+		 $price = $purchase[0]->order_price;
+		 echo '<script type="text/javascript">';
+		 echo "var price = '$price';";
+		 echo "var deposit = '$deposit';";
+		 echo '</script>';
+		
 		
 		?>
 		<script type="text/javascript">function toMudjum(){
+			var image = document.querySelector('#qr');
     document.getElementById("money123").innerHTML = deposit;
+	image.src = "https://promptpay.io/0873717758/"+deposit+".png";
 }
 function toFull(){
+	var image = document.querySelector('#qr');
     document.getElementById("money123").innerHTML = price;
+	image.src = "https://promptpay.io/0873717758/"+price+".png";
 }</script>
 	</head>
 	<body class="is-preload">
@@ -62,7 +67,8 @@ function toFull(){
 							<!-- Banner -->
 							
 							<section>
-								<form name="form1" method="post" action="shopping.php" enctype="multipart/form-data">
+								<form  method="post" action="payment" enctype="multipart/form-data">
+									@csrf
 								<div class="content">
 									<div class="align-center">
 										<p>ชำระเงินโดยโอนมาที่บัญชี 123-456789 ธนาคารกรุงไทย นายสมชาย พร้อมรับเงิน</p>
@@ -85,18 +91,21 @@ function toFull(){
 												<label for="fname">วันที่โอนเงิน:</label>
 												<input type="date" id="day" name="date"  value=""><br><br>
 												<label for="lname">เลขบัญชี 4 ตัวท้าย:</label>
-												<input type="number" id="number"  placeholder="xxxx"><br><br>
+												<input type="number" id="number" name="num"  placeholder="xxxx"><br><br>
+												<label for="lname">สแกนจ่าย:</label>
+												<img id="qr" src = "https://promptpay.io/0873717758/100.png" alt="">
+												 
 												<div class="row gtr-uniform">
 													<!-- <div class="align-center"> -->
 														<label for="fname">ชำระเงินค่า:</label>
 														
 														<div class="col-3 col-12-small">
-															<input onclick="toMudjum()" type="radio" id="demo-priority-low" name="mf" value="มัดจำ">
+															<input onclick="toMudjum()" type="radio" id="demo-priority-low" name="mf" value="1">
 															<label for="demo-priority-low">เงินมัดจำ</label>
 														</div>
 
 														<div class="col-4 col-12-small">
-															<input onclick="toFull();" type="radio" id="demo-priority-high" name="mf" value="จ่ายเต็ม">
+															<input onclick="toFull()" type="radio" id="demo-priority-high" name="mf" value="2">
 															<label for="demo-priority-high">จ่ายเต็มจำนวน</label>
 														</div>
 													<!-- </div> -->
@@ -104,10 +113,11 @@ function toFull(){
 												<label >จำนวนเงิน : <span id="money123"></span></label>
 												
 												<div class="col-12 col-12-small">
+													<input type="hidden" name="id" value="<?php echo $purchase[0]->id_order ?>"></input>
 													<input type="button" class="button primary" value="ยกเลิก"></input>
 													<input type="submit" class="button secondary" value="ตกลง"></input>
 												</div>
-
+</form >
 												
 											</div>
 

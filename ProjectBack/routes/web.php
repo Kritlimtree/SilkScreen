@@ -34,23 +34,43 @@ Route::post('buy.php', [OrderfController::class, 'buycolor'])->name('buy');
 
 Route::post('checkorder3.php', [OrderfController::class, 'checkorder'])->name('checkorder3');
 
+Route::post('checkorder4', [OrderfController::class, 'checkorderdetail'])->name('checkorder4');
+
+Route::post('purchase', [OrderfController::class, 'purchase'])->name('purchase');
+
+Route::post('sample', [OrderfController::class, 'sample'])->name('sample');
+
 Route::post('purchase_1.php', [OrderfController::class, 'storedetail'])->name('purchase_1');
 
 Route::post('store', [OrderfController::class, 'store'])->name('store');
 
-Route::get('shopping.php', function () {
-    return view('Frontend.shopping');
-});
+Route::get('shopping.php', [OrderfController::class, 'shopping'])->name('shopping');
+
+Route::post('simple.php', [OrderfController::class, 'sample'])->name('sample');
+
+Route::post('confirmsimple', [OrderfController::class, 'confirmsample'])->name('confirmsample');
+
+Route::post('payment', [OrderfController::class, 'payment'])->name('payment');
 
 Route::get('contact.html', function () {
     return view('Frontend.contact');
 });
 
+Route::get('/login', function () {
+    return view('Backend.login');
+});
 
+Route::get('/register', function () {
+    return view('Backend.register');
+});
 
+Route::get('/check4', function () {
+    return view('Frontend.checkorder4');
+});
 
-
-
+Route::get('/profile', function () {
+    return view('Backend.profile');
+});
 
 
 
@@ -58,6 +78,8 @@ Route::get('contact.html', function () {
 Route::get('/', function () {
     return view('Backend.indexLoginIsTrue');
 });
+
+
 
 Route::get('indexLoginIsTrue.php', function () {
     return view('Backend.indexLoginIsTrue');
@@ -73,10 +95,8 @@ Route::post('test2-2/edit', [OrderAdminController::class, 'edit'])->name('ordera
 Route::get('checkorder.html', function () {
     return view('Backend.checkorder');
 });
-Route::get('purchase.php', function () {
-    return view('Backend.purchase');
-});
-
+ 
+Route::get('purchase.php', [OrderAdminController::class, 'payment'])->name('purchase');
 
 Route::get('managementSize.html', [ShirtSizeController::class, 'index'])->name('managementSize');
 Route::post('/managementSize_store', [ShirtSizeController::class, 'store'])->name('managementSize_store');

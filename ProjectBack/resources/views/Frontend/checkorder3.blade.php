@@ -14,9 +14,13 @@
 			$quantity = $_POST['quantity'];
 			if($_SESSION["number"]==1){
 			$screen_color = $_POST['screen_color'];
-			$transport = $_POST['transport'];
-			$_SESSION["screen_color"]=$screen_color;
+			 
+			
+			}else{
+				$screen_color = '';
+			
 			}
+			$transport = $_POST['transport'];
 			$w = $_POST['top'];
 			
 			
@@ -60,7 +64,7 @@
 			for($i=0;$i<$count;$i++){
 			$price[$i] = ($quantity[$i]*$size_price[$i])+$blockprice;
 			$unitprice[$i] = $size_price[$i];
-			 
+			  
 			 
 		}
 		 
@@ -208,6 +212,7 @@ function toFull(){
 																				<?php $c = 0 ; foreach($_SESSION["size"] as $key => $size) { ?>
 																				<td><?php echo $size ?></td>
 																				<?php $c++; } ?>
+																				<td></td>
 																			</tr>
 																		
 																			
@@ -216,29 +221,31 @@ function toFull(){
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านบน(นิ้ว)</td>
 																				<?php foreach($w as $key => $w1) { ?>
-																				<td><?php echo $w1; ?></td>
+																				<td><?php echo number_format($w1,2); ?></td>
 																				<?php } ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านล่าง(นิ้ว)</td>
 																				<?php foreach($s as $key => $s1) { ?>
-																				<td><?php echo $s1; ?></td>
+																				<td><?php echo number_format($s1,2); ?></td>
 																				<?php } ?>
+																				<td>นิ้ว</td>
 																				
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านซ้าย(นิ้ว)</td>
 																				<?php foreach($a as $key => $a1) { ?>
-																				<td><?php echo $a1; ?></td>
+																				<td><?php echo number_format($a1,2); ?></td>
 																				<?php } ?>
-																				
+																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านขวา(นิ้ว)</td>
 																				<?php foreach($d as $key => $d1) { ?>
-																				<td><?php echo $d1; ?></td>
+																				<td><?php echo number_format($d1,2); ?></td>
 																				<?php } ?>
-																				
+																				<td>นิ้ว</td>
 																			</tr>
 																			<?php if($_SESSION["number"]==1) { ?>
 																			<tr>
@@ -246,36 +253,40 @@ function toFull(){
 																				<?php foreach($quantity as $key => $q) { ?>
 																				<td><?php echo $q; ?></td>
 																				<?php } ?>
-																				
+																				<td>ตัว</td>
 																			</tr>
 																			<tr>
 																				<td>ราคาต่อหน่วย(บาท)</td>
 																				<?php foreach($unitprice as $key => $unit) { ?>
-																				<td><?php echo $unit; ?></td>
+																				<td><?php echo number_format($unit,2); ?></td>
 																				<?php } ?>
+																				<td>บาท</td>
 																			</tr>
 																			<tr>
 																				<td>ราคาบล็อคพิมพ์(บาท)</td>
 																				<?php foreach($unitprice as $key => $unit) { ?>
-																				<td><?php echo $blockprice; ?></td>
+																				<td><?php echo number_format($blockprice,2); ?></td>
 																				<?php } ?>
+																				<td>บาท</td>
 																			</tr>
 																			<tr>
 																				<td>ราคาค่าส่ง(บาท)</td>
-																				<?php foreach($wpu as $key => $wpu) { ?>
-																				<td><?php echo $wpu; ?></td>
+																				<?php foreach($wpu as $key => $wpu1) { ?>
+																				<td><?php echo number_format($wpu1,2); ?></td>
 																				<?php } ?>
+																				<td>บาท</td>
 																			</tr>
 																			<tr>
 																				<td>ราคารวม(บาท)</td>
 																				<?php foreach($weightprice as $key => $p) { ?>
-																				<td><?php echo $p; ?></td>
+																				<td><?php echo number_format($p,2); ?></td>
 																				<?php } ?>
+																				<td>บาท</td>
 																			</tr>
 																			<tr>
 																				<td colspan="<?php echo $c; ?>">ราคาสุทธิ(บาท)</td>
-																				<td><?php echo $sum; ?></td>
-																				
+																				<td><?php echo number_format($sum,2); ?></td>
+																				<td>บาท</td>
 																			</tr>
 																			<?php } ?>
 																			
@@ -296,7 +307,7 @@ function toFull(){
 																			 ?>
                                                                         <label for="lname">สีที่จะใช้สกรีน: </label><div class="col-6 col-12-xsmall">
 																			 
-                                                                            <div class="boxCenter" style="background-color: <?php echo $_SESSION["screen_color"]  ?>";></div>
+                                                                            <div class="boxCenter" style="background-color: <?php echo $screen_color ?>";></div>
 																			<input type="hidden" name="sum" value="<?php echo $sum; ?>"/>
                                                                         </div>
 																		<?php } ?>
@@ -304,8 +315,8 @@ function toFull(){
                                                                         <!-- <input type="text" id="addr" name="addr" value="12 nowhere"><br> -->
 																		
 																		<label for="fname">ขนส่งโดย: </label>
-                                                                        <label for="fname">ขนาดภาพกว้าง(นิ้ว): <?php echo $_SESSION["wide"]; ?></label>
-                                                                        <label for="fname">ขนาดภาพยาว(นิ้ว): <?php echo $_SESSION["long"]; ?></label>
+                                                                        <label for="fname">ขนาดภาพกว้าง(นิ้ว): <?php echo number_format($_SESSION["wide"],2); ?></label>
+                                                                        <label for="fname">ขนาดภาพยาว(นิ้ว): <?php echo number_format($_SESSION["long"],2); ?></label>
                                                                         <div class="col-6 col-12-xsmall">
 																		<h3 id="content">บริษัทขนส่ง</h3>
 																	</div>
@@ -322,10 +333,12 @@ function toFull(){
 																		<input type="hidden" name="screenPicture[]" value="<?php echo $_SESSION["screenPicture"]; ?>"/>
 																		
 																		<input type="hidden" name="color[]" value="<?php echo $_SESSION["color"]; ?>"/>
-																		<input type="hidden" name="screencolor[]" value="<?php echo $_SESSION["screen_color"]; ?>"/>
+																		<input type="hidden" name="screencolor[]" value="<?php echo $screen_color; ?>"/>
 																		<input type="hidden" name="colorname[]" value="<?php echo $_SESSION["color_name"]; ?>"/>
 																		<input type="hidden" name="size_id[]" value="<?php echo $size; ?>"/>
 																		<input type="hidden" name="quantity[]" value="<?php echo $quantity[$i]; ?>"/>
+																		<input type="hidden" name="blockprice" value="<?php echo $blockprice; ?>"/>
+																		<input type="hidden" name="wpu[]" value="<?php echo $wpu[$i]; ?>"/>
 																		<input type="hidden" name="unitprice[]" value="<?php echo $unitprice[$i]; ?>"/>
 																		<input type="hidden" name="price[]" value="<?php echo $price[$i]; ?>"/>
 																		<?php $i++; } ?>

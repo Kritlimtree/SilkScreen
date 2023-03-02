@@ -6,60 +6,18 @@
 -->
 <html>
 	<head>
-	<?php
-		@ini_set('display_errors', '0');
-		session_start();
-		 
-		if($_POST){
-			$quantity = $_POST['quantity'];
-			$colorRGB = $_POST['colorRGB'];
-			$w = $_POST['top'];
-			$s = $_POST['button'];
-			$a = $_POST['left'];
-			$d = $_POST['right'];
-			$wide = $_POST['wide'];
-			$long = $_POST['long'];
-			$sum = 0;
-			for($i=0;$i<3;$i++){
-			$price[$i] = $quantity[$i]*10;
-			if($wide>=8.3&&$wide<11.7){
-				if($long>=11.7&&$long<16.5){
-					$price[$i] = 150+$price[$i];
-				}
-			}elseif($wide>=11.7&&$wide<16.5){
-				if($long>=16.5&&$long<23.4){
-					$price[$i] = 250+$price[$i];
-				}
-			}else{
-					$price[$i] = 350+$price[$i];
-			}
-			$deposit[$i] = $price[$i]*40/100;
-			$sum = $sum+$price[$i];
-		}
-			$_SESSION["quantity"]=$quantity;
-			$_SESSION["sum"]=$sum;
-			
-			$_SESSION["colorRGB"]=$colorRGB;
-			$_SESSION["price"]=$price;
-			$_SESSION["deposit"]=$deposit;
-			$_SESSION["w"]=$w;
-			$_SESSION["s"]=$s;
-			$_SESSION["a"]=$a;
-			$_SESSION["d"]=$d;
-			$_SESSION["wide"]=$wide;
-			$_SESSION["long"]=$long;
-			$_SESSION["name"]="admin";
-			$_SESSION["fname"]="Smith";
-			$_SESSION["address"]="123 กำแพงแสน จ.นครปฐม";
-			$_SESSION["phone"]="123-456789";
-			$_SESSION["start"]="1";
-		}
-		 
-		?>
-		<title>Order | silk_screen</title>
+		<?php $c=0; foreach($orderdetail as $key => $od){  
+			$sum[$c] = ($od->orderdetail_price*$od->quantity)+$od->wpu+$order[0]->blockprice;
+			$c++;
+		 }  ?>
+		<title>silk_screen</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+
 		<!-- <script >function openModalBlack() {
   document.getElementById("ModalBlack").style.display = "block";
 }
@@ -187,13 +145,13 @@ function slider5(){
 									<header class="main">
 										<h2>ทำการสั่งซื้อ</h2>
 									</header>
-
+ 
 									<div class="row gtr-200">
 										<div class="col-6 col-12-medium">
 											<div id="boxCenter">
 												<div class="displayShirt">												
 													<p><strong>ภาพที่จะใช้สกรีน</strong></p>
-													<div class="img-resize"><span><img src="<?php echo $_SESSION["screenPicture"]; ?>"  alt="" /></span></div>
+													<div class="img-resize"><span><img src="assets/images/<?php echo $order[0]->picture; ?>"  alt="" /></span></div>
 												</div>
 											</div>	
 										</div>
@@ -202,7 +160,9 @@ function slider5(){
                                             <div id="boxCenter">		
                                                 <div class="displayShirt">
                                                     <p><strong>เสื้อยืดที่เลือก</strong></p>
-                                                        <div class="img-resize"><span><img src="<?php echo $_SESSION["color"]; ?>"  alt="" /></span></div><br>
+													<?php foreach($shirtcolor as $key => $shirt){if($order[0]->id_shirtcolor==$shirt->id_shirtcolor){ ?>
+                                                        <div class="img-resize"><span><img src="assets/images/<?php echo $shirt->shirtcolor_picture; ?>"  alt="" /></span></div><br>
+														<?php }} ?>
                                                 </div>
                                             </div>			
                                         </div>
@@ -228,59 +188,82 @@ function slider5(){
 																		<tbody>
 																			<tr>
 																				<td>ขนาด(Size)</td>
-																				<td>s</td>
-																				<td>m</td>
-																				<td>l</td>
+																				<?php $c=0; foreach($shirtsize as $key => $size){ foreach($orderdetail as $key => $od){ if($size->id_shirtsize==$od->id_shirtprice){ ?>
+																				<td><?php echo $size->shirtsize_size ?></td>
+																				<?php $c++; }}} ?>
+																				<td></td>
 																			</tr>
 																		
-																			<tr>
-																				<td>จำนวน(ตัว)</td>
-																				<td><?php echo $_SESSION["quantity"][0]; ?></td>
-																				<td><?php echo $_SESSION["quantity"][1]; ?></td>
-																				<td><?php echo $_SESSION["quantity"][2]; ?></td>
-																			</tr>
+																			 
 																			
 																				
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านบน(นิ้ว)</td>
-																				<td><?php echo $_SESSION["w"][0]; ?></td>
-																				<td><?php echo $_SESSION["w"][1]; ?></td>
-																				<td><?php echo $_SESSION["w"][2]; ?></td>
+																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<td><?php echo number_format($od->orderdetail_upper, 2) ?></td>
+																				<?php } ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านล่าง(นิ้ว)</td>
-																				<td><?php echo $_SESSION["s"][0]; ?></td>
-																				<td><?php echo $_SESSION["s"][1]; ?></td>
-																				<td><?php echo $_SESSION["s"][2]; ?></td>
+																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<td><?php echo number_format($od->orderdetail_lower, 2) ?></td>
+																				<?php } ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านซ้าย(นิ้ว)</td>
-																				<td><?php echo $_SESSION["a"][0]; ?></td>
-																				<td><?php echo $_SESSION["a"][1]; ?></td>
-																				<td><?php echo $_SESSION["a"][2]; ?></td>
+																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<td><?php echo number_format($od->orderdetail_left, 2) ?></td>
+																				<?php } ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านขวา(นิ้ว)</td>
-																				<td><?php echo $_SESSION["d"][0]; ?></td>
-																				<td><?php echo $_SESSION["d"][1]; ?></td>
-																				<td><?php echo $_SESSION["d"][2]; ?></td>
+																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<td><?php echo number_format($od->orderdetail_right, 2) ?></td>
+																				<?php } ?>
+																				<td>นิ้ว</td>
+																			</tr>
+																			<tr>
+																				<td>จำนวน(ตัว)</td>
+																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<td><?php echo $od->quantity ?></td>
+																				<?php } ?>
+																				<td>ตัว</td>
 																			</tr>
 																			<tr>
 																				<td>ราคาต่อหน่วย(บาท)</td>
-																				<td><?php echo $_SESSION["deposit"][0]; ?></td>
-																				<td><?php echo $_SESSION["deposit"][1]; ?></td>
-																				<td><?php echo $_SESSION["deposit"][2]; ?></td>
+																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<td><?php echo number_format($od->orderdetail_price, 2) ?></td>
+																				<?php } ?>
+																				<td>บาท</td>
+																			</tr>
+																			<tr>
+																				<td>ราคาบล็อคพิมพ์(บาท)</td>
+																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<td><?php echo number_format($order[0]->blockprice, 2) ?></td>
+																				<?php } ?>
+																				<td>บาท</td>
+																			</tr>
+																			<tr>
+																				<td>ราคาค่าส่ง(บาท)</td>
+																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<td><?php echo number_format($od->wpu, 2) ?></td>
+																				<?php } ?>
+																				<td>บาท</td>
 																			</tr>
 																			<tr>
 																				<td>ราคารวม(บาท)</td>
-																				<td><?php echo $_SESSION["price"][0]; ?></td>
-																				<td><?php echo $_SESSION["price"][1]; ?></td>
-																				<td><?php echo $_SESSION["price"][2]; ?></td>
+																				<?php foreach($sum as $key => $sum){  ?>
+																				<td><?php echo number_format($sum, 2) ?></td>
+																				<?php } ?>
+																				<td>บาท</td>
 																			</tr>
 																			<tr>
-																				<td colspan="3">ราคาสุทธิ(บาท)</td>
-																				<td><?php echo $_SESSION["sum"]; ?></td>
-																				
+																				<td colspan="<?php echo $c ?>">ราคาสุทธิ(บาท)</td>
+																				<td><?php echo number_format($order[0]->order_price, 2) ?></td>
+																				<td>บาท</td>
 																			</tr>
 																			
 																			
@@ -292,20 +275,28 @@ function slider5(){
                                                                 <div class="col-6 col-12-medium">
 
                                                                     <form class="box2" style="background-color: rgb(179, 171, 171);">
+																	<?php if($order[0]->order_type==1){ ?>
                                                                         <label for="lname">จำนวนสีที่ใช้: 1 สี</label>
-                                                                        <label for="lname">สีที่จะใช้สกรีน: </label><div class="col-6 col-12-xsmall">
+																		<?php }else{ ?>
+																			<label for="lname">จำนวนสีที่ใช้: หลายสี</label>
+																			<?php } ?>
                                                                             <div class="boxCenter" ></div>
-                                                                        </div>
+                                                                         
                                                                         <br>
                                                                         <!-- <input type="text" id="addr" name="addr" value="12 nowhere"><br> -->
-                                                                        <label for="fname">ขนาดภาพกว้าง(นิ้ว): <?php echo $_SESSION["wide"]; ?></label>
-                                                                        <label for="fname">ขนาดภาพยาว(นิ้ว): <?php echo $_SESSION["long"]; ?></label>
+                                                                        <label for="fname">ขนาดภาพกว้าง(นิ้ว): <?php echo number_format($orderdetail[0]->orderdetail_wide) ?></label><br>
+                                                                        <label for="fname">ขนาดภาพยาว(นิ้ว): <?php echo number_format($orderdetail[0]->orderdetail_long) ?></label><br>
                                                                         
-                                                                         
-																		<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">ยังไม่ชำระ</span></label>
-                                                                        <label for="lname">สถานะการชำระเงินคงเหลือ: <span style="color:rgb(0, 0, 0)">-</span></label>
-                                                                        <label for="lname">บริการขนส่งโดย: -</label>
-                                                                        <label for="lname">หมายเลขรหัสพัสดุ: -</label>
+																		<?php if($order[0]->id_status>=5){ ?>
+																		<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:green">ยังไม่ชำระ</span></label><br>
+																		<?php }else{ ?>
+																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">ชำระแล้ว</span></label><br>
+																			<?php } ?>
+                                                                        <label for="lname">สถานะการชำระเงินคงเหลือ: <?php echo number_format($order[0]->order_price,2) ?> บาท </label><br>
+																		<?php foreach($transport as $key => $trans){ if($trans->id_tramsport==$order[0]->id_post){ ?>
+                                                                        <label for="lname">บริการขนส่งโดย: <?php echo $trans->transport_name ?></label><br>
+																		<?php }} ?>
+                                                                        <label for="lname">หมายเลขรหัสพัสดุ: <?php echo $order[0]->postcode ?></label><br>
                                                                     </form>
                                                                 </div> 
 
@@ -317,8 +308,12 @@ function slider5(){
 															
 															<div class="col-12 col-12-small">
 																<input type="button" class="button primary" value="ยกเลิก"></input>
-																
-																<button type="submit" class="button secondary" name="action" value="check">ชำระเงิน</button>
+																<?php if($order[0]->id_status>=5){ ?>
+																		 
+																		<?php }else{ ?>
+																			<button type="submit" class="button secondary" name="action" value="check">ชำระเงิน</button>
+																			<?php } ?>
+																 
 																<!-- <a href="checkorder3.html">ดำเนินการสั่งทำ</a> -->
 																
 															</div>
@@ -367,12 +362,11 @@ function slider5(){
 			
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js" defer></script>
 			<script src="assets/js/changecolor.js"></script>
-			
 	</body>
 </html>

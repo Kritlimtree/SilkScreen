@@ -6,8 +6,11 @@
 -->
 <html>
 	<head>
-	<?php session_start(); 
-	$_SESSION['color'] = 0;?>
+	<?php 
+	
+	session_start(); 
+	 
+	$_SESSION['color'] = 0; ?>
 		<title>Order | silk_screen</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
