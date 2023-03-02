@@ -1,0 +1,14 @@
+body{
+    background-size: cover;
+    background-position: center;
+}
+.progress img{
+    width: 1px;
+}
+ul{
+    text-align: center;
+}
+ul li{
+    display: inline-block;
+    width: 1px;
+}
