@@ -8,7 +8,7 @@
 		<?php 
 		@ini_set('display_errors', '0');
 			session_start();
-			$logo = $_SESSION["screenPicture"];
+			
 		?>
 		<style>
 			input[type="float"],
@@ -64,8 +64,10 @@
 													<div id="boxCenter">
 														<p><strong>ตัวอย่างการสกรีน</strong></p>
 															<div id="display_image"></div><br>
+															<?php  if($order[0]->id_sample != ''){ ?>
 															<div class="img-resize"><span><img src="assets/images/<?php echo $order[0]->sample_picture; ?>"  alt="" /></span></div>
-												<!-- <span>*กรุณาเลือกลายรูป*</span><br><br> -->
+															<?php  } ?>
+															<!-- <span>*กรุณาเลือกลายรูป*</span><br><br> -->
 															
 																<input type="file" id="image_input" name="sample" accept="image/png, image/jpeg">
 																 

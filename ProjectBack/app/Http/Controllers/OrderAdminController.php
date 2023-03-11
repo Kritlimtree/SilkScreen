@@ -38,7 +38,9 @@ class OrderAdminController extends Controller
     }
 
     public function detail(Request $request){
-        
+        $order1 = order::where('id_order',$request->id)->get();
+         
+         if($order1[0]->id_sample != ''){
         $order = order::
         join('usershops','orders.id_user','=','usershops.id_user')
         ->join('statuses','orders.id_status','=','statuses.id_status')
@@ -48,6 +50,17 @@ class OrderAdminController extends Controller
         ->join('shirtsizes','orderdetails.id_shirtprice','=','shirtsizes.id_shirtsize')
         ->join('samples','orders.id_sample','=','samples.id_sample')
         ->where('orders.id_order',$request->id)->orderBy('orderdetails.id_order','ASC')->get();
+         }else{
+            $order = order::
+        join('usershops','orders.id_user','=','usershops.id_user')
+        ->join('statuses','orders.id_status','=','statuses.id_status')
+        ->join('orderdetails','orders.id_order','=','orderdetails.id_order')
+        ->join('transports','transports.id_tramsport','=','orders.id_post')
+        ->join('shirtcolors','orders.id_shirtcolor','=','shirtcolors.id_shirtcolor')
+        ->join('shirtsizes','orderdetails.id_shirtprice','=','shirtsizes.id_shirtsize')
+         
+        ->where('orders.id_order',$request->id)->orderBy('orderdetails.id_order','ASC')->get();
+         }
         $status = status::all();
         $transport = transport::all();
          

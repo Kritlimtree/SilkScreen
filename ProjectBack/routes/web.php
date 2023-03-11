@@ -21,9 +21,20 @@ use App\Http\Controllers\OrderDetailController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('indexLoginIsTrue.html', function () {
     return view('Frontend.indexLoginIsTrue');
+});
+
+Route::get('/index.html', function () {
+    return view('Frontend.index');
+});
+
+Route::get('/login.html', function () {
+    return view('Frontend.login');
+});
+
+Route::get('/register.html', function () {
+    return view('Frontend.register');
 });
 
 Route::get('orderf.php', [OrderfController::class, 'index'])->name('orderf');
@@ -96,7 +107,7 @@ Route::get('checkorder.html', function () {
     return view('Backend.checkorder');
 });
  
-Route::get('purchase.php', [OrderAdminController::class, 'payment'])->name('purchase');
+Route::get('adminpurchase.php', [OrderAdminController::class, 'payment'])->name('adminpurchase');
 
 Route::get('managementSize.html', [ShirtSizeController::class, 'index'])->name('managementSize');
 Route::post('/managementSize_store', [ShirtSizeController::class, 'store'])->name('managementSize_store');

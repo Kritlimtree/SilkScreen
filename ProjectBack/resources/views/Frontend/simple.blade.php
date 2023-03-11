@@ -45,7 +45,11 @@
 											<div id="boxCenter">
 												<div class="displayShirt">												
 													<p><strong>ตัวอย่างสินค้า</strong></p>
+													<?php  if($order[0]->id_sample != ''){ ?>
 													<div class="img-resize"><span><img src="assets/images/<?php echo $sample[0]->sample_picture; ?>"  alt="" /></span></div>
+												<?php }else{ ?>
+													<div class="img-resize"><span></span></div>
+													<?php } ?>
 												</div>
 											</div>	
 										</div>
@@ -78,7 +82,9 @@
 																<input type="hidden" id="colorInputText">
 															</div>
 															<div class="col-12 col-12-small">
+															<?php  if($order[0]->id_sample != ''){ ?>
 															<input type="hidden" id="demo-priority-low" name="id" value="<?php echo $sample[0]->id_sample; ?>">
+															<?php } ?>
 																<input type="button" class="button primary" value="ยกเลิก"></input>
 																<input type="hidden" name="controller" value="<span id='color'></span>"/>
 																<button type="submit" class="button secondary" name="action" value="check">ยืนยัน</input>
