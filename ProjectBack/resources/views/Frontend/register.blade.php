@@ -22,71 +22,84 @@
 
 							<!-- Header -->
 								<header id="header">
-									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
-                                    <!-- <a href="login.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a>
-									<strong>ยินดีต้อนรับ</strong> -->
-									<!-- <ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-										<li><a href="#" class="icon brands fa-user-circle-o" aria-hidden="true"><span class="label">User</span></a></li>
-									</ul> -->
-									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
+		
 								</header>
 
 							<!-- Banner -->
-								<!-- <section id="banner">
-									<div class="content">
-										<header>
-											<h1>สมัครสมาชิก</h1>
-											<p>A free and fully responsive site template</p>
-										</header>
-										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										</ul>
-									</div>
-									<span class="image object">
-										<img src="images/pic10.jpg" alt="" />
-									</span>
-								</section> -->
+								
 
 							<!-- Section -->
 								<section>
 									<header class="align-center">
-										<h2>register</h2>
+										<h2>สมัครสมาชิก</h2>
 									</header>
 									<!-- <h1>สมัครสมาชิก</h1> -->
 									<div class="features">
 
-                                        <form class="box">
-											<label for="fname">Username:</label>
-											<input type="text" id="uname" name="uname" value="admin"><br>
-											<label for="lname">Name:</label>
-											<input type="text" id="name" name="name" value="adam"><br>
-                                            <label for="fname">Lastname:</label>
-											<input type="text" id="lname" name="lname" value="smith"><br>
-											<label for="lname">Address:</label>
-											<div class="col-12">
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div><br>
-                                            <label for="fname">phone:</label>
-											<input type="tel" id="phone" name="phone" value="111-2222"><br>
-											<label for="lname">Password:</label>
-											<input type="password" id="pass" name="pass" value="1234"><br>
-											<label for="lname">Conflim Password:</label>
-											<input type="password" id="passConflim" name="passConflim" value="1234"><br>
-											<!-- <input type="submit" value="Submit"> -->
-											<div class="row">
-												<div class="distance">
-													<div class="col-9-xlarge">
-														<a href="login.html" class="button secondary">ยืนยัน</a>
-													</div>
+									<form class="box">
+											<label for="fname">ชื่อผู้ใช้:</label>
+											<input type="text" id="uname" name="uname" placeholder="กรอกชื่อผู้ใช้" value=""><br>
+											<label for="lname">ชื่อ:</label>
+											<input type="text" id="name" name="name" placeholder="กรอกชื่อจริง" value=""><br>
+                                            <label for="fname">นามสกุล:</label>
+											<input type="text" id="lname" name="lname" placeholder="กรอกนามสกุล" value=""><br>
+											<label for="lname">ที่อยู่:</label>
+											<div class="col-6">
+											<input type="text" id="demo-message" name="demo-message" placeholder="กรอกที่อยู่"></input>
+											<div class="row gtr-25">
+												<div class="col-6" style="padding-top: 5px;">
+													<select name="district" id="district">
+														<option value="volvo">--กรุณาเลือกตำบล--</option>
+														<option value="saab">กำแพงแสน</option>
+														<option value="opel">เมือง</option>
+														<option value="audi">ทุ่งลูกนก</option>
+													</select>
 												</div>
-												<input type="button" onclick="history.back()" class="button primary" value="ยกเลิก"></input>
+												<div class="col-6" style="padding-top: 5px;">
+													<select name="district2" id="district2">
+														<option value="volvo">--กรุณาเลือกอำเภอ--</option>
+														<option value="saab">เมือง</option>
+														<option value="opel">กำแพงแสน</option>
+														<option value="audi">สามพราน</option>
+													</select>
+												</div>
 											</div>
+											<div class="row gtr-25">
+												<div class="col-6" style="padding-top: 5px;">
+													<select name="province" id="province">
+														<option value="volvo">--กรุณาเลือกจังหวัด--</option>
+														<option value="saab">นครปฐม</option>
+														<option value="opel">สมุทรปราการ</option>
+														<option value="audi">นนทบุรี</option>
+													</select>
+												</div>
+												<div class="col-6" style="padding-top: 5px;">
+													<select name="postcode" id="postcode">
+														<option value="volvo">--กรุณาเลือกรหัสไปรษณีย์--</option>
+														<option value="saab">73000</option>
+														<option value="opel">73140</option>
+														<option value="audi">73180</option>
+													</select>
+												</div>
+											</div>
+											</div><br>
+                                            <label for="fname">เบอร์โทร:</label>
+											<input type="tel" id="phone" name="phone" placeholder="กรอกเบอร์โทร" value=""><br>
+											<label for="lname">รหัสผ่าน:</label>
+											<input type="password" id="pass" name="pass" placeholder="กรอกรหัสผ่าน" value=""><br>
+											<label for="lname">ยืนยันรหัสผ่าน:</label>
+											<input type="password" id="passConflim" name="passConflim" placeholder="ยืนยันรหัสผ่านอีกครั้ง" value=""><br>
+											<!-- <input type="submit" value="Submit"> -->
+											<ul class="actions fit">
+												<li>
+													<a href="login.html" class="button secondary fit">สมัครสมาชิก</a>
+												</li>
+												<li>
+													<input type="button" onclick="history.back()" class="button primary fit" value="ยกเลิก"></input>
+													<!-- <a href="#" class="button primary fit">ยกเลิก</a> -->
+												</li>
+											</ul>
+											
 										  </form>
 
 										<!-- <article>
