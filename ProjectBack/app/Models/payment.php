@@ -11,6 +11,6 @@ class payment extends Model
     
     protected $table="payments";
     protected $fillable = [
-        'id_order','id_statuspayment','payment_slip','payment_4num','payment_arrears','payment_date'
+        'id_order','id_statuspayment','payment_slip','payment_4num','payment_paid','payment_arrears','payment_date'
     ];
 }

@@ -192,9 +192,12 @@ hr {
 											<input type="text" id="file_upload" name="color_name" required ><br>
 											<label for="price">โค้ดสี:</label>
 											 
-   										   <input type="text" class="form-control" required name="color_code">
-                         <br>
-  											   
+   										    
+						 <label for="price">รูปเสื้อ:</label>
+											<div class="image">
+   							 				  <label><h4>Add image</h4></label>
+   										   <input type="file" class="form-control" required name="color_code">
+  											  </div>
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
            									         <i class="bx bx-save text-4 mr-2"></i> บันทึกข้อมูล
@@ -220,8 +223,12 @@ hr {
 											<label for="size">สี:</label>
 											<input type="text" id="color_name_edit" name="color_name" value=""><br>
 											<label for="price" >รูปเสื้อ:</label>
-											<input type="text" id="color_code_edit" class="form-control" required name="color_code">
-                         <br>
+											<label for="price">รูปเสื้อ:</label>
+											<div class="image">
+   							 				  <label><h4>Add image</h4></label>
+   										   <input type="file" class="form-control" required name="color_code">
+  											  </div>
+											 
 												<input type="hidden" id="edit_id" name="id_color">
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
@@ -292,7 +299,8 @@ hr {
                                                 <tr>
                                                     <td><?php echo $color->color_name  ?></td>
                                                     <td><?php echo $color->color_code  ?></td>
-                                                    <td><div class="smallbox" style="background-color: <?php echo $color->color_code  ?>;"></div></td>
+													<td><img src="assets/images/<?php echo $color->color_code  ?>" width="100px" alt=""></td>
+                                                     
                                                     <!-- <td>13/10/65</td> -->
                                                     <td><button type="button" value="{{$color->id_color}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
                                                     <td><button type="button" value="{{$color->id_color}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>

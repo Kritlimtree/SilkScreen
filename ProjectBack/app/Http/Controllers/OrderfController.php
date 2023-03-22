@@ -42,14 +42,14 @@ class OrderfController extends Controller
     }
 
     public function checkorder(Request $request){
-        
+         
         $block = block::orderBy('block_wide')->get();
-        $screencolor = color::all();
-        $transport = transport::all();
+        $screencolor = color::where('id_color', $request->screen_color)->get();
+        $transporter = transport::where('id_tramsport', $request->transport)->get();
         $shirtsize = shirtsize::all();
         $data1 = freight::where('id_transport', $request->transport)->get();
          
-        return view('Frontend.checkorder3', compact(['block','screencolor','transport','shirtsize','data1']));
+        return view('Frontend.checkorder3', compact(['block','screencolor','transporter','shirtsize','data1']));
     }
 
     public function checkorderdetail(Request $request){
@@ -83,16 +83,21 @@ class OrderfController extends Controller
     }
 
     public function purchase(Request $request){
-         
         
-        $purchase = order::where('id_order', $request->id)->get();
-         
+         $purchase = order::where('id_order', $request->id)->get();
+        if($purchase[0]->id_status==4||$purchase[0]->id_status==8||$purchase[0]->id_status==10){
+            $purchase = order::join('payments','payments.id_order','orders.id_order')->where('orders.id_order', $request->id)
+        ->orderBy('payments.id_payment','desc')->get();
+        }
+        
+          
         return view('Frontend.purchase_1', compact(['purchase']));
     }
 
     public function payment(Request $request){
-         
+        $item = explode(",", $request->mf);
         
+         
         $imageName="";
         
          $image = $request->bill->getClientOriginalName();
@@ -104,12 +109,18 @@ class OrderfController extends Controller
              $imageName = time() . '.' . $request->bill->extension();
               
              $request->bill->move(public_path('assets/images/'), $imageName);
-              
+              $order = order::where('id_order',$request->id)->get();
+              if($order[0]->id_status <3)
+              order::where('id_order',$request->id)->update([
+                'id_status' => 3,
+              ]);
         $payment = payment::create([
             'id_order' => $request->id,
-            'id_statuspayment' => $request->mf,
+            'id_statuspayment' => $item[0],
             'payment_slip' => $imageName,
             'payment_4num' => $request->num,
+            'payment_arrears' => $request->price,
+            'payment_paid' => $item[1],
             'payment_date' => $request->date,
         ]);
          

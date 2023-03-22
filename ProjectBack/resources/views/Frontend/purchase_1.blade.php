@@ -24,9 +24,9 @@
 		//}
 		 
 		 $deposit = $purchase[0]->order_price*40/100;
-		 $price = $purchase[0]->order_price;
+		 $price1 = $purchase[0]->order_price;
 		 echo '<script type="text/javascript">';
-		 echo "var price = '$price';";
+		 echo "var price = '$price1';";
 		 echo "var deposit = '$deposit';";
 		 echo '</script>';
 		
@@ -67,6 +67,7 @@ function toFull(){
 							<!-- Banner -->
 							
 							<section>
+							<?php if($purchase[0]->id_status<12){ ?>
 								<form  method="post" action="payment" enctype="multipart/form-data">
 									@csrf
 								<div class="content">
@@ -93,27 +94,92 @@ function toFull(){
 												<label for="lname">เลขบัญชี 4 ตัวท้าย:</label>
 												<input type="number" id="number" name="num"  placeholder="xxxx"><br><br>
 												<label for="lname">สแกนจ่าย:</label>
-												<img id="qr" src = "https://promptpay.io/0873717758/100.png" alt="">
+												<?php if($purchase[0]->id_status==2){ ?>
+												<img id="qr" src = "" alt="">
 												 
 												<div class="row gtr-uniform">
 													<!-- <div class="align-center"> -->
 														<label for="fname">ชำระเงินค่า:</label>
 														
 														<div class="col-3 col-12-small">
-															<input onclick="toMudjum()" type="radio" id="demo-priority-low" name="mf" value="1">
+															<input onclick="toMudjum()" type="radio" id="demo-priority-low" name="mf" value="1,<?php echo $deposit ?>">
 															<label for="demo-priority-low">เงินมัดจำ</label>
 														</div>
 
 														<div class="col-4 col-12-small">
-															<input onclick="toFull()" type="radio" id="demo-priority-high" name="mf" value="2">
+															<input onclick="toFull()" type="radio" id="demo-priority-high" name="mf" value="2,<?php echo $price1 ?>">
 															<label for="demo-priority-high">จ่ายเต็มจำนวน</label>
 														</div>
+														<label >จำนวนเงิน : <span id="money123"></span> บาท</label>
+														</div><br>
+														<input type="hidden" name="price" value="<?php echo $price1 ?>"></input>
+														<?php }else if($purchase[0]->id_status==4 ){ 
+															$paid = 0;
+															foreach($purchase as $key => $p){
+																$paid = $paid+$p->payment_paid;
+															}
+															 
+															?>
+															
+															 
+															<?php if($purchase[0]->id_status==4&&($purchase[0]->id_statuspayment==1||$purchase[0]->id_statuspayment==4)){ 
+																$price = $price1*40/100 - $paid;
+																?>
+																<input type="hidden" name="mf" value="4,<?php echo $price ?>">
+																<input type="hidden" name="price" value="<?php echo $purchase[0]->payment_arrears ?>"></input>
+																<?php }else if($purchase[0]->id_status==4&&($purchase[0]->id_statuspayment==2||$purchase[0]->id_statuspayment==4)){ 
+																	$price = $price1 - $paid;
+																	 
+																	?>
+																	<input type="hidden" name="mf" value="4,<?php echo $price ?>">
+																	<input type="hidden" name="price" value="<?php echo $purchase[0]->payment_arrears ?>"></input>
+																	<?php } ?>
+																<div class="row gtr-uniform">
+															<img id="qr" src = "https://promptpay.io/0873717758/<?php echo $price ?>.png" alt="">
+															<label for="fname">ชำระเงินส่วนที่ขาด </label>
+															<label >จำนวนเงิน : <?php echo $price ?> บาท</label>
+
+															
+															<?php }else if($purchase[0]->id_status==10){ 
+																$paid = 0;
+																foreach($purchase as $key => $p){
+																	$paid = $paid+$p->payment_paid;
+																}
+																$price = $price1 - $paid;
+																?>
+
+																<div class="row gtr-uniform">
+															<img id="qr" src = "https://promptpay.io/0873717758/<?php echo $price ?>.png" alt="">
+															<label for="fname">ชำระเงินส่วนที่ขาด </label>
+															<label >จำนวนเงิน : <?php echo $price ?> บาท</label>
+
+																<input type="hidden" name="mf" value="5,<?php echo $price ?>">
+																<input type="hidden" name="price" value="<?php echo $purchase[0]->payment_arrears ?>"></input>
+															</div><br>
+															 
+														<?php } else if($purchase[0]->id_status==8){ 
+															$paid = 0;
+															foreach($purchase as $key => $p){
+																$paid = $paid+$p->payment_paid;
+															}
+															$price = $price1 - $paid;
+															 
+															?>
+															<div class="row gtr-uniform">
+															<img id="qr" src = "https://promptpay.io/0873717758/<?php echo $price ?>.png" alt="">
+															<label for="fname">ชำระเงินส่วนที่เหลือ </label>
+															<label >จำนวนเงิน : <?php echo $price ?> บาท</label>
+															<input type="hidden" name="mf" value="3,<?php echo $price ?>">
+															<input type="hidden" name="price" value="<?php echo $purchase[0]->payment_arrears ?>"></input>
+															</div><br>
+														<?php } ?>
 													<!-- </div> -->
-												</div><br>
-												<label >จำนวนเงิน : <span id="money123"></span></label>
+												
+												
 												
 												<div class="col-12 col-12-small">
 													<input type="hidden" name="id" value="<?php echo $purchase[0]->id_order ?>"></input>
+													 
 													<input type="button" class="button primary" value="ยกเลิก"></input>
 													<input type="submit" class="button secondary" value="ตกลง"></input>
 												</div>
@@ -131,7 +197,9 @@ function toFull(){
 										<div class="align-center">
 										</div>
 									</div>
-
+									<?php }else{ ?>
+										<h1>สำเร็จ</h1>
+										<?php } ?>
 								</section>
 </form>
 						</div>

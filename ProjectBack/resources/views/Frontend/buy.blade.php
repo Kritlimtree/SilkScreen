@@ -38,80 +38,10 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<!-- <script >function openModalBlack() {
-  document.getElementById("ModalBlack").style.display = "block";
-}
-function closeModalBlack() {
-  document.getElementById("ModalBlack").style.display = "none";
-}
-function openModalWhite() {
-  document.getElementById("ModalWhite").style.display = "block";
-}
-function closeModalWhite() {
-  document.getElementById("ModalWhite").style.display = "none";
-}
-function openModalBlue() {
-  document.getElementById("ModalBlue").style.display = "block";
-}
-function closeModalBlue() {
-  document.getElementById("ModalBlue").style.display = "none";
-}
-function openModalOrange() {
-  document.getElementById("ModalOrange").style.display = "block";
-}
-function closeModalOrange() {
-  document.getElementById("ModalOrange").style.display = "none";
-}
-function openModalYellow() {
-  document.getElementById("ModalYellow").style.display = "block";
-}
-function closeModalYellow() {
-  document.getElementById("ModalYellow").style.display = "none";
-}
-function slider(){
-    var output = document.getElementById("demo");
-    var slider = document.getElementById("myRange").oninput = function(){
-        var value = (this.value-this.min)/(this.max-this.min)*100;
-        output.innerHTML =this.value;
-    }
-}
-function slider1(){
-    var output = document.getElementById("demo1");
-    var slider = document.getElementById("myRange1").oninput = function(){
-        var value = (this.value-this.min)/(this.max-this.min)*100;
-        output.innerHTML =this.value;
-    }
-}
-function slider2(){
-    var output = document.getElementById("demo2");
-    var slider = document.getElementById("myRange2").oninput = function(){
-        var value = (this.value-this.min)/(this.max-this.min)*100;
-        output.innerHTML =this.value;
-    }
-}
-function slider3(){
-    var output = document.getElementById("demo3");
-    var slider = document.getElementById("myRange3").oninput = function(){
-        var value = (this.value-this.min)/(this.max-this.min)*100;
-        output.innerHTML =this.value;
-    }
-}
-function slider4(){
-    var output = document.getElementById("demo4");
-    var slider = document.getElementById("myRange4").oninput = function(){
-        var value = (this.value-this.min)/(this.max-this.min)*100;
-        output.innerHTML =this.value;
-    }
-}
-function slider5(){
-    var output = document.getElementById("demo5");
-    var slider = document.getElementById("myRange5").oninput = function(){
-        var value = (this.value-this.min)/(this.max-this.min)*100;
-        output.innerHTML =this.value;
-    }
-}
-</script>
-<script type="text/javascript" src="assets/js/app1.js" defer></script> -->
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 <style>
 	.modal {
   display: none;
@@ -260,12 +190,12 @@ function slider5(){
 																	<div class="col-6 col-12-xsmall">
 																		<h3 id="content">สีที่จะใช้สกรีน</h3>
 																	</div>
-																	<select name="screen_color" id="screen_color" >
-												<option value="-1" selected disabled>กรุณาเลือกสี</option>
+																	<select name="screen_color" id="example" style>
+												 
 												<?php foreach ($screencolor as $key => $screencolor1) { 
 													
 													?>
-                                                    <option value="<?php echo $screencolor1->id_color  ?>" style="background-color: <?php echo $screencolor1->color_code  ?>;"><?php echo $screencolor1->color_name  ?></option>
+                                                    <option value="<?php echo $screencolor1->id_color  ?>" data-icon="<?php echo $screencolor1->color_code  ?>"><?php echo $screencolor1->color_name  ?></option>
 													<?php } ?>
                                                 </select>
 												
@@ -274,7 +204,7 @@ function slider5(){
 																</div>
 															</div>
 															
-															<select name="transport" id="weight" >
+															<select name="transport" id="myval" >
 												<option value="-1" selected disabled>กรุณาเลือกบริษัทขนส่ง</option>
 												<?php foreach ($transport as $key => $trans) { 
 													
@@ -296,6 +226,7 @@ function slider5(){
 
 														</div>
 													</form>
+													 
 										</div>
 								</section>
 
@@ -334,8 +265,11 @@ function slider5(){
 					</div>
 
 			</div>
-
-			
+			<script src="assets/js/custom-selectbox.min.js"></script>
+			<script>
+    $('#example').IconSelectBox(true); // isImg: boolean 
+    $('.example2').IconSelectBox(false); // isImg: boolean 
+  </script>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

@@ -13,9 +13,18 @@ class ColorController extends Controller
     }
 
     public function store(Request $request){
+        $imageName="";
+        
+         
+        if (!empty($request->color_code)) {
+            $generate = hexdec(uniqid());
+            $imageName = time() . '.' . $request->color_code->extension();
+             
+            $request->color_code->move(public_path('assets/images/'), $imageName);
+        }
         $model = color::create([
             'color_name' => $request->color_name,
-            'color_code' => $request->color_code,
+            'color_code' => $imageName,
         ]);
         return redirect()->route('managementColor');
     }
@@ -32,9 +41,18 @@ class ColorController extends Controller
 
     public function update(Request $request)
     {
+        $imageName="";
+        
+         
+        if (!empty($request->color_code)) {
+            $generate = hexdec(uniqid());
+            $imageName = time() . '.' . $request->color_code->extension();
+             
+            $request->color_code->move(public_path('assets/images/'), $imageName);
+        }
         color::where('id_color', $request->id_color)->update([
             'color_name' => $request->input('color_name'),
-            'color_code' => $request->input('color_code'),
+            'color_code' => $imageName,
         ]);
         return redirect()->route('managementColor');
     }

@@ -230,7 +230,7 @@ h5{
 																			 
 																			 
 																			<?php if($order1->order_price!=''){ ?>
-																			<td><?php echo $order1->order_price ?></td>
+																			<td><?php echo number_format($order1->order_price,2) ?></td>
 																			
 																				<?php }else{ ?>
 																					<td>กำลังประเมินราคา</td>
@@ -252,39 +252,81 @@ h5{
 																							<i class="c">2</i>	
 																							<?php } ?>																	
 																				</li>
-																				<li class="b" title="รอการชำระเงินส่วนที่เหลือ">																		
+																				<li class="b" title="รอยืนยันการชำระเงินมัดจำ/เต็มจำนวน">																		
 																				<?php if($order1->id_status>='3'){ ?>														
 																						<i class="d">3</i>	
 																						<?php }else{ ?>			
 																							<i class="c">3</i>	
 																							<?php } ?>																		
 																				</li>
-																				<li class="b" title="กำลังยืนยันการจ่ายเงิน">																		
+																				<li class="b" title="ชำระเงินไม่ครบกรุณาชำระส่วนที่ขาด">																		
 																				<?php if($order1->id_status>='4'){ ?>														
 																						<i class="d">4</i>	
 																						<?php }else{ ?>			
 																							<i class="c">4</i>	
 																							<?php } ?>																			
 																				</li>
-																				<li class="b" title="กำลังผลิต">																		
+																				<li class="b" title="รอยืนยันการชำระเงินส่วนที่ขาด">																		
 																				<?php if($order1->id_status>='5'){ ?>														
 																						<i class="d">5</i>	
 																						<?php }else{ ?>			
 																							<i class="c">5</i>	
 																							<?php } ?>																				
 																				</li>
-																				<li class="b" title="กำลังจัดส่งสินค้า">																			
+																				<li class="b" title="ตรวจสอบตัวอย่าง">																			
 																				<?php if($order1->id_status>='6'){ ?>														
 																						<i class="d">6</i>	
 																						<?php }else{ ?>			
 																							<i class="c">6</i>	
 																							<?php } ?>	
 																				</li>
-																				<li class="b" title="จัดส่งสินค้าสำเร็จ">																			
+																				<li class="b" title="กำลังผลิตสินค้า">																			
 																				<?php if($order1->id_status>='7'){ ?>														
 																						<i class="d">7</i>	
 																						<?php }else{ ?>			
 																							<i class="c">7</i>	
+																							<?php } ?>	
+																				</li>
+																				<li class="b" title="รอชำระส่วนที่เหลือจากมัดจำ">																			
+																				<?php if($order1->id_status>='8'){ ?>														
+																						<i class="d">8</i>	
+																						<?php }else{ ?>			
+																							<i class="c">8</i>	
+																							<?php } ?>	
+																				</li>
+																				<li class="b" title="รอยืนยันการำระเงินส่วนที่เหลือจากมัดจำ">																			
+																				<?php if($order1->id_status>='9'){ ?>														
+																						<i class="d">9</i>	
+																						<?php }else{ ?>			
+																							<i class="c">9</i>	
+																							<?php } ?>	
+																				</li>
+																				<li class="b" title="ชำระเงินส่วนที่เหลือจากมัดจำไม่ครบกรุณาชำระส่วนที่ขาด">																			
+																				<?php if($order1->id_status>='10'){ ?>														
+																						<i class="d">10</i>	
+																						<?php }else{ ?>			
+																							<i class="c">10</i>	
+																							<?php } ?>	
+																				</li>
+																				<li class="b" title="รอยืนยันการชำระเงินส่วนที่เหลือของมัดจำที่จ่ายไม่ครบ">																			
+																				<?php if($order1->id_status>='11'){ ?>														
+																						<i class="d">11</i>	
+																						<?php }else{ ?>			
+																							<i class="c">11</i>	
+																							<?php } ?>	
+																				</li>
+																				<li class="b" title="กำลังจัดส่งสินค้า">																			
+																				<?php if($order1->id_status>='12'){ ?>														
+																						<i class="d">12</i>	
+																						<?php }else{ ?>			
+																							<i class="c">12</i>	
+																							<?php } ?>	
+																				</li>
+																				<li class="b" title="เสร็จสิ้น">																			
+																				<?php if($order1->id_status>='13'){ ?>														
+																						<i class="d">13</i>	
+																						<?php }else{ ?>			
+																							<i class="c">13</i>	
 																							<?php } ?>	
 																				</li>
 																			</ul></td>
@@ -302,13 +344,19 @@ h5{
 															</div>
 
 								</section>
-								<p>1 กำลังประเมินราคา</p>
+																<p>1 กำลังประเมินราคา</p>
 																<p>2 รอชำระเงินมัดจำ/เต็มจำนวน</p>
-																<p>3 รอการชำระเงินส่วนที่เหลือ</p>
-																<p>4 กำลังยืนยันการจ่ายเงิน</p>
-																<p>5 กำลังผลิต</p>
-																<p>6 กำลังจัดส่งสินค้า</p>
-																<p>7 จัดส่งสินค้าสำเร็จ</p>
+																<p>3 รอยืนยันการชำระเงินมัดจำ/เต็มจำนวน</p>
+																<p>4 ชำระเงินไม่ครบกรุณาชำระส่วนที่ขาด</p>
+																<p>5 รอยืนยันการชำระเงินส่วนที่ขาด</p>
+																<p>6 ตรวจสอบตัวอย่าง</p>
+																<p>7 กำลังผลิตสินค้า</p>
+																<p>8 รอชำระส่วนที่เหลือจากมัดจำ</p>
+																<p>9 รอยืนยันการำระเงินส่วนที่เหลือจากมัดจำ</p>
+																<p>10 ชำระเงินส่วนที่เหลือจากมัดจำไม่ครบกรุณาชำระส่วนที่ขาด</p>
+																<p>11 รอยืนยันการชำระเงินส่วนที่เหลือของมัดจำที่จ่ายไม่ครบ</p>
+																<p>12 กำลังจัดส่งสินค้า</p>
+																<p>13 เสร็จสิ้น</p>
 						</div>
 					</div>
 

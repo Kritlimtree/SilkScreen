@@ -99,6 +99,12 @@ Route::get('order.php', function () {
     return view('Backend.order');
 });
 
+Route::post('detailpurchase.php', [OrderAdminController::class, 'detailpurchase'])->name('detailpurchase');
+
+Route::post('detailpurchase_store.php', [OrderAdminController::class, 'detailpurchase_store'])->name('detailpurchase_store');
+
+Route::get('purchase.php', [OrderAdminController::class, 'purchase'])->name('purchaseback');
+
 Route::get('order.php', [OrderAdminController::class, 'index'])->name('orderadmin');
 Route::post('test2-2.php', [OrderAdminController::class, 'detail'])->name('orderadmin_detail');
 Route::post('test2-2/edit', [OrderAdminController::class, 'edit'])->name('orderadmin_edit');

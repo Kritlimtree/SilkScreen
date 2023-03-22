@@ -200,7 +200,8 @@ hr {
 							</header>
 
 							<!-- Banner -->
-							
+							<form action="{{ route('detailpurchase') }}" method="POST" enctype="multipart/form-data">
+									@csrf
 							<section id="banner">
 								<header>
 								</header>
@@ -222,27 +223,29 @@ hr {
 													<td>รายละเอียด</td>
 												</tr>
 											</thead>
+											
 											<tbody>
+												<?php foreach($payment as $key => $payment){ ?>
 												<tr>
-													<?php foreach($order as $key => $order1){ ?>
-													<td><?php echo $order1->order_id ?></td>
-													<td><?php echo $order1->order_price ?></td>
-													<td><?php echo $order1->order_price*40/100 ?></td>
-													<td></td>
-													<td></td>
-													<td><?php echo $order1->payment_date ?></td>
-													<td><a href="#" class="fa fa-file"></a></td>
-													<td>รอตรวจสอบการมัดจำ</td>
-													<td><a href="detailPurchase.html">คลิ๊กที่นี่</a></td>
-													<?php } ?>
+													
+														<td><?php echo $payment->order_id ?></td>
+														<td><?php echo number_format($payment->order_price,2); ?></td>
+														<td><?php echo number_format($payment->order_price*40/100,2); ?></td>
+													<td><?php echo number_format($payment->payment_paid,2); ?></td>
+													<td><?php echo number_format($payment->payment_arrears,2); ?></td>
+													<td><?php echo $payment->payment_date ?></td>
+													<td><a href="#"  ><img src="assets/images/<?php echo $payment->payment_slip  ?>" width="100px" alt=""></a></td>
+													<td><?php echo $payment->statuspayment_name ?></td>
+													<td><button type="submit" value="<?php echo $payment->id_order ?>" name="id" class="secondary" >รายละเอียด</button></td>
+													
 												</tr>
-												
+												<?php } ?>
 												 
 											</tbody>
 											
 										</table>
 									</div>
-									
+									</form>
 								</div>
 								<!-- <span class="image object">
 									<img src="images/pic10.jpg" alt="" />

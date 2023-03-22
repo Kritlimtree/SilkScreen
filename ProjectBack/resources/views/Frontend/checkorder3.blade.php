@@ -9,7 +9,7 @@
 	<?php
 		@ini_set('display_errors', '0');
 		session_start();
-		 
+		
 		if($_POST){
 			$quantity = $_POST['quantity'];
 			if($_SESSION["number"]==1){
@@ -306,19 +306,19 @@ function toFull(){
 																		<?php if($_SESSION["number"]==1){ 
 																			 ?>
                                                                         <label for="lname">สีที่จะใช้สกรีน: </label><div class="col-6 col-12-xsmall">
-																			 
-                                                                            <div class="boxCenter" style="background-color: <?php echo $screen_color ?>";></div>
+																			  
+                                                                            <div class="" ><img src="assets/images/<?php echo $screencolor[0]->color_code; ?>"  alt="" /></div>
 																			<input type="hidden" name="sum" value="<?php echo $sum; ?>"/>
                                                                         </div>
 																		<?php } ?>
                                                                         <br>
                                                                         <!-- <input type="text" id="addr" name="addr" value="12 nowhere"><br> -->
 																		
-																		<label for="fname">ขนส่งโดย: </label>
+																		<label for="fname">ขนส่งโดย: <?php echo $transporter[0]->transport_name ?></label>
                                                                         <label for="fname">ขนาดภาพกว้าง(นิ้ว): <?php echo number_format($_SESSION["wide"],2); ?></label>
                                                                         <label for="fname">ขนาดภาพยาว(นิ้ว): <?php echo number_format($_SESSION["long"],2); ?></label>
                                                                         <div class="col-6 col-12-xsmall">
-																		<h3 id="content">บริษัทขนส่ง</h3>
+																		 
 																	</div>
 																	<input type="hidden" name="transport" value="<?php echo $_SESSION["number"]; ?>"/>					
 												<input type="hidden" name="number" value="<?php echo $_SESSION["number"]; ?>"/>
