@@ -38,12 +38,12 @@ class OrderAdminController extends Controller
     }
 
     public function detailpurchase(Request $request){
-        
+       
         $payment = payment::join('orders','orders.id_order','=','payments.id_order')
         ->join('statuspayments','statuspayments.id_statuspayment','=','payments.id_statuspayment')
         ->join('usershops','usershops.id_user','=','orders.id_user')
         ->where('payments.id_order',$request->id)->orderBy('payments.created_at')->get();
-         
+        
         return view('Backend.detailPurchase', compact(['payment']));
     }
 

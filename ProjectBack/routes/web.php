@@ -11,6 +11,7 @@ use App\Http\Controllers\OrderfController;
 use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\UsershopController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,11 +22,12 @@ use App\Http\Controllers\OrderDetailController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('indexLoginIsTrue.html', function () {
-    return view('Frontend.indexLoginIsTrue');
-});
 
-Route::get('/index.html', function () {
+
+
+ 
+
+Route::get('/', function () {
     return view('Frontend.index');
 });
 
@@ -33,13 +35,27 @@ Route::get('/login.html', function () {
     return view('Frontend.login');
 });
 
-Route::get('/register.html', function () {
-    return view('Frontend.register');
-});
+Route::post('/login', [UsershopController::class, 'login'])->name('login');
+
+Route::get('/logout', [UsershopController::class, 'logout'])->name('logout');
+
+Route::get('/regis', [UsershopController::class, 'register'])->name('regis');
+
+Route::post('/amphures', [UsershopController::class, 'amphures'])->name('amphures');
+
+Route::post('/district', [UsershopController::class, 'district'])->name('district');
+
+Route::post('/postcode', [UsershopController::class, 'postcode'])->name('postcode');
+
+Route::post('/apply', [UsershopController::class, 'apply'])->name('apply');
+
+Route::middleware(['auth.admin'])->group(function(){
+
+    Route::get('indexLoginIsTrue.html', function () {
+        return view('Frontend.indexLoginIsTrue');
+    })->name('indexTrue');
 
 Route::get('orderf.php', [OrderfController::class, 'index'])->name('orderf');
-
-
 
 Route::post('buy.php', [OrderfController::class, 'buycolor'])->name('buy');
 
@@ -86,11 +102,13 @@ Route::get('/profile', function () {
 
 
 
-Route::get('/', function () {
-    return view('Backend.indexLoginIsTrue');
-});
 
 
+Route::middleware(['is_admin'])->group(function(){
+
+Route::get('/index_back', function () {
+        return view('Backend.indexLoginIsTrue');
+    });
 
 Route::get('indexLoginIsTrue.php', function () {
     return view('Backend.indexLoginIsTrue');
@@ -150,3 +168,13 @@ Route::post('managementTransport-search', [FreightController::class, 'search'])-
 Route::put('Transport-select/{id}', [FreightController::class, 'select'])->name('Transport_select');
 
 Route::post('Transport.html', [TransportController::class, 'store'])->name('Transport_store');
+});
+
+
+
+
+
+
+
+});
+

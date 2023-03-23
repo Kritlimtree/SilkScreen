@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="is-preload">
-
+	<?php session_start(); ?>
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -22,7 +22,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<p>ยินดีต้อนรับ คุณ admin</p>
+									<p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 									<!-- <a href="index.html" class="logo2">logout2</a> -->
 									<!-- <a href="index.html" class="logo">logout</a> -->
 									
@@ -33,8 +33,11 @@
 										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li> -->
+										<?php if(session('is_admin')==1){ ?>
+											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<?php } ?>
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
-										<li><a href="index.html" class="logo">logout</a></li>
+										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 								</header>
@@ -199,7 +202,7 @@
 										<!-- <li><a href="#">Maximus Erat</a></li> -->
 										<!-- <li><a href="#">Sapien Mauris</a></li> -->
 										
-										<li><a href="contact.html">ติดต่อเรา</a></li>
+										 
 									</ul>
 								</nav>
 

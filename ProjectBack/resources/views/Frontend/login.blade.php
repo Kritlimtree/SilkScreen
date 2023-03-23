@@ -57,22 +57,28 @@
 								<section>
 									<header class="align-center">
 										<h2>login</h2>
+										
 									</header>
 									<div class="features">
 										<div>
-											<form class="box">
-												<label for="fname">ชื่อผู้ใช้:</label><br>
-												<input type="text" id="fname" name="fname" placeholder="กรอกชื่อผู้ใช้" value=""><br>
-												<label for="lname">รหัสผ่าน:</label><br>
-												<input type="password" id="lname" name="lname" placeholder="กรอกรหัสผ่าน" value=""><br><br>
+											<form class="box" method="post" action="login" enctype="multipart/form-data">
+												@csrf
+												<label for="fname">E-mail:</label><br>
+												<input type="text" id="fname" name="email" placeholder="กรอกชื่อผู้ใช้" value=""><br>
+												@error('email')
+												<div class="invalid-feedback d-block">{{ $error->first('email')}}</div>
+												@enderror
+												<label for="lname">Password:</label><br>
+												<input type="password" id="lname" name="password" placeholder="กรอกรหัสผ่าน" value=""><br><br>
 												<!-- <input type="submit" value="Submit"> -->
 												<a href="#" style="float: left;">ลืมรหัสผ่าน</a>
-												<a href="register.html" style="float: right;">สมัครสมาชิก</a>
+												<a href="{{ route('regis') }}" style="float: right;">สมัครสมาชิก</a>
 												<span style="float: right;">ยังไม่ได้เป็นสมาชิกหรอ? </span><br><br>
 												<!-- <div class="row"> -->
 												<div class="align-center">
 														<div class="col-3-xlarge">
-															<a href="indexLoginIsTrue.html" class="button fit secondary" >เข้าสู่ระบบ</a>
+															<button type="submit" class="button fit secondary" >เข้าสู่ระบบ</a>
+															 
 														</div>
 													</div>
 													<!-- <a href="register.html" class="button secondary">สมัครสมาชิก</a> -->

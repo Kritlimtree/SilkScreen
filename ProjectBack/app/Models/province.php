@@ -11,6 +11,6 @@ class province extends Model
     
     protected $table="provinces";
     protected $fillable = [
-        'province_name'
+        'code','name_th','name_en','geography_id',
     ];
 }

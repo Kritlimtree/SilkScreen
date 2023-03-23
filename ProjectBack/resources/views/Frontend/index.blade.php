@@ -22,6 +22,7 @@
 
 							<!-- Header -->
 								<header id="header">
+									 <p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 									<!-- <a href="login.html" class="logo"><strong>login</strong> by HTML5 UP</a> -->
 									
 									<!-- <a href="login.html" class="logo">login</a>
@@ -35,7 +36,7 @@
 										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
 										<li><a href="#" class="icon brands fa-user-circle-o" aria-hidden="true"><span class="label">User</span></a></li> -->
 										<li><a href="login.html" class="logo">login</a></li>
-										<li><a href="register.html" class="logo">register</a></li>
+										<li><a href="{{ route('regis') }}" class="logo">register</a></li>
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 								</header>
@@ -197,7 +198,7 @@
 										<!-- <li><a href="#">Maximus Erat</a></li> -->
 										<!-- <li><a href="#">Sapien Mauris</a></li> -->
 										
-										<li><a href="contact.html">ติดต่อเรา</a></li>
+										 
 									</ul>
 								</nav>
 

@@ -142,8 +142,11 @@ h5{
 							<header id="header">
 								<p>ยินดีต้อนรับ คุณ admin</p>
 								<ul class="icons">
+								<?php if(session('is_admin')==1){ ?>
+											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<?php } ?>
 									<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
-									<li><a href="index.html" class="logo">logout</a></li>
+									<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 								</ul>
 								<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 							</header>
@@ -184,7 +187,7 @@ h5{
             <form method="POST" action="{{ route('checkorder4') }}">
                 <input type="hidden" name="id" value="{{ $order1->id_order }}">
                 {!! csrf_field() !!}
-                <button type="submit" class="btn">
+                <button type="submit"  >
                     <span class="glyphicon glyphicon-trash"><img style="width:100px" class="img-fluid"  src="assets/images/<?php echo $order1->picture ?>"></span>
                 </button>
             </form>
@@ -402,7 +405,7 @@ h5{
 										</li> -->
 										<!-- <li><a href="#">Maximus Erat</a></li> -->
 										<!-- <li><a href="#">Sapien Mauris</a></li> -->
-										<li><a href="contact.html">ติดต่อเรา</a></li>
+										 
 									</ul>
 								</nav>
 

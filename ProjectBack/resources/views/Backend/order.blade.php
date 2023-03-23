@@ -18,7 +18,8 @@
 		session_start();
 		?>
 		<style>
-		body, input, select, textarea {
+
+body, input, select, textarea {
   color: #7f888f;
   font-family: "Open Sans", sans-serif;
   font-size: 13pt;
@@ -156,7 +157,17 @@ hr {
 .align-right {
   text-align: right; }
 
-		</style>
+	.model {
+  display: show;
+   
+  height: 80px;
+  width:  80px;
+  
+  overflow: hidden;
+  background-color: white;
+}
+
+</style>
 		
 	</head>
 	<body class="is-preload">
@@ -173,8 +184,9 @@ hr {
 									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
 									<p>ยินดีต้อนรับ คุณ admin</p>
 									<ul class="icons">
+									<li><a href="indexLoginIsTrue.html" class="logo">ไปหน้าบ้าน</a></li>
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
-										<li><a href="index.html" class="logo">logout</a></li>
+										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 									</ul>
 
 								</header>
@@ -184,7 +196,7 @@ hr {
 								</header>
 								<form action="{{ route('orderadmin_detail') }}" method="POST" enctype="multipart/form-data">
 									@csrf
-								<div class="Center">
+								<div class="Center2">
 									<h3>ลูกค้าที่สั่งออร์เดอร์ทั้งหมด</h3>
 									
 									<div class="table-wrapper" style="width:135%">

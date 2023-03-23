@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class district extends Model
+class amphures extends Model
 {
-    use HasFactory;
-    
-    protected $table="districts";
+    protected $table="amphures";
     protected $fillable = [
-        'id','name_th','name_en','amphure_id',
+        'id','name_th','name_en','province_id',
     ];
 }

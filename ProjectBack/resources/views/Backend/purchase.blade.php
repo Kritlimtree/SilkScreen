@@ -193,8 +193,9 @@ hr {
 									<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
 									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 									<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li> -->
+									<li><a href="indexLoginIsTrue.html" class="logo">ไปหน้าบ้าน</a></li>
 									<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
-									<li><a href="index.html" class="logo">logout</a></li>
+									<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 								</ul>
 								<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 							</header>

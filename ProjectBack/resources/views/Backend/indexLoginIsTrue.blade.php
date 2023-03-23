@@ -184,8 +184,11 @@ hr {
 								<header id="header">
 									<p>ยินดีต้อนรับ คุณ admin</p>
 									<ul class="icons">
+									
+											<li><a href="indexLoginIsTrue.html" class="logo">ไปหน้าบ้าน</a></li>
+											
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
-										<li><a href="index.html" class="logo">logout</a></li>
+										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 								</header>
@@ -201,10 +204,11 @@ hr {
 											<table class="alt" id="table1">
 												<thead>
 													<tr>
+													<td>id order</td>
 														<td>ชื่อ</td>
 														<td>นามสกุล</td>
 														<td>วันที่สั่งออร์เดอร์</td>
-														<td>id order</td>
+														
 														<td>อยู่ในระหว่างการดำเนินการ(วัน)</td>
 														<td>สถานะ</td>
 														

@@ -11,6 +11,6 @@ class usershop extends Model
     
     protected $table="usershops";
     protected $fillable = [
-        'id_tumbon','user_name','user_fname','user_phone','user_username','user_password','user_address','is_admin'
+        'id_tumbon','user_name','user_fname','user_phone','user_email','user_password','user_address','is_admin'
     ];
 }

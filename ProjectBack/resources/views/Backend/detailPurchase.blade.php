@@ -50,7 +50,7 @@ div.desc {
 									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
 									<p>ยินดีต้อนรับ คุณ admin</p>
 									<ul class="icons">
-
+									<li><a href="indexLoginIsTrue.html" class="logo">ไปหน้าบ้าน</a></li>
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="index.html" class="logo">logout</a></li>
 									</ul>
@@ -103,11 +103,11 @@ div.desc {
                                             <label for="fname">phone: <?php echo $payment[0]->user_phone ?></label><br>
                                             <!-- <label for="fname">เลขบัญชี 4 ตัวท้าย: 1234</label><br> -->
                                              
-                                            <label for="fname">ราคาเต็ม: <?php echo $payment[0]->order_price ?> บาท</label><br>
-                                            <label for="fname">ราคามัดจำ: <?php echo $payment[0]->order_price*40/100 ?> บาท</label><br>
+                                            <label for="fname">ราคาเต็ม: <?php echo number_format($payment[0]->order_price,2) ?> บาท</label><br>
+                                            <label for="fname">ราคามัดจำ: <?php echo number_format( $payment[0]->order_price*40/100,2) ?> บาท</label><br>
 											<?php $c=0; while(true){
 												if($c==sizeof($payment)-1){ ?>
-                                            <label for="fname">ราคาคงเหลือ: <?php echo $payment[$c]->payment_arrears ?> บาท</label><br>
+                                            <label for="fname">ราคาคงเหลือ: <?php echo number_format($payment[$c]->payment_arrears,2) ?> บาท</label><br>
 											<?php break; } $c++; } ?>
 										</form>
 										</div>
@@ -137,7 +137,7 @@ div.desc {
 													<td><?php echo $c ?></td>
 													
 													<td><?php echo $p->statuspayment_name ?></td>
-													<td><?php echo $p->payment_paid ?></td>
+													<td><?php echo number_format($p->payment_paid,2) ?></td>
 													<?php if($c==sizeof($payment)){ ?>
 														<input type="hidden" name="st" value="0">
 														<input type="hidden" name="id_status" value="<?php echo $p->id_statuspayment ?>">

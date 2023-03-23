@@ -154,9 +154,11 @@ function toFull(){
 									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
 									<p>ยินดีต้อนรับ คุณ admin</p>
 									<ul class="icons">
-										
+									<?php if(session('is_admin')==1){ ?>
+											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<?php } ?>
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
-										<li><a href="index.html" class="logo">logout</a></li>
+										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 								</header>
@@ -306,8 +308,8 @@ function toFull(){
 																		<?php if($_SESSION["number"]==1){ 
 																			 ?>
                                                                         <label for="lname">สีที่จะใช้สกรีน: </label><div class="col-6 col-12-xsmall">
-																			  
-                                                                            <div class="" ><img src="assets/images/<?php echo $screencolor[0]->color_code; ?>"  alt="" /></div>
+																		<div class="img-resize"><span><img src="assets/images/<?php echo $screencolor[0]->color_code; ?>"  alt="" /></span></div>
+                                                                             
 																			<input type="hidden" name="sum" value="<?php echo $sum; ?>"/>
                                                                         </div>
 																		<?php } ?>
@@ -378,7 +380,7 @@ function toFull(){
 									<li><a href="indexLoginIsTrue.html">หน้าหลัก</a></li>
 									<li><a href="orderf.php">การสั่งสกรีนเสื้อผ้า</a></li>
 									<li><a href="shopping.php">การซื้อของฉัน</a></li>
-									<li><a href="contact.html">ติดต่อเรา</a></li>
+									 
 								</ul>
 							</nav>
 							<section>

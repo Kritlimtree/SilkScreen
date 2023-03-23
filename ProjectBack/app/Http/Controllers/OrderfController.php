@@ -55,11 +55,12 @@ class OrderfController extends Controller
     public function checkorderdetail(Request $request){
          
         $order = order::where('id_order', $request->id)->get();
+        $screencolor = color::where('id_color', $order[0]->id_color)->get();
         $shirtcolor = shirtcolor::all();
         $shirtsize = shirtsize::all();
         $orderdetail = orderdetail::where('id_order', $order[0]->id_order)->get();
         $transport = transport::all();
-        return view('Frontend.checkorder4', compact(['order','orderdetail','shirtcolor','shirtsize','transport']));
+        return view('Frontend.checkorder4', compact(['order','screencolor','orderdetail','shirtcolor','shirtsize','transport']));
     }
 
     public function sample(Request $request){
