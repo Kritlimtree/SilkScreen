@@ -199,7 +199,7 @@ hr {
 								<div class="Center2">
 									<h3>ลูกค้าที่สั่งออร์เดอร์ทั้งหมด</h3>
 									
-									<div class="table-wrapper" style="width:135%">
+									<div class="table-wrapper" style="width:116%">
 										<table id="example" class="table table-striped" style="width:100%">
 											<thead>
 												<tr>													
@@ -244,10 +244,10 @@ hr {
 									<h2>Menu</h2>
 								</header>
 								<ul>
-									<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+									<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 									<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 									
-									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+									<li><a href="/user">ข้อมูลลูกค้า</a></li>
 									<li><a href="purchase.php">การชำระเงิน</a></li>
 									<!-- <li><a href="management.html">การจัดการระบบ</a></li> -->
 									<li><span class="opener">การจัดการระบบ</span>

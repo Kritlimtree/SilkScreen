@@ -10,6 +10,26 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+
+	<style>
+
+a {
+  -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  border-bottom: dotted 1px;
+  color: #2c91f0;
+  text-decoration: none; }
+  a:hover {
+    border-bottom-color: #2c91f0;
+    color: #2c91f0 !important; }
+    a:hover strong {
+      color: inherit; }
+	</style>
+
 	</head>
 	<body class="is-preload">
 	<?php session_start(); ?>
@@ -34,7 +54,7 @@
 										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li> -->
 										<?php if(session('is_admin')==1){ ?>
-											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
 											<?php } ?>
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>

@@ -58,7 +58,7 @@ function toFull(){
 
 								<ul class="icons">
 								<?php if(session('is_admin')==1){ ?>
-											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
 											<?php } ?>
 									<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 									<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
@@ -69,7 +69,7 @@ function toFull(){
 							<!-- Banner -->
 							
 							<section>
-							<?php if($purchase[0]->id_status<12){ ?>
+							<?php if($purchase[0]->id_status==2||$purchase[0]->id_status==4||$purchase[0]->id_status==8||$purchase[0]->id_status==10){ ?>
 								<form  method="post" action="payment" enctype="multipart/form-data">
 									@csrf
 								<div class="content">
@@ -199,9 +199,27 @@ function toFull(){
 										<div class="align-center">
 										</div>
 									</div>
-									<?php }else{ ?>
+									
+									<?php }else if($purchase[0]->id_status==1){ ?>
+										<h1>กำลังประเมินราคา</h1>
+									<?php }else if($purchase[0]->id_status==3){ ?>
+										<h1>รอยืนยันการชำระเงินมัดจำ/เต็มจำนวน</h1>
+									<?php }else if($purchase[0]->id_status==5){ ?>
+										<h1>รอยืนยันการชำระเงินส่วนที่ขาด</h1>
+									<?php }else if($purchase[0]->id_status==6){ ?>
+										<h1>รอตรวจสอบตัวอย่าง</h1>
+									<?php }else if($purchase[0]->id_status==7){ ?>
+										<h1>กำลังผลิตสินค้า</h1>
+									<?php }else if($purchase[0]->id_status==9){ ?>
+										<h1>รอยืนยันการำระเงินส่วนที่เหลือจากมัดจำ</h1>
+									<?php }else if($purchase[0]->id_status==11){ ?>
+										<h1>รอยืนยันการชำระเงินส่วนที่เหลือของมัดจำที่จ่ายไม่ครบ</h1>
+									<?php }else if($purchase[0]->id_status==12){ ?>
+										<h1>กำลังจัดส่งสินค้า</h1>
+									<?php }else if($purchase[0]->id_status==13){ ?>
 										<h1>สำเร็จ</h1>
-										<?php } ?>
+									<?php } ?>
+									
 								</section>
 </form>
 						</div>

@@ -287,7 +287,7 @@ hr {
                                             <thead>
                                                 <tr>
                                                     <td>สี</td>
-                                                    <td>โค้ดสี</td>
+                                                     
                                                     <td>ตัวอย่างสี</td>
                                                     <!-- <th>วันที่สั่งออร์เดอร์ล่าสุด</th> -->
                                                     <td></td>
@@ -298,7 +298,7 @@ hr {
                                               <?php foreach ($data as $key => $color) { ?>
                                                 <tr>
                                                     <td><?php echo $color->color_name  ?></td>
-                                                    <td><?php echo $color->color_code  ?></td>
+                                                     
 													<td><img src="assets/images/<?php echo $color->color_code  ?>" width="100px" alt=""></td>
                                                      
                                                     <!-- <td>13/10/65</td> -->
@@ -330,10 +330,10 @@ hr {
 									<h2>Menu</h2>
 								</header>
 								<ul>
-									<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+									<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 									<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 									
-									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+									<li><a href="/user">ข้อมูลลูกค้า</a></li>
 									<li><a href="purchase.php">การชำระเงิน</a></li>
                                     <!-- <li><a href="management.html">การจัดการระบบ</a></li> -->
                                     <li><span class="opener">การจัดการระบบ</span>

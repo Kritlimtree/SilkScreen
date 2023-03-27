@@ -26,12 +26,11 @@ class OrderfController extends Controller
     }
 
     public function shopping(){
+         
+        $order = order::where('id_user', session('id_user'))->get();
         
-        $order = order::where('id_user', 1)->get();
-        foreach($order as $key => $order1){
-        $orderdetail = orderdetail::where('id_order', $order1->id_order)->get();
-        }
-        return view('Frontend.shopping', compact(['order','orderdetail']));
+         
+        return view('Frontend.shopping', compact(['order']));
     }
     
     public function buycolor(){
@@ -53,8 +52,9 @@ class OrderfController extends Controller
     }
 
     public function checkorderdetail(Request $request){
-         
+          
         $order = order::where('id_order', $request->id)->get();
+         
         $screencolor = color::where('id_color', $order[0]->id_color)->get();
         $shirtcolor = shirtcolor::all();
         $shirtsize = shirtsize::all();
@@ -132,7 +132,7 @@ class OrderfController extends Controller
          
         $t=time();
         $order = order::create([
-            'id_user' => '1',
+            'id_user' => session('id_user'),
             'picture' => $request->screenPicture[0],
             'id_shirtcolor' => $request->colorname[0],
             'id_color' => $request->screencolor[0],

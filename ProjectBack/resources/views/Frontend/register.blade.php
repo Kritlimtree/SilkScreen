@@ -40,52 +40,130 @@
 
 									<form class="box" method="post" action="{{route('apply')}}" enctype="multipart/form-data">
 										@csrf
-											<label for="fname">ชื่อผู้ใช้:</label>
+											<label for="fname">email:</label>
 											<input type="text" id="email" name="email" placeholder="กรอกชื่อผู้ใช้" value=""><br>
+											@if ($errors->has('email'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('email') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="lname">ชื่อ:</label>
 											<input type="text" id="name" name="name" placeholder="กรอกชื่อจริง" value=""><br>
+											@if ($errors->has('name'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('name') }}</li> 
+													</ul>
+												</div>
+											@endif
                                             <label for="fname">นามสกุล:</label>
-											<input type="text" id="fname" name="lname" placeholder="กรอกนามสกุล" value=""><br>
+											<input type="text" id="fname" name="fname" placeholder="กรอกนามสกุล" value=""><br>
+											@if ($errors->has('fname'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('fname') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="lname">ที่อยู่:</label>
 											<div class="col-6">
 											<input type="text" id="address" name="address" placeholder="กรอกที่อยู่"></input>
+											@if ($errors->has('address'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('address') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<div class="row gtr-25">
 											<div class="col-6" style="padding-top: 5px;">
 													<select name="province" id="province" class="province">
 														<option value="" selected disabled>--กรุณาเลือกจังหวัด--</option>
-														<?php foreach($province as $key => $province){?>
-														<option value="<?php echo $province->id ?>"><?php echo $province->name_th ?></option>
+														<?php  foreach($province as $key => $province){?>
+														<option value="<?php echo $province->id ?>"><?php echo $province->province_name_th ?></option>
 														<?php }?>
 													</select>
+													@if ($errors->has('province'))
+														<div class="alert alert-danger">
+															<ul>
+																<li style="color: red;">{{ $errors->first('province') }}</li> 
+															</ul>
+														</div>
+													@endif
 												</div>
+												
 												<div class="col-6" style="padding-top: 5px;">
-													<select name="amphures" id="amphures"  class="amphures">
+													<select  name="amphures" id="amphures"  class="amphures">
 														<option value="	" selected disabled>--กรุณาเลือกอำเภอ--</option>
 													</select>
+													@if ($errors->has('amphures'))
+														<div class="alert alert-danger">
+															<ul>
+																<li style="color: red;">{{ $errors->first('amphures') }}</li> 
+															</ul>
+														</div>
+													@endif
 												</div>
 											</div>
 											<div class="row gtr-25">
 												
 												<div class="col-6" style="padding-top: 5px;">
-													<select name="district" id="district" class="district">
+													<select  name="district" id="district" class="district">
 														<option value=" " selected disabled>--กรุณาเลือกตำบล--</option>
 														
 													</select>
+													@if ($errors->has('district'))
+														<div class="alert alert-danger">
+															<ul>
+																<li style="color: red;">{{ $errors->first('district') }}</li> 
+															</ul>
+														</div>
+													@endif
 												</div>
 												<div class="col-6" style="padding-top: 5px;">
-													<select name="postcode" id="postcode" class="postcode">
+													<select  name="postcode" id="postcode" class="postcode">
 														<option value="" selected disabled>--กรุณาเลือกรหัสไปรษณีย์--</option>
 														
 													</select>
+													@if ($errors->has('postcode'))
+														<div class="alert alert-danger">
+															<ul>
+																<li style="color: red;">{{ $errors->first('postcode') }}</li> 
+															</ul>
+														</div>
+													@endif
 												</div>
 											</div>
 											</div><br>
                                             <label for="fname">เบอร์โทร:</label>
 											<input type="tel" id="phone" name="phone" placeholder="กรอกเบอร์โทร" value=""><br>
+											@if ($errors->has('phone'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('phone') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="lname">รหัสผ่าน:</label>
 											<input type="password" id="password" name="pass" placeholder="กรอกรหัสผ่าน" value=""><br>
+											@if ($errors->has('pass'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('pass') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="lname">ยืนยันรหัสผ่าน:</label>
 											<input type="password" id="passwordConflim" name="passConflim" placeholder="ยืนยันรหัสผ่านอีกครั้ง" value=""><br>
+											@if ($errors->has('passwordConflim'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('passwordConflim') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<!-- <input type="submit" value="Submit"> -->
 											<ul class="actions fit">
 												<li>
@@ -97,17 +175,9 @@
 													<!-- <a href="#" class="button primary fit">ยกเลิก</a> -->
 												</li>
 											</ul>
-											<h1>Create Post</h1>
+											 
  
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+
 										  </form>
 
 									</div>

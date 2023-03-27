@@ -37,6 +37,8 @@ Route::get('/login.html', function () {
 
 Route::post('/login', [UsershopController::class, 'login'])->name('login');
 
+Route::get('/forgotpassword', [UsershopController::class, 'forgotpassword'])->name('forgotpassword');
+
 Route::get('/logout', [UsershopController::class, 'logout'])->name('logout');
 
 Route::get('/regis', [UsershopController::class, 'register'])->name('regis');
@@ -110,12 +112,11 @@ Route::get('/index_back', function () {
         return view('Backend.indexLoginIsTrue');
     });
 
-Route::get('indexLoginIsTrue.php', function () {
-    return view('Backend.indexLoginIsTrue');
-});
 Route::get('order.php', function () {
     return view('Backend.order');
 });
+
+Route::get('indexLoginIsTrue', [OrderAdminController::class, 'indexLoginIsTrue'])->name('indexLoginIsTrue');
 
 Route::post('detailpurchase.php', [OrderAdminController::class, 'detailpurchase'])->name('detailpurchase');
 
@@ -164,6 +165,10 @@ Route::delete('/managementTransport-delete', [FreightController::class, 'destroy
 Route::get('managementTransport-edit/{id}', [FreightController::class, 'edit'])->name('managementTransport_edit');
 Route::put('managementTransport-update', [FreightController::class, 'update'])->name('managementTransport_update');
 Route::post('managementTransport-search', [FreightController::class, 'search'])->name('managementTransport_search');
+
+Route::get('/user', [OrderAdminController::class, 'user'])->name('user');
+
+Route::post('/user_show', [OrderAdminController::class, 'user_show'])->name('user_show');
 
 Route::put('Transport-select/{id}', [FreightController::class, 'select'])->name('Transport_select');
 

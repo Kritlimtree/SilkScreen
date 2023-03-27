@@ -65,13 +65,31 @@
 												@csrf
 												<label for="fname">E-mail:</label><br>
 												<input type="text" id="fname" name="email" placeholder="กรอกชื่อผู้ใช้" value=""><br>
-												@error('email')
-												<div class="invalid-feedback d-block">{{ $error->first('email')}}</div>
-												@enderror
+												@if ($errors->has('email'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('email') }}</li> 
+													</ul>
+												</div>
+												@endif
 												<label for="lname">Password:</label><br>
 												<input type="password" id="lname" name="password" placeholder="กรอกรหัสผ่าน" value=""><br><br>
+												@if ($errors->has('password'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('password') }}</li> 
+													</ul>
+												</div>
+												@endif
+												@if ($errors->has('pass'))
+												<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('pass') }}</li> 
+													</ul>
+												</div>
+												@endif
 												<!-- <input type="submit" value="Submit"> -->
-												<a href="#" style="float: left;">ลืมรหัสผ่าน</a>
+												<a href="{{ route('forgotpassword') }}" style="float: left;">ลืมรหัสผ่าน</a>
 												<a href="{{ route('regis') }}" style="float: right;">สมัครสมาชิก</a>
 												<span style="float: right;">ยังไม่ได้เป็นสมาชิกหรอ? </span><br><br>
 												<!-- <div class="row"> -->

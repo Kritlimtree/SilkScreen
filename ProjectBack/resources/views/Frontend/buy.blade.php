@@ -83,7 +83,7 @@
 									<p>ยินดีต้อนรับ คุณ admin</p>
 									<ul class="icons">
 									<?php if(session('is_admin')==1){ ?>
-											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
 											<?php } ?>
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
@@ -205,7 +205,7 @@
 																	<?php } ?>
 																</div>
 															</div>
-															
+															<br>
 															<select name="transport" id="myval" >
 												<option value="-1" selected disabled>กรุณาเลือกบริษัทขนส่ง</option>
 												<?php foreach ($transport as $key => $trans) { 
@@ -214,7 +214,7 @@
                                                     <option value="<?php echo $trans->id_tramsport ?>"><?php echo $trans->transport_name  ?></option>
 													<?php } ?>
                                                 </select>
-															
+												<br>
 															
 															
 															

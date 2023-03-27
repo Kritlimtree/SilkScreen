@@ -28,6 +28,39 @@ class OrderAdminController extends Controller
         return view('Backend.order', compact(['order']));
     }
 
+    public function indexLoginIsTrue(){
+        
+        $order1 = order::join('usershops','orders.id_user','=','usershops.id_user')
+        ->join('statuses','orders.id_status','=','statuses.id_status')
+        ->where('orders.id_status','<',13)
+        ->get();
+         
+        $order2 = order::join('usershops','orders.id_user','=','usershops.id_user')
+        ->join('statuses','orders.id_status','=','statuses.id_status')
+        ->where('orders.id_status','<',2)
+        ->get();
+        $sample = sample::join('orders','orders.id_sample','=','samples.id_sample')
+        ->where('samples.sample_status',2)->get();
+         
+        return view('Backend.indexLoginIsTrue', compact(['order1','order2','sample']));
+    }
+
+    public function user(){
+        
+        $user = usershop::all();
+         
+        return view('Backend.checkorder', compact(['user']));
+    }
+
+    public function user_show(Request $request){
+         
+        $user = usershop::join('districts','districts.id','=','usershops.id_tumbon')
+        ->join('amphures','amphures.id','=','districts.amphure_id')
+        ->join('provinces','provinces.id','=','amphures.province_id')->where('usershops.id_user',$request->id_user)->get();
+         
+        return view('Backend.userdetail', compact(['user']));
+    }
+
     public function purchase(){
         
         $payment = payment::join('orders','orders.id_order','=','payments.id_order')
@@ -42,6 +75,9 @@ class OrderAdminController extends Controller
         $payment = payment::join('orders','orders.id_order','=','payments.id_order')
         ->join('statuspayments','statuspayments.id_statuspayment','=','payments.id_statuspayment')
         ->join('usershops','usershops.id_user','=','orders.id_user')
+        ->join('districts','districts.id','=','usershops.id_tumbon')
+        ->join('amphures','amphures.id','=','districts.amphure_id')
+        ->join('provinces','provinces.id','=','amphures.province_id')
         ->where('payments.id_order',$request->id)->orderBy('payments.created_at')->get();
         
         return view('Backend.detailPurchase', compact(['payment']));
@@ -122,6 +158,11 @@ class OrderAdminController extends Controller
         ->join('shirtcolors','orders.id_shirtcolor','=','shirtcolors.id_shirtcolor')
         ->join('shirtsizes','orderdetails.id_shirtprice','=','shirtsizes.id_shirtsize')
         ->join('samples','orders.id_sample','=','samples.id_sample')
+
+        ->join('districts','districts.id','=','usershops.id_tumbon')
+        ->join('amphures','amphures.id','=','districts.amphure_id')
+        ->join('provinces','provinces.id','=','amphures.province_id')
+
         ->where('orders.id_order',$request->id)->orderBy('orderdetails.id_order','ASC')->get();
          }else{
             $order = order::
@@ -131,7 +172,9 @@ class OrderAdminController extends Controller
         ->join('transports','transports.id_tramsport','=','orders.id_post')
         ->join('shirtcolors','orders.id_shirtcolor','=','shirtcolors.id_shirtcolor')
         ->join('shirtsizes','orderdetails.id_shirtprice','=','shirtsizes.id_shirtsize')
-         
+        ->join('districts','districts.id','=','usershops.id_tumbon')
+        ->join('amphures','amphures.id','=','districts.amphure_id')
+        ->join('provinces','provinces.id','=','amphures.province_id')
         ->where('orders.id_order',$request->id)->orderBy('orderdetails.id_order','ASC')->get();
          }
         $status = status::all();
@@ -141,8 +184,9 @@ class OrderAdminController extends Controller
     }
 
     public function edit(Request $request){
+        if($request->sample != null){
         $imageName="";
-        
+         
          $image = $request->sample->getClientOriginalName();
          
         
@@ -153,14 +197,16 @@ class OrderAdminController extends Controller
               
              $request->sample->move(public_path('assets/images/'), $imageName);
           
-
+        }
         $order1 = orderdetail::where('id_order',$request->id)->orderBy('id_orderdetail','ASC')->get();
         $order = order::join('usershops','orders.id_user','=','usershops.id_user')
         ->join('statuses','orders.id_status','=','statuses.id_status')
         ->get(['id_order','user_name','user_fname','order_orderdate','order_id','status_name']);
         $i=0;
         $sum=0;
+        
         if($request->type==2){
+            if($request->appraise!=''){
         foreach($order1 as $key => $orders){
              
             orderdetail::where('id_orderdetail',$request->idorder[$i])->orderBy('id_order','ASC')->update([
@@ -169,22 +215,33 @@ class OrderAdminController extends Controller
             $sum=$sum+$request->appraise[$i];
             $i++;
         }
+    
         order::where('id_order',$request->id)->update([
             'order_price' => $sum,
         ]);
     }
-
+    }
+     
+    if($request->sample != null){
         $sample = sample::create([
             'id_order' => $request->id,
             'sample_picture' => $imageName,
         ]);
-        
+        order::where('id_order',$request->id)->update([
+            'id_sample' => $sample->id,
+        ]);
+    }
          order::where('id_order',$request->id)->update([
             'postcode' => $request->serial,
-            'id_sample' => $sample->id,
             'id_status' => $request->option,
-            'id_post' => $request->tp,
+             
         ]);
+        if($request->tp != null){
+            order::where('id_order',$request->id)->update([
+ 
+                'id_post' => $request->tp,
+            ]);
+        }
         return redirect()->route('orderadmin');
     }
 }

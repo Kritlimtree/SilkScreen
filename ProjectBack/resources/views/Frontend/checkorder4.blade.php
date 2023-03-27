@@ -133,7 +133,7 @@ function slider5(){
 									<p>ยินดีต้อนรับ คุณ admin</p>
 									<ul class="icons">
 										<?php if(session('is_admin')==1){ ?>
-											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
 											<?php } ?>
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
@@ -282,9 +282,10 @@ function slider5(){
 																		<?php }else{ ?>
 																			<label for="lname">จำนวนสีที่ใช้: หลายสี</label>
 																			<?php } ?>
+																			<?php if($order[0]->id_color!=''){ ?>
 																			<label for="lname">สีที่จะใช้สกรีน: </label><div class="col-6 col-12-xsmall">
 																		<div class="img-resize"><span><img src="assets/images/<?php echo $screencolor[0]->color_code; ?>"  alt="" /></span></div>
-                                                                         
+																		<?php } ?>
                                                                         <br>
                                                                         <!-- <input type="text" id="addr" name="addr" value="12 nowhere"><br> -->
                                                                         <label for="fname">ขนาดภาพกว้าง(นิ้ว): <?php echo number_format($orderdetail[0]->orderdetail_wide) ?></label><br>

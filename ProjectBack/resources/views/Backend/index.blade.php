@@ -171,9 +171,9 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-										<li><a href="index.html">หน้าหลัก</a></li>
+										<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 										<li><a href="login.html">รายการที่ลูกค้าสั่ง</a></li>
-										<li><a href="login.html">ข้อมูลลูกค้า</a></li>
+										<li><a href="/user">ข้อมูลลูกค้า</a></li>
 										<!-- <li>
 											<span class="opener">Submenu</span>
 											<ul>

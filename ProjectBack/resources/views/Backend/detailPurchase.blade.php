@@ -95,7 +95,12 @@ div.desc {
 											<!-- <input type="text" id="name" name="name" value="adam"><br> -->
                                             <label for="fname">Lastname: <?php echo $payment[0]->user_fname ?></label><br>
 											<!-- <input type="text" id="lname" name="lname" value="smith"><br> -->
-											<label for="lname">Address: </label><br>
+											 
+											<label for="fname">Address: <?php echo $payment[0]->user_address; ?> 
+															ตำบล <?php echo $payment[0]->district_name_th; ?> 
+															อำเภอ <?php echo $payment[0]->amphure_name_th; ?> 
+															จังหวัด <?php echo $payment[0]->province_name_th; ?> 
+															รหัสไปรษณีย์ <?php echo $payment[0]->zip_code; ?></label>
 											<!-- <div class="col-12">
 												<textarea name="demo-message" id="addr" placeholder="12 nowhere" rows="6"></textarea>
 											</div><br> -->
@@ -194,10 +199,10 @@ div.desc {
 									<h2>Menu</h2>
 								</header>
 								<ul>
-									<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+									<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 									<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 									
-									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+									<li><a href="/user">ข้อมูลลูกค้า</a></li>
 									<!-- <li>
 										<span class="opener">Submenu</span>
 										<ul>

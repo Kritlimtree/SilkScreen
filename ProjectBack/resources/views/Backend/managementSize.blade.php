@@ -303,7 +303,7 @@ hr {
 													<td><?php echo $size->shirtsize_size  ?></td>
 													<td><?php echo $size->shirtsize_chest  ?></td>
 													<td><?php echo $size->shirtsize_long  ?></td>
-													<td><?php echo $size->shirtsize_price  ?></td>
+													<td><?php echo number_format($size->shirtsize_price,2)  ?></td>
 													<td><button type="button" value="{{$size->id_shirtsize}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
                                                     <td><button type="button" value="{{$size->id_shirtsize}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
 												</tr>
@@ -330,10 +330,10 @@ hr {
 									<h2>Menu</h2>
 								</header>
 								<ul>
-									<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+									<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 									<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 									
-									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+									<li><a href="/user">ข้อมูลลูกค้า</a></li>
 
 									<li><a href="purchase.php">การชำระเงิน</a></li>
                                     <!-- <li><a href="management.html">การจัดการระบบ</a></li> -->

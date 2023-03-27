@@ -75,6 +75,15 @@
 													</div>
 												</div>
 											</div>
+											<?php if($order[0]->id_sample != ''&&$order[0]->sample_status == '2'){ ?>
+											<div class="col-5 col-12-medium">
+												<div class="displayShirt">
+												<p><strong>รายละเอียดการแก้ไขตัวอย่าง</strong></p>
+													<p><strong><?php echo $order[0]->sample_detail; ?></strong></p>
+													
+												</div>
+											</div>
+											<?php } ?>
 										</div>
 										
 											<div class="col-6 col-12-medium">
@@ -124,10 +133,11 @@
 																					<td><?php echo $num->quantity ?></td>
 																				<?php } ?>
 																			</tr>
+																			
 																			<tr>
 																				<td>ราคาที่ประเมิน(จำนวนตัว/ไซส์)</td>
 																				<?php foreach($order as $key => $price){ ?>
-																				<?php if($price->order_type == 2){ ?>
+																				<?php if($price->orderdetail_price == ''){ ?>
 																				<td><input type="float" name="appraise[]" value=""></input></td>
 																				<?php }else{ ?>
 																					<td><?php echo $price->orderdetail_price ?></td>
@@ -152,8 +162,13 @@
 														<h2>ข้อมูลลูกค้า</h2>
 														<label for="fname">ชื่อลูกค้า: <?php echo $order[0]->user_name; ?></label>
 															<label for="fname">นามสกุลลูกค้า: <?php echo $order[0]->user_fname; ?></label>
-															<label for="fname">ที่อยู่: <?php echo $order[0]->user_address; ?></label>
+															<label for="fname">ที่อยู่: <?php echo $order[0]->user_address; ?> 
+															ตำบล <?php echo $order[0]->district_name_th; ?> 
+															อำเภอ <?php echo $order[0]->amphure_name_th; ?> 
+															จังหวัด <?php echo $order[0]->province_name_th; ?> 
+															รหัสไปรษณีย์ <?php echo $order[0]->zip_code; ?></label>
 															<label for="fname">เบอร์โทร: <?php echo $order[0]->user_phone; ?></label>
+															<label for="fname">บริการขนส่งโดย: <?php echo $order[0]->transport_name; ?></label>
 															</div>
 													</div>
 															
@@ -165,18 +180,18 @@
 															<option value="<?php echo $s->id_status; ?>"><?php echo $s->status_name; ?></option>
 															<?php } ?>
 														</select>
-														<label for="lname">บริการขนส่งโดย: -</label>
-														<select name="tp">
-														<?php foreach($transport as $key => $trans){ ?>
-															<option value="<?php echo $trans->id_tramsport; ?>"><?php echo $trans->transport_name; ?></option>
-															<?php } ?>
-														</select>
 														<label for="lname">หมายเลขรหัสพัสดุ: -</label>
+														<?php if($order[0]->postcode == ''){ ?>
+														 
 														<input type="text" name="serial" ></input>
+														<?php }else{ ?>
+															<label for="fname"><?php echo $order[0]->postcode; ?></label>
+															<?php } ?>
 														<br>
 														<?php foreach($order as $key => $idorder){ ?>
 															<input type="hidden" name="idorder[]" value="<?php echo $idorder->id_orderdetail; ?>"/>
 															<?php } ?>
+															
 														<input type="hidden" name="id" value="<?php echo $order[0]->id_order; ?>"/>
 														<input type="hidden" name="type" value="<?php echo $order[0]->order_type; ?>"/>
 														<a href="order.html" onclick="return confirm('คุณต้องการยกเลิกออเดอร์นี้')" class="button primary">ยกเลิก</a>
@@ -206,10 +221,10 @@
 									<h2>Menu</h2>
 								</header>
 								<ul>
-									<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+									<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 									<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 									
-									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+									<li><a href="/user">ข้อมูลลูกค้า</a></li>
 									<li><a href="purchase.php">การชำระเงิน</a></li>
 									<li><span class="opener">การจัดการระบบ</span>
 									<ul>

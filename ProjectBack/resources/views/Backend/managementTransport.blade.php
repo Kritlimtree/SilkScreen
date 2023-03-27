@@ -189,7 +189,7 @@ hr {
                                         <div class="col-6 col-12-medium ">
 										<form action="{{ route('managementTransport_search') }}" method="POST" enctype="multipart/form-data">
 										@csrf
-                                            <div class="col-6 float:left " style="margin: 20px 20px 20px 0px;wide: 100px;">
+                                            <div class="col-6 float:left " style="margin: 20px 20px 20px 0px; wide: 100px;">
                                                 <select name="transportation_category" id="transportation-category" >
 												<option value="-1" selected disabled>บริษัทขนส่ง</option>
 												<?php foreach ($data2 as $key => $transport) { 
@@ -336,7 +336,7 @@ hr {
 												<tr>
 													<td><?php echo $freight->min  ?></td>
 													<td><?php echo $freight->max  ?></td>
-													<td><?php echo $freight->price  ?></td>
+													<td><?php echo number_format($freight->price,2)  ?></td>
 													<td><button type="button" value="{{$freight->id_freight}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
                                                     <td><button type="button" value="{{$freight->id_freight}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
 												</tr>
@@ -362,10 +362,10 @@ hr {
 									<h2>Menu</h2>
 								</header>
 								<ul>
-									<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+									<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 									<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 									
-									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+									<li><a href="/user">ข้อมูลลูกค้า</a></li>
 									<li><a href="purchase.php">การชำระเงิน</a></li>
                                     <li><span class="opener">การจัดการระบบ</span>
                                         <ul>

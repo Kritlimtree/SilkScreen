@@ -34,7 +34,19 @@ function toFull(){
   overflow: hidden;
   background-color: white;
 }
-
+a {
+  -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  border-bottom: dotted 1px;
+  color: #2c91f0;
+  text-decoration: none; }
+  a:hover {
+    border-bottom-color: #2c91f0;
+    color: #2c91f0 !important; }
+    a:hover strong {
+      color: inherit; }
 body{
     background-size: cover;
     background-position: center;
@@ -43,7 +55,7 @@ body{
     width: 1px;
 }
 .a{
-    padding-left: 1px;
+    padding-left: 10px;
 }
 .b{
     display: inline-block;
@@ -83,6 +95,11 @@ td{
 h5{
 	font-size: 50px;
 	font: 1.5em sans-serif;
+}
+h4{
+	font-size: 50px;
+	font: 1.5em sans-serif;
+	
 }
 /* Modal Content */
 
@@ -143,7 +160,7 @@ h5{
 								<p>ยินดีต้อนรับ คุณ admin</p>
 								<ul class="icons">
 								<?php if(session('is_admin')==1){ ?>
-											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
 											<?php } ?>
 									<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 									<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
@@ -158,7 +175,7 @@ h5{
 																<h4>การซื้อของฉัน</h4>
 															</div>
 															
-															<div class="col-10 col-12-small">
+															<div class=" ">
 															<div class="table-wrapper">
 															<div class="w3-container">
 															
@@ -180,14 +197,14 @@ h5{
 																		</tr>
 																	</thead>
 																	<tbody>
-																		<?php foreach($order as $key => $order1){ ?>
+																		<?php  foreach($order as $key => $order1){ ?>
 																		<tr>
 																		<td>
         
             <form method="POST" action="{{ route('checkorder4') }}">
                 <input type="hidden" name="id" value="{{ $order1->id_order }}">
                 {!! csrf_field() !!}
-                <button type="submit"  >
+                <button type="submit"class="btn" >
                     <span class="glyphicon glyphicon-trash"><img style="width:100px" class="img-fluid"  src="assets/images/<?php echo $order1->picture ?>"></span>
                 </button>
             </form>
@@ -240,98 +257,51 @@ h5{
 																					<?php } ?>
 																					<td><ul class="a">
 																					
-																				<li class="b" title="กำลังประเมินราคา">		
-																						<?php if($order1->id_status>='1'){ ?>														
-																						<i class="d">1</i>	
-																						<?php }else{ ?>			
-																							<i class="c">1</i>	
-																							<?php } ?>		
-																				</li>
+																				 
+																						<?php if($order1->id_status=='1'){ ?>														
+																							<i class="d" style="float:left">1</i>	
+																								<h4 >กำลังประเมินราคา</h4>	
+																						<?php }else if($order1->id_status=='2'){ ?>			
+																							<i class="d" style="float:left">2</i>	
+																								<h4 >รอชำระเงินมัดจำ/เต็มจำนวน</h4>	
+																							<?php }else if($order1->id_status=='3'){ ?>			
+																							<i class="d" style="float:left">3</i>	
+																								<h4 >รอยืนยันการชำระเงินมัดจำ/เต็มจำนวน</h4>	
+																							<?php }else if($order1->id_status=='4'){ ?>			
+																							<i class="d" style="float:left">4</i>	
+																								<h4 >ชำระเงินไม่ครบกรุณาชำระส่วนที่ขาด</h4>	
+																							<?php }else if($order1->id_status=='5'){ ?>			
+																							<i class="d" style="float:left">5</i>	
+																								<h4 >รอยืนยันการชำระเงินส่วนที่ขาด</h4>	
+																							<?php }else if($order1->id_status=='6'){ ?>			
+																							<i class="d" style="float:left">6</i>	
+																								<h4 >ตรวจสอบตัวอย่าง</h4>	
+																							<?php }else if($order1->id_status=='7'){ ?>			
+																							<i class="d" style="float:left">7</i>	
+																								<h4 >กำลังผลิตสินค้า</h4>	
+																							<?php }else if($order1->id_status=='8'){ ?>			
+																							<i class="d" style="float:left">8</i>	
+																								<h4 >รอชำระส่วนที่เหลือจากมัดจำ</h4>	
+																							<?php }else if($order1->id_status=='9'){ ?>			
+																							<i class="d" style="float:left">9</i>	
+																								<h4 >รอยืนยันการำระเงินส่วนที่เหลือจากมัดจำ</h4>	
+																							<?php }else if($order1->id_status=='10'){ ?>			
+																							<i class="d" style="float:left">10</i>	
+																								<h4 >ชำระเงินส่วนที่เหลือจากมัดจำไม่ครบกรุณาชำระส่วนที่ขาด</h4>	
+																							<?php }else if($order1->id_status=='11'){ ?>			
+																							<i class="d" style="float:left">11</i>	
+																								<h4 >รอยืนยันการชำระเงินส่วนที่เหลือของมัดจำที่จ่ายไม่ครบ</h4>	
+																							<?php }else if($order1->id_status=='12'){ ?>			
+																							<i class="d" style="float:left">12</i>	
+																								<h4 >กำลังจัดส่งสินค้า</h4>	
+																							<?php }else if($order1->id_status=='13'){ ?>			
+																							<i class="d" style="float:left">13</i>	
+																								<h4 >เสร็จสิ้น</h4>	
+																							<?php } ?>																							
+																							
+																				 
 																				
-																				<li class="b" title="รอชำระเงินมัดจำ/เต็มจำนวน">																	
-																				<?php if($order1->id_status>='2'){ ?>														
-																						<i class="d">2</i>	
-																						<?php }else{ ?>			
-																							<i class="c">2</i>	
-																							<?php } ?>																	
-																				</li>
-																				<li class="b" title="รอยืนยันการชำระเงินมัดจำ/เต็มจำนวน">																		
-																				<?php if($order1->id_status>='3'){ ?>														
-																						<i class="d">3</i>	
-																						<?php }else{ ?>			
-																							<i class="c">3</i>	
-																							<?php } ?>																		
-																				</li>
-																				<li class="b" title="ชำระเงินไม่ครบกรุณาชำระส่วนที่ขาด">																		
-																				<?php if($order1->id_status>='4'){ ?>														
-																						<i class="d">4</i>	
-																						<?php }else{ ?>			
-																							<i class="c">4</i>	
-																							<?php } ?>																			
-																				</li>
-																				<li class="b" title="รอยืนยันการชำระเงินส่วนที่ขาด">																		
-																				<?php if($order1->id_status>='5'){ ?>														
-																						<i class="d">5</i>	
-																						<?php }else{ ?>			
-																							<i class="c">5</i>	
-																							<?php } ?>																				
-																				</li>
-																				<li class="b" title="ตรวจสอบตัวอย่าง">																			
-																				<?php if($order1->id_status>='6'){ ?>														
-																						<i class="d">6</i>	
-																						<?php }else{ ?>			
-																							<i class="c">6</i>	
-																							<?php } ?>	
-																				</li>
-																				<li class="b" title="กำลังผลิตสินค้า">																			
-																				<?php if($order1->id_status>='7'){ ?>														
-																						<i class="d">7</i>	
-																						<?php }else{ ?>			
-																							<i class="c">7</i>	
-																							<?php } ?>	
-																				</li>
-																				<li class="b" title="รอชำระส่วนที่เหลือจากมัดจำ">																			
-																				<?php if($order1->id_status>='8'){ ?>														
-																						<i class="d">8</i>	
-																						<?php }else{ ?>			
-																							<i class="c">8</i>	
-																							<?php } ?>	
-																				</li>
-																				<li class="b" title="รอยืนยันการำระเงินส่วนที่เหลือจากมัดจำ">																			
-																				<?php if($order1->id_status>='9'){ ?>														
-																						<i class="d">9</i>	
-																						<?php }else{ ?>			
-																							<i class="c">9</i>	
-																							<?php } ?>	
-																				</li>
-																				<li class="b" title="ชำระเงินส่วนที่เหลือจากมัดจำไม่ครบกรุณาชำระส่วนที่ขาด">																			
-																				<?php if($order1->id_status>='10'){ ?>														
-																						<i class="d">10</i>	
-																						<?php }else{ ?>			
-																							<i class="c">10</i>	
-																							<?php } ?>	
-																				</li>
-																				<li class="b" title="รอยืนยันการชำระเงินส่วนที่เหลือของมัดจำที่จ่ายไม่ครบ">																			
-																				<?php if($order1->id_status>='11'){ ?>														
-																						<i class="d">11</i>	
-																						<?php }else{ ?>			
-																							<i class="c">11</i>	
-																							<?php } ?>	
-																				</li>
-																				<li class="b" title="กำลังจัดส่งสินค้า">																			
-																				<?php if($order1->id_status>='12'){ ?>														
-																						<i class="d">12</i>	
-																						<?php }else{ ?>			
-																							<i class="c">12</i>	
-																							<?php } ?>	
-																				</li>
-																				<li class="b" title="เสร็จสิ้น">																			
-																				<?php if($order1->id_status>='13'){ ?>														
-																						<i class="d">13</i>	
-																						<?php }else{ ?>			
-																							<i class="c">13</i>	
-																							<?php } ?>	
-																				</li>
+																				 
 																			</ul></td>
 																			
 																		</tr>

@@ -192,8 +192,10 @@ hr {
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 								</header>
-							<!-- Banner -->
+							<!-- Banner --><form action="{{ route('orderadmin_detail') }}" method="POST" enctype="multipart/form-data">
+									@csrf
 								<section id="banner">
+								
 									<div class="Center">
 										<h4>Search</h4>
 									<input type="text" id="Search_All">
@@ -201,7 +203,7 @@ hr {
 
 										<div class="table-wrapper">
 											<table class="alt">
-											<table class="alt" id="table1">
+											<table class="alt" id="table1" style="width:100%">
 												<thead>
 													<tr>
 													<td>id order</td>
@@ -215,41 +217,26 @@ hr {
 													</tr>
 												</thead>
 												<tbody>
+													<?php foreach($order1 as $key => $order){ 
+														$date = date("d-m-Y", strtotime($order->order_orderdate));
+														$today = date("d-m-Y");
+														$diff = abs(strtotime($date) - strtotime($today));
+														$years = floor($diff / (365*60*60*24));
+														$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+														$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+														?>
 													<tr>
-														<td>นายนวพร</td>
-														<td>หลงเหลือยิ่ง</td>
-														<td>13/11/65</td>
-														<td><a href="testtest.php" >bts1111220001</a></td>
-														<td>2</td>
-														<td>กำลังประเมินราคา</td>
+														 <td><button type="submit" value="<?php echo $order->id_order ?>" name="id" class="secondary" ><?php echo $order->order_id ?></button></td>
+														
+														<td><?php echo $order->user_name ?></td>
+														<td><?php echo $order->user_fname ?></td>
+														<td><?php echo date("d-m-Y", strtotime($order->order_orderdate)) ?></td>
+														<td><?php echo $days ?></td>
+														 
+														<td><?php echo $order->status_name ?></td>
 														
 													</tr>
-													<tr>
-														<td>นางนงนวล</td>
-														<td>อุดรรัตนธี</td>
-														<td>12/11/65</td>
-														<td><a href="testtest.php" >bts1112220001</a></td>
-														<td>3</td>
-														<td>กำลังประเมินราคา</td>
-														
-													</tr>
-													<tr>
-														<td>บุษกร</td>
-														<td>นภาลัย</td>
-														<td>11/11/65</td>
-														<td><a href="testtest.php" >bts1113220001</a></td>
-														<td>4</td>
-														<td>กำลังแก้ไขตัวอย่าง</td>
-														
-													</tr>
-													<tr>										
-													<td> </td>
-													<td> </td>
-													<td> </td>
-													<td><a href="test2.php" >bts1112220001</a></td>
-													<td>0</td>
-														<td>กำลังแก้ไขตัวอย่าง</td>
-												</tr>
+													<?php } ?>
 												</tbody>
 												
 											</table>
@@ -268,33 +255,40 @@ hr {
 									<h3>ออเดอร์ที่ยังไม่ได้ประเมินราคา</h3>
 									<div class="table-wrapper">
 										<table class="alt">
-										<table class="alt" id="table2">
-											<thead>
-												<tr>		
-													<td>ชื่อ</td>
-													<td>นามสกุล</td>
-													<td>วันที่สั่งออร์เดอร์</td>
+										<table class="alt" id="table2" style="width:100%">
+										<thead>
+										 
+													<tr>
 													<td>id order</td>
-													
-												</tr>
-											</thead>
-											<tbody>
-												<tr>					
-													<td>นายนวพร</td>
-													<td>หลงเหลือยิ่ง</td>
-													<td>11/11/65</td>
-													<td><a href="test1.html" >bts1111220001</a></td>
-													
-												</tr>
-												<tr>										
-													<td>นางนงนวล</td>
-													<td>อุดรรัตนธี</td>
-													<td>12/11/65</td>
-													<td><a href="test1.html" >bts1112220001</a></td>
-													
-												</tr>
-												 
-											</tbody>
+														<td>ชื่อ</td>
+														<td>นามสกุล</td>
+														<td>วันที่สั่งออร์เดอร์</td>
+														
+														<td>อยู่ในระหว่างการดำเนินการ(วัน)</td>
+														 
+														
+													</tr>
+												</thead>
+												<tbody>
+												<?php foreach($order2 as $key => $order2){ 
+													$date = date("d-m-Y", strtotime($order2->order_orderdate));
+													$today = date("d-m-Y");
+													$diff = abs(strtotime($date) - strtotime($today));
+													$years = floor($diff / (365*60*60*24));
+													$months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+													$days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+													?>
+													<tr>
+													<td><button type="submit" value="<?php echo $order2->id_order ?>" name="id" class="secondary" ><?php echo $order2->order_id ?></button></td>
+													<td><?php echo $order2->user_name ?></td>
+														<td><?php echo $order2->user_fname ?></td>
+														<td><?php echo date("d-m-Y", strtotime($order2->order_orderdate)) ?></td>
+														<td><?php echo $days ?></td>
+														 
+														
+													</tr>
+													<?php } ?>
+												</tbody>
 											
 										</table>
 									</div>
@@ -306,7 +300,7 @@ hr {
 									<h3>ออเดอร์ที่ต้องแก้ไขตัวอย่าง</h3>
 									<div class="table-wrapper">
 										<table class="alt">
-										<table class="alt" id="table3">
+										<table class="alt" id="table3" style="width:100%">
 											<thead>
 												<tr>												
 													<td>id order</td>
@@ -317,14 +311,15 @@ hr {
 												</tr>
 											</thead>
 											<tbody>
+											<?php foreach($sample as $key => $sample){ ?>
 												<tr>													
-													<td><a href="test1.php" >bts1113220001</a></td>
-													<td>13/11/65</td>
-													<td>ขนาดรูปเล็กไป,อยากไห้สีเหลืองเข้มขึ้นอีก</td>
+												<td><button type="submit" value="<?php echo $sample->id_order ?>" name="id" class="secondary" ><?php echo $order->order_id ?></button></td>
+													<td><?php echo date_format($sample->updated_at,"d-m-Y") ?></td>
+													<td><?php echo $sample->sample_detail ?></td>
 													
 													
 												</tr>
-												
+												<?php } ?>
 												
 												
 											</tbody>
@@ -333,8 +328,9 @@ hr {
 									</div>
 									
 								</div>
+								
 								</section>
-							
+							</form>
 						</div>
 					</div>
 				<!-- Sidebar -->
@@ -346,10 +342,10 @@ hr {
 										<h2>Menu</h2>
 									</header>
 									<ul>
-										<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+										<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 										<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 										
-										<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+										<li><a href="/user">ข้อมูลลูกค้า</a></li>
 										
 										<li><a href="purchase.php">การชำระเงิน</a></li>
 										<!-- <li><a href="management.html">การจัดการระบบ</a></li> -->

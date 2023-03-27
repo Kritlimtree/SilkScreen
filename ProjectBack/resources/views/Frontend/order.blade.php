@@ -15,6 +15,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
 		<script >function openModalBlack() {
   document.getElementById("ModalBlack").style.display = "block";
 }
@@ -61,7 +63,19 @@ function closeModalYellow() {
   background-color: white;
 }
 	
-
+a {
+  -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  border-bottom: dotted 1px;
+  color: #2c91f0;
+  text-decoration: none; }
+  a:hover {
+    border-bottom-color: #2c91f0;
+    color: #2c91f0 !important; }
+    a:hover strong {
+      color: inherit; }
 /* Modal Content */
 
 
@@ -86,7 +100,7 @@ function closeModalYellow() {
 									<p>ยินดีต้อนรับ คุณ admin</p>
 									<ul class="icons">
 									<?php if(session('is_admin')==1){ ?>
-											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
 											<?php } ?>
 										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
@@ -181,7 +195,7 @@ function closeModalYellow() {
 															<?php foreach ($shirtcolor as $key => $shirtcolor) { ?>
 															<div class="col-4 col-12-small">
 																<div class="boxShowShirt">
-																	<div class="img-resize2"><span><img name="img" value="<?php echo $shirtcolor->shirtcolor_name ?>" id="image" class="zoom colorshow" src="assets/images/<?php echo $shirtcolor->shirtcolor_picture ?>" onmouseover="openModalWhite();" onmouseout="closeModalWhite()" alt="" /></span></div><br>
+																	<div class="img-resize2 Center"><span><img style="width:115px; height:110px" name="img" value="<?php echo $shirtcolor->shirtcolor_name ?>" id="image" class="zoom colorshow" src="assets/images/<?php echo $shirtcolor->shirtcolor_picture ?>" onmouseover="openModalWhite();" onmouseout="closeModalWhite()" alt="" /></span></div><br>
 																	<input type="radio" required class="zoom colorshow" id="<?php echo $shirtcolor->shirtcolor_name ?>" name="demo-priority1" value="<?php echo $shirtcolor->shirtcolor_picture ?>,<?php echo $shirtcolor->id_shirtcolor ?>">
 																	<label for="<?php echo $shirtcolor->shirtcolor_name ?>">สี<?php echo $shirtcolor->shirtcolor_name ?></label>
 																

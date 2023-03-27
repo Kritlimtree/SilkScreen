@@ -303,7 +303,7 @@ hr {
 													<td><?php echo $block->block_name  ?></td>
 													<td><?php echo $block->block_wide  ?></td>
 													<td><?php echo $block->block_long  ?></td>
-													<td><?php echo $block->block_price  ?></td>
+													<td><?php echo number_format($block->block_price,2)  ?></td>
 													<td><button type="button" value="{{$block->id_block}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
                                                     <td><button type="button" value="{{$block->id_block}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
 												</tr>
@@ -330,10 +330,10 @@ hr {
 									<h2>Menu</h2>
 								</header>
 								<ul>
-									<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+									<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 									<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 									
-									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+									<li><a href="/user">ข้อมูลลูกค้า</a></li>
 									<li><a href="purchase.php">การชำระเงิน</a></li>
                                     <!-- <li><a href="management.html">การจัดการระบบ</a></li> -->
                                     <li><span class="opener">การจัดการระบบ</span>

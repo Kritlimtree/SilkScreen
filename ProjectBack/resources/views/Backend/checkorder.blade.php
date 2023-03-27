@@ -197,11 +197,13 @@ hr {
 								</header>
 								<div class="Center">
 									<h3>ข้อมูลของลูกค้า</h3>
+									<form action="{{ route('user_show') }}" method="POST" enctype="multipart/form-data">
+										@csrf 
 									<div class="table-wrapper">
 										<table id="example" class="table table-striped" style="width:100%">
 											<thead>
 												<tr>
-													<td>Username</td>
+													<td>E-mail</td>
 													<td>ชื่อ</td>
 													<td>นามสกุล</td>
 													<!-- <th>วันที่สั่งออร์เดอร์ล่าสุด</th> -->
@@ -209,40 +211,23 @@ hr {
 												</tr>
 											</thead>
 											<tbody>
+											<?php foreach($user as $key => $user){ ?>
 												<tr>
-													<td>qwerty</td>
-													<td>นายนวพร</td>
-													<td>หลงเหลือยิ่ง</td>
+													<td><?php echo $user->user_email ?></td>
+													<td><?php echo $user->user_name ?></td>
+													<td><?php echo $user->user_fname ?></td>
 													<!-- <td>11/11/65</td> -->
-													<td><a href="test2.html" class="button secondary" value="คลิ๊กที่นี่">คลิ๊กที่นี่</a></td>
+													 
+													<td><button name="id_user" type="submit" class="button secondary" value="<?php echo $user->id_user ?>" >คลิ๊กที่นี่</button></td>
 												</tr>
-												<tr>
-													<td>นางนงนวล</td>
-													<td>นางนงนวล</td>
-													<td>อุดรรัตนธี</td>
-													<!-- <td>12/11/65</td> -->
-													<td><input type="button" class="button secondary" value="คลิ๊กที่นี่"></input></td>
-												</tr>
-												<tr>
-													<td>บุษกร เอื้ออำพร</td>
-													<td>บุษกร</td>
-													<td>นภาลัย</td>
-													<!-- <td>13/11/65</td> -->
-													<td><input type="button" class="button secondary" value="คลิ๊กที่นี่"></input></td>
-												</tr>
-												<tr>
-													<td>ลองลอง</td>
-													<td>ทดสอบ</td>
-													<td>ไร้สกุล</td>
-													<!-- <td>13/10/65</td> -->
-													<td><input type="button" class="button secondary" value="คลิ๊กที่นี่"></input></td>
-												</tr>
+												<?php } ?>
+												
 												
 											</tbody>
 											
 										</table>
 									</div>
-									
+									</form>
 								</div>
 								
 							</section>
@@ -267,10 +252,10 @@ hr {
 									<h2>Menu</h2>
 								</header>
 								<ul>
-									<li><a href="indexLoginIsTrue.php">หน้าหลัก</a></li>
+									<li><a href="indexLoginIsTrue">หน้าหลัก</a></li>
 									<li><a href="order.php">รายการที่ลูกค้าสั่ง</a></li>
 									
-									<li><a href="checkorder.html">ข้อมูลลูกค้า</a></li>
+									<li><a href="/user">ข้อมูลลูกค้า</a></li>
 									
 									<!-- <li>
 										<span class="opener">Submenu</span>
