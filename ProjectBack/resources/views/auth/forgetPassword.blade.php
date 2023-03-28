@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,9 @@
 	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Forgot password</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/my-login.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/my-login.css">
 </head>
 <body class="my-login-page">
 	<section class="h-100">
@@ -17,9 +18,15 @@
 
 					<div class="cardx fat">
 						<div class="card-body">
-							<h4 class="card-title">Forgot Password</h4>
-							<br>
-							<form method="POST" class="my-login-validation" novalidate="" action=" ">
+							<h4 class="card-title">Forgot Password</h4><br>
+
+                            @if (Session::has('message'))
+                         <div class="alert alert-success" role="alert">
+                            {{ Session::get('message') }}
+                        </div>
+                    @endif
+                    
+							<form method="POST" class="my-login-validation" novalidate="" action="{{ route('forget.password.post') }}">
                                 @csrf
 
                                 @if (session('status'))
@@ -32,7 +39,7 @@
 									<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter your email">
                                     <span class="text-danger">@error('email'){{ $message }} @enderror</span>
 								</div>
-								<br>
+                                <br>
 								<div class="form-group m-0">
 									<button type="submit" class="btn btn-primary btn-block">
 										Send Password Link

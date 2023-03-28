@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,9 @@
 	<meta name="author" content="Kodinger">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Reset Password</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/my-login.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/my-login.css">
 </head>
 <body class="my-login-page">
 	<section class="h-100">
@@ -18,7 +19,7 @@
 					<div class="cardx fat">
 						<div class="card-body">
 							<h4 class="card-title">Reset Password</h4>
-							<form method="POST" class="my-login-validation" novalidate="" action="{{ route('password.update') }}">
+							<form method="POST" class="my-login-validation" novalidate="" action="{{ route('reset.password.post') }}">
                                 @csrf
 
                                 <input type="hidden" name="token" value="{{ $token }}">

@@ -89,7 +89,7 @@
 												</div>
 												@endif
 												<!-- <input type="submit" value="Submit"> -->
-												<a href="{{ route('forgotpassword') }}" style="float: left;">ลืมรหัสผ่าน</a>
+												<a href="{{ route('forget.password.get') }}" style="float: left;">ลืมรหัสผ่าน</a>
 												<a href="{{ route('regis') }}" style="float: right;">สมัครสมาชิก</a>
 												<span style="float: right;">ยังไม่ได้เป็นสมาชิกหรอ? </span><br><br>
 												<!-- <div class="row"> -->

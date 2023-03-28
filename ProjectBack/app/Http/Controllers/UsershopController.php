@@ -163,7 +163,7 @@ class UsershopController extends Controller
         usershop::create([
             'id_tumbon' => $request->district,
             'user_name' => $request->name,
-            'user_fname' => $request->lname,
+            'user_fname' => $request->fname,
             'user_phone' => $request->phone,
             'user_email' => $request->email,
             'user_password' => $password,
@@ -173,5 +173,82 @@ class UsershopController extends Controller
         ]);
         return redirect()->route('login');
     }
-     
+
+    public function edit_user(Request $request)
+    {
+        $province = province::all();
+        $user = usershop::join('districts','districts.id','=','usershops.id_tumbon')
+        ->join('amphures','amphures.id','=','districts.amphure_id')
+        ->join('provinces','provinces.id','=','amphures.province_id')
+        ->where('usershops.id_user', session('id_user'))
+        ->get();
+        
+        return view('Frontend.edit_user', compact(['province','user']));
+    }
+
+    public function edit_user_store(Request $request)
+    {
+         
+        $password = Hash::make($request->pass);
+        $credentials = $request->validate([
+            'email' => 'required|unique:usershops,user_email|email',
+            'name' => 'required',
+            'fname' => 'required',
+            'address' => 'required',
+            'province' => 'required',
+            'amphures' => 'required',
+            'postcode' => 'required',
+            'district' => 'required',
+            'phone' => 'required|numeric|min:10',
+            'pass' => [
+                'required',
+                'string',
+                'min:10',             // must be at least 10 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[@$!%*#?&]/', // must contain a special character
+                'required_with:passConflim', 
+                'same:passConflim', 
+            ],
+            'passConflim' => 'min:10',
+        ],[
+            'email.required' => 'กรุณากรอก E-mail',
+            'email.unique' => 'E-mail นี้มีการใช้ไปแล้ว',
+            'email.email' => 'กรุณากรอก E-mail',
+            'name.required' => 'กรุณากรอก ชื่อ',
+            'fname.required' => 'กรุณากรอก นามสกุล',
+            'address.required' => 'กรุณากรอก ที่อยู่',
+            'province.required' => 'กรุณาเลือก ตำบล',
+            'amphures.required' => 'กรุณาเลือก อำเภอ',
+            'postcode.required' => 'กรุณาเลือก รหัสไปรษณีย์',
+            'district.required' => 'กรุณาเลือก จังหวัด',
+            'phone.required' => 'กรุณากรอกเบอร์โทร',
+            'phone.numeric' => 'เบอร์โทรไม่ถูกต้อง',
+            'phone.min' => 'เบอร์โทรไม่ถูกต้อง',
+            'pass.required' => 'กรุณากรอกรหัสผ่าน',
+            'pass.min' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',
+            'pass.regex' => 'ต้องมีตัวพิมพ์เล็ก ตัวพิมพ์ใหญ่ ตัวเลข ตัวอักษรพิเศษ',
+            'pass.regex:/[A-Z]/' => 'รหัสผ่านต้องมีตัวพิมพ์ใหญ่',
+            'pass.regex:/[0-9]/' => 'รหัสผ่านต้องมีตตัวเลข',
+            'pass.regex:/[@$!%*#?&]/' => 'รหัสผ่านต้องมีตัวอักษรพิเศษ',
+            'required_with:passConflim' => 'กรุณายืนยันรหัสผ่าน',
+            'same' => 'รหัสผ่านไม่ตรงกัน',
+            'passConflim.min:10' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',
+        ]);
+        
+
+        usershop::where('usershops.id_user', session('id_user'))->update([
+            'id_tumbon' => $request->district,
+            'user_name' => $request->name,
+            'user_fname' => $request->fname,
+            'user_phone' => $request->phone,
+            'user_email' => $request->email,
+            'user_password' => $password,
+            'user_address' => $request->address,
+            'is_admin' => '0',
+             
+        ]);
+        return redirect()->route('indexLoginIsTrue');
+    }
 }

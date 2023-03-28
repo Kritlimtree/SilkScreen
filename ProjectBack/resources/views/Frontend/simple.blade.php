@@ -31,7 +31,7 @@
 									<?php if(session('is_admin')==1){ ?>
 											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
 											<?php } ?>
-										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
+										<li><a href="{{ route('edit_user') }}" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->

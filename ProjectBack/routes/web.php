@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\UsershopController;
+use App\Http\Controllers\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,19 @@ Route::get('/login.html', function () {
 Route::post('/login', [UsershopController::class, 'login'])->name('login');
 
 Route::get('/forgotpassword', [UsershopController::class, 'forgotpassword'])->name('forgotpassword');
+
+Route::get('/edit_user', [UsershopController::class, 'edit_user'])->name('edit_user');
+
+Route::post('/edit_user_store', [UsershopController::class, 'edit_user_store'])->name('edit_user_store');
+
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+
+
+
 
 Route::get('/logout', [UsershopController::class, 'logout'])->name('logout');
 
