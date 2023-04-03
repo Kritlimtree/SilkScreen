@@ -121,7 +121,7 @@ class UsershopController extends Controller
             'amphures' => 'required',
             'postcode' => 'required',
             'district' => 'required',
-            'phone' => 'required|numeric|min:10',
+            'phone' => 'required|numeric|min:6',
             'pass' => [
                 'required',
                 'string',
@@ -129,7 +129,7 @@ class UsershopController extends Controller
                 'regex:/[a-z]/',      // must contain at least one lowercase letter
                 'regex:/[A-Z]/',      // must contain at least one uppercase letter
                 'regex:/[0-9]/',      // must contain at least one digit
-                'regex:/[@$!%*#?&]/', // must contain a special character
+                
                 'required_with:passConflim', 
                 'same:passConflim', 
             ],
@@ -149,11 +149,11 @@ class UsershopController extends Controller
             'phone.numeric' => 'เบอร์โทรไม่ถูกต้อง',
             'phone.min' => 'เบอร์โทรไม่ถูกต้อง',
             'pass.required' => 'กรุณากรอกรหัสผ่าน',
-            'pass.min' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',
+            'pass.min' => 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร',
             'pass.regex' => 'ต้องมีตัวพิมพ์เล็ก ตัวพิมพ์ใหญ่ ตัวเลข ตัวอักษรพิเศษ',
             'pass.regex:/[A-Z]/' => 'รหัสผ่านต้องมีตัวพิมพ์ใหญ่',
             'pass.regex:/[0-9]/' => 'รหัสผ่านต้องมีตตัวเลข',
-            'pass.regex:/[@$!%*#?&]/' => 'รหัสผ่านต้องมีตัวอักษรพิเศษ',
+            
             'required_with:passConflim' => 'กรุณายืนยันรหัสผ่าน',
             'same' => 'รหัสผ่านไม่ตรงกัน',
             'passConflim.min:10' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',

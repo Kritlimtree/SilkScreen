@@ -218,6 +218,8 @@ class OrderAdminController extends Controller
         $i=0;
         $sum=0;
         
+        
+
         if($request->type==2){
             if($request->appraise!=''){
         foreach($order1 as $key => $orders){
@@ -260,6 +262,13 @@ class OrderAdminController extends Controller
             'id_status' => $request->option,
              
         ]);
+        if($request->option==14){
+            order::where('id_order',$request->id)->update([
+                'order_deliverydate' => date('Ymd'),
+                'id_status' => $request->option,
+                 
+            ]);
+        }
         if($request->tp != null){
             order::where('id_order',$request->id)->update([
  
