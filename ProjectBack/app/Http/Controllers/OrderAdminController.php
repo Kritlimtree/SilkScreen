@@ -17,8 +17,20 @@ use App\Models\usershop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class OrderAdminController extends Controller
-{
+{ 
     public function index(){
+        
+        $order = order::join('usershops','orders.id_user','=','usershops.id_user')
+        ->join('statuses','orders.id_status','=','statuses.id_status')
+         
+        ->get(['id_order','user_name','user_fname','order_orderdate','order_id','status_name']);
+         
+        return view('Backend.order', compact(['order']));
+    }
+
+     
+
+    public function OrderAdminController(){
         
         $order = order::join('usershops','orders.id_user','=','usershops.id_user')
         ->join('statuses','orders.id_status','=','statuses.id_status')
@@ -155,7 +167,7 @@ class OrderAdminController extends Controller
         ->join('statuses','orders.id_status','=','statuses.id_status')
         ->join('orderdetails','orders.id_order','=','orderdetails.id_order')
         ->join('transports','transports.id_tramsport','=','orders.id_post')
-        ->join('shirtcolors','orders.id_shirtcolor','=','shirtcolors.id_shirtcolor')
+        ->join('shirtcolors','orderdetails.id_shirtcolor','=','shirtcolors.id_shirtcolor')
         ->join('shirtsizes','orderdetails.id_shirtprice','=','shirtsizes.id_shirtsize')
         ->join('samples','orders.id_sample','=','samples.id_sample')
 
@@ -170,7 +182,7 @@ class OrderAdminController extends Controller
         ->join('statuses','orders.id_status','=','statuses.id_status')
         ->join('orderdetails','orders.id_order','=','orderdetails.id_order')
         ->join('transports','transports.id_tramsport','=','orders.id_post')
-        ->join('shirtcolors','orders.id_shirtcolor','=','shirtcolors.id_shirtcolor')
+        ->join('shirtcolors','orderdetails.id_shirtcolor','=','shirtcolors.id_shirtcolor')
         ->join('shirtsizes','orderdetails.id_shirtprice','=','shirtsizes.id_shirtsize')
         ->join('districts','districts.id','=','usershops.id_tumbon')
         ->join('amphures','amphures.id','=','districts.amphure_id')
@@ -184,6 +196,7 @@ class OrderAdminController extends Controller
     }
 
     public function edit(Request $request){
+        
         if($request->sample != null){
         $imageName="";
          
@@ -209,15 +222,26 @@ class OrderAdminController extends Controller
             if($request->appraise!=''){
         foreach($order1 as $key => $orders){
              
-            orderdetail::where('id_orderdetail',$request->idorder[$i])->orderBy('id_order','ASC')->update([
-                'orderdetail_price' => $request->appraise[$i],
-            ]);
-            $sum=$sum+$request->appraise[$i];
+            $od = orderdetail::where('id_orderdetail',$request->idorder[$i])->get();
+           $c=0;
+            foreach($request->shirt as $value ){
+                
+                if($od[0]->id_shirtprice==$request->shirt[$c]){
+                    orderdetail::where('id_orderdetail',$request->idorder[$i])->update([
+                        'orderdetail_price' => $request->appraise[$c]*$od[0]->quantity,
+                    ]);
+                    $sum=$sum+($request->appraise[$c]*$orders->quantity);
+                }
+                
+                $c++;
+
+            }
+            
             $i++;
         }
     
         order::where('id_order',$request->id)->update([
-            'order_price' => $sum,
+            'order_price' => $sum+$request->blockprice+$request->delivery,
         ]);
     }
     }

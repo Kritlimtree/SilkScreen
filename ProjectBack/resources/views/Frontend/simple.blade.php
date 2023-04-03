@@ -26,7 +26,7 @@
 							<!-- Header -->
 								<header id="header">
 									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
-									<p>ยินดีต้อนรับ คุณ admin</p>
+									<p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 									<ul class="icons">
 									<?php if(session('is_admin')==1){ ?>
 											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
@@ -41,7 +41,7 @@
 									<!-- <header class="main">
 										<h1>สั่งสกรีน</h1>
 									</header> -->
-
+									<?php  if($order[0]->id_sample != ''){ ?>
 									<div class="row gtr-200">
 									<div class="col-6 col-12-medium">
 											<div id="boxCenter">
@@ -58,7 +58,7 @@
 										
 										<div class="col-6 col-12-medium">
 											<!-- <h3>Form</h3> -->
-
+													<?php if($sample[0]->sample_status==null){ ?>
 													<form method="post" action="confirmsimple" enctype="multipart/form-data">
 														@csrf
 														<div class="row gtr-uniform">
@@ -67,11 +67,11 @@
 															</div>
 															 
 															<div class="col-8 col-12-small">
-																<input type="radio" id="demo-priority-low" name="fix" value="1">
+																<input type="radio" id="demo-priority-low" name="fix" value="1" required>
 																<label for="demo-priority-low">งานถูกต้อง</label>
 															</div>
 															<div class="col-8 col-12-small">
-																<input type="radio" id="demo-priority-normal" name="fix" value="2">
+																<input type="radio" id="demo-priority-normal" name="fix" value="2" required>
 																<label for="demo-priority-normal">งานไม่ถูกต้อง</label>
 															</div><br>
                                                             <div class="col-10 col-12-small">
@@ -84,18 +84,24 @@
 																<input type="hidden" id="colorInputText">
 															</div>
 															<div class="col-12 col-12-small">
-															<?php  if($order[0]->id_sample != ''){ ?>
+															 
 															<input type="hidden" id="demo-priority-low" name="id" value="<?php echo $sample[0]->id_sample; ?>">
-															<?php } ?>
+															 
 																<input type="button" class="button primary" value="ยกเลิก"></input>
 																<input type="hidden" name="controller" value="<span id='color'></span>"/>
 																<button type="submit" class="button secondary" name="action" value="check">ยืนยัน</input>
 															</div>
 														</div>
 													</form>
+													<?php }else{ ?>
+															<h1>ตรวจสอบตัวอย่างเสร็จสิ้น</h1>
+														<?php } ?>
 										</div>
+										<?php }else{ ?>
+												<h1>อยู่ระหว่างการดำเนินการ</h1>
+											<?php } ?>
 								</section>
-
+								
 						</div>
 					</div>
 
@@ -117,7 +123,7 @@
 								</header>
 								<ul>
 									<li><a href="indexLoginIsTrue.html">หน้าหลัก</a></li>
-									<li><a href="orderf.html">การสั่งสกรีนเสื้อผ้า</a></li>
+									<li><a href="orderf.php">การสั่งสกรีนเสื้อผ้า</a></li>
 									<li><a href="shopping.php">การซื้อของฉัน</a></li>
 									<!-- <li>
 										<span class="opener">Submenu</span>

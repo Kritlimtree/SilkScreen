@@ -11,23 +11,53 @@
 		session_start();
 		
 		if($_POST){
-			$quantity = $_POST['quantity'];
+			 
 			if($_SESSION["number"]==1){
 			$screen_color = $_POST['screen_color'];
-			 
 			
+			  
+			 
+			 
 			}else{
 				$screen_color = '';
 			
 			}
+			
+			$option[] = $_POST['option'];
+			$c2=0;
+		   $quantity[$c2] = 0;
+		 
+		   foreach($_POST['color'] as $value){
+			
+			   $screen_color1[] = array($_POST['size1'][$c2%$_POST['count']],$_POST['color'][$c2]);
+			   $quantity[$c2%$_POST['count']] = 0;
+				
+			   $c2++; 
+		   }$c2=0;
+		   foreach($_POST['color'] as $value){
+			   $quantity[$c2%$_POST['count']] = $quantity[$c2%$_POST['count']]+$screen_color1[$c2][1];
+			   $c2++; 
+			}
+			for($i=0;$i<count($_SESSION["color_name"]);$i++){
+			$c2=0+($i*$_POST['count']);
+			foreach($screen_color1 as $value ){
+			   if($c2<count($screen_color1)){
+			   $screen_color1[$c2][2] = $_SESSION["color_name"][$i];
+			   $c2++; 
+			   }
+			}
+		   }
+		 
+ 
 			$transport = $_POST['transport'];
 			$w = $_POST['top'];
 			
 			
 			$a = $_POST['left'];
 			$count = 0;
+			$weight = 0;
 			foreach($quantity as $value){
-				$weight[] = $quantity[$count]*0.2;
+				$weight = $weight+$quantity[$count]*0.2;
 				$count++;
 			}
 
@@ -35,17 +65,20 @@
 				$weightunit[] = $data;
 				 
 			}
-			
+			 
 			$count = 0;
 			foreach($w as $value){
 				foreach($shirtsize as $key => $size){
-				if($size->shirtsize_size == $_SESSION["size"][$count]){
+					$x=0;
+					foreach($_SESSION["size"] as $value){
+				if($size->id_shirtsize == $_SESSION["size"][$x]){
 					$s[$count] = $size->shirtsize_long - $w[$count];
 					$d[$count] = $size->shirtsize_chest - $a[$count];
 					$size_price[$count] = $size->shirtsize_price;
 					$size_id[$count] = $size->id_shirtsize;
 				}
-				
+				$x++;
+			}
 			}
 			$count++;
 			}
@@ -62,30 +95,42 @@
 			}
 			$sum = 0;
 			for($i=0;$i<$count;$i++){
-			$price[$i] = ($quantity[$i]*$size_price[$i])+$blockprice;
-			$unitprice[$i] = $size_price[$i];
-			  
-			 
+				$unit[$i] = $size_price[$i];
+			$unitprice[$i] = $size_price[$i]*$quantity[$i];
+		}
+		for($i=0;$i<count($screen_color1);$i++){
+			$price[$i] = ($screen_color1[$i][1]*$size_price[$i%$_POST['count']]);
 		}
 		 
 		$weightprice[]=0;
 		$c = 0;
-		$count = 0;
-		foreach($unitprice as $key => $up){
-			foreach($weightunit as $key => $wu){
-				foreach($weight as $key => $we){
-					 
-					if($wu->min < $we && $wu->max >= $we){
-						$weightprice[$c] = $price[$c]+$wu->price;
+		 
+		foreach($price as $key => $up){
+			foreach($weightunit as $key => $wu){		
+				  
+					if($wu->min < $weight && $wu->max >= $weight){
+						 
+						$weightprice[$c] = $price[$c];
 						$wpu[$c] = $wu->price;
 					}
-				}
-			$count++;
+			 
 			}
 			$sum = $weightprice[$c]+$sum;
 		$c++;
 		} 
-		 
+		$sum = $wpu[0]+$sum;
+		$c2=0;
+		  
+			 
+			foreach($screen_color1 as $value ){
+			   if($c2<count($screen_color1)){
+			   $screen_color1[$c2][3] = $price[$c2];
+			   $c2++; 
+			   }
+			}
+		  
+ 
+		$sum = $blockprice+$sum;
 			$_SESSION["quantity"]=$quantity;
 			$_SESSION["w"]=$w;
 			$_SESSION["a"]=$a;
@@ -101,6 +146,7 @@
 			$_SESSION["address"]="123 กำแพงแสน จ.นครปฐม";
 			$_SESSION["phone"]="123-456789";
 			$_SESSION["start"]="1";
+			 
 		}
 		 
 		?>
@@ -152,7 +198,7 @@ function toFull(){
 							<!-- Header -->
 								<header id="header">
 									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
-									<p>ยินดีต้อนรับ คุณ admin</p>
+									<p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 									<ul class="icons">
 									<?php if(session('is_admin')==1){ ?>
 											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
@@ -181,14 +227,7 @@ function toFull(){
 											</div>	
 										</div>
 
-                                        <div class="col-6 col-12-medium">
-                                            <div id="boxCenter">		
-                                                <div class="displayShirt">
-                                                    <p><strong>เสื้อยืดที่เลือก</strong></p>
-                                                        <div class="img-resize"><span><img src="assets/images/<?php echo $_SESSION["color"]; ?>"  alt="" /></span></div><br>
-                                                </div>
-                                            </div>			
-                                        </div>
+                                         
 									</div>
 
 
@@ -249,49 +288,76 @@ function toFull(){
 																				<?php } ?>
 																				<td>นิ้ว</td>
 																			</tr>
-																			<?php if($_SESSION["number"]==1) { ?>
+																			 
+																			<?php $c3=0;$c2=0; foreach ($_POST['option'] as $value) { $c2=0;?>
 																			<tr>
-																				<td>จำนวน(ตัว)</td>
-																				<?php foreach($quantity as $key => $q) { ?>
-																				<td><?php echo $q; ?></td>
-																				<?php } ?>
+																			<?php foreach($shirtcolor as $key => $sc){ if($sc->id_shirtcolor==$_POST['option'][$c3]){ ?>
+																				<td><span class="glyphicon glyphicon-trash"><img style="width:100px" class="img-fluid"  src="assets/images/<?php echo $sc->shirtcolor_picture ?>"></span></td>
+																				<?php }}  ?>
+																				<?php   $c1=$c3*$_POST['count'];  
+																					foreach($screen_color1 as $value) { 
+																						if($screen_color1[$c1][0]==$_POST['size1'][$c2]){  ?>
+																					 
+																					 <td><?php echo $screen_color1[$c1][1] ?></td>
+																					 
+																				<?php $c2++; 
+																				if($c2>=$_POST['count']){
+																					break;
+																					}
+																				}
+																				$c1++;}   ?>
 																				<td>ตัว</td>
 																			</tr>
+																			 <?php $c3++; } ?>
+																			  
+																			 <tr>
+																				<td>จำนนรวม(ตัว)</td>
+																			 <?php foreach($quantity as $key => $q1){ ?>
+																				
+																				 
+																				<td><?php echo number_format($q1); ?></td>
+																				<?php } ?>
+																				<td>บาท</td>
+																			</tr>
+																			<?php if($_SESSION["number"]==1) { ?>
 																			<tr>
 																				<td>ราคาต่อหน่วย(บาท)</td>
-																				<?php foreach($unitprice as $key => $unit) { ?>
+																				<?php foreach($unit as $key => $unit) { ?>
 																				<td><?php echo number_format($unit,2); ?></td>
 																				<?php } ?>
 																				<td>บาท</td>
 																			</tr>
-																			<tr>
-																				<td>ราคาบล็อคพิมพ์(บาท)</td>
-																				<?php foreach($unitprice as $key => $unit) { ?>
-																				<td><?php echo number_format($blockprice,2); ?></td>
-																				<?php } ?>
-																				<td>บาท</td>
-																			</tr>
-																			<tr>
-																				<td>ราคาค่าส่ง(บาท)</td>
-																				<?php foreach($wpu as $key => $wpu1) { ?>
-																				<td><?php echo number_format($wpu1,2); ?></td>
-																				<?php } ?>
-																				<td>บาท</td>
-																			</tr>
+																			 
+																			 
+																			 
 																			<tr>
 																				<td>ราคารวม(บาท)</td>
-																				<?php foreach($weightprice as $key => $p) { ?>
+																				<?php foreach($unitprice as $key => $p) { ?>
 																				<td><?php echo number_format($p,2); ?></td>
 																				<?php } ?>
 																				<td>บาท</td>
 																			</tr>
+																			 
 																			<tr>
-																				<td colspan="<?php echo $c; ?>">ราคาสุทธิ(บาท)</td>
-																				<td><?php echo number_format($sum,2); ?></td>
+																				<td>ราคาสุทธิ(บาท)</td>
+																				<td  colspan="<?php echo $c ?>"><?php echo number_format($sum,2); ?></td>
 																				<td>บาท</td>
 																			</tr>
 																			<?php } ?>
-																			
+																			<tr>
+																				<td>ราคาค่าส่ง(บาท)</td>
+																				 
+																				<td colspan="<?php echo $c ?>"><?php echo number_format($wpu[0],2); ?></td>
+																				 
+																				<td>บาท</td>
+																			</tr>
+																			<tr>
+																				<td>ราคาบล็อคพิมพ์(บาท)</td>
+																				 
+																				<td colspan="<?php echo $c ?>"><?php echo number_format($blockprice,2); ?></td>
+																				 
+																				<td>บาท</td>
+																			</tr>
 																		</tbody>
 																	
 																	</table>
@@ -334,9 +400,8 @@ function toFull(){
 																		<input type="hidden" name="long[]" value="<?php echo $_SESSION["wide"]; ?>"/>
 																		<input type="hidden" name="screenPicture[]" value="<?php echo $_SESSION["screenPicture"]; ?>"/>
 																		
-																		<input type="hidden" name="color[]" value="<?php echo $_SESSION["color"]; ?>"/>
-																		<input type="hidden" name="screencolor[]" value="<?php echo $screen_color; ?>"/>
-																		<input type="hidden" name="colorname[]" value="<?php echo $_SESSION["color_name"]; ?>"/>
+																		<input type="hidden" name="screencolor[]" value="<?php echo $screen_color ; ?>"/>
+																		<input type="hidden" name="count" value="<?php echo $_POST['count']; ?>"/>
 																		<input type="hidden" name="size_id[]" value="<?php echo $size; ?>"/>
 																		<input type="hidden" name="quantity[]" value="<?php echo $quantity[$i]; ?>"/>
 																		<input type="hidden" name="blockprice" value="<?php echo $blockprice; ?>"/>
@@ -344,6 +409,15 @@ function toFull(){
 																		<input type="hidden" name="unitprice[]" value="<?php echo $unitprice[$i]; ?>"/>
 																		<input type="hidden" name="price[]" value="<?php echo $price[$i]; ?>"/>
 																		<?php $i++; } ?>
+																		<?php  $i = 0; foreach($screen_color1 as $value){ ?>
+																		<?php   for($j=0;$j<4;$j++){ ?>
+																		<input type="hidden" name="screen_color1[<?php echo $i ?>][<?php echo $j ?>]" value="<?php echo $screen_color1[$i][$j]; ?>"/>
+																		<?php }$i++;} ?>
+
+																		<?php  $i = 0; foreach($_SESSION["color_name"] as $value){ ?>
+																		 
+																		<input type="hidden" name="color_name[]" value="<?php echo $_SESSION["color_name"][$i]; ?>"/>
+																		<?php  $i++;} ?>
                                                                     </form>
                                                                 </div> 
 
@@ -354,7 +428,7 @@ function toFull(){
 															
 															
 															<div class="col-12 col-12-small">
-																<input type="button" class="button primary" value="ยกเลิก"></input>
+																<input type="button" onclick="history.back()" class="button primary" value="ยกเลิก"></input>
 																
 																<button type="submit" class="button secondary" name="action" value="check">ชำระเงิน</button>
 																<!-- <a href="checkorder3.html">ดำเนินการสั่งทำ</a> -->

@@ -304,8 +304,8 @@ hr {
 													<td><?php echo $size->shirtsize_chest  ?></td>
 													<td><?php echo $size->shirtsize_long  ?></td>
 													<td><?php echo number_format($size->shirtsize_price,2)  ?></td>
-													<td><button type="button" value="{{$size->id_shirtsize}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
-                                                    <td><button type="button" value="{{$size->id_shirtsize}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
+													<td><button type="button" value="{{$size->id_shirtsize}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">แก้ไข</button></td>
+                                                    <td><button type="button" value="{{$size->id_shirtsize}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">ลบ</button></td>
 												</tr>
 												<?php } ?>
 											</tbody>

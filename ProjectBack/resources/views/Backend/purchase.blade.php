@@ -234,12 +234,12 @@ hr {
 														<td><?php echo number_format($payment->order_price*40/100,2); ?></td>
 													<td><?php echo number_format($payment->payment_paid,2); ?></td>
 													<td><?php echo number_format($payment->payment_arrears,2); ?></td>
-													<td><?php echo $payment->payment_date ?></td>
-													<td><a href="#"  ><img src="assets/images/<?php echo $payment->payment_slip  ?>" width="100px" alt=""></a></td>
+													<td><?php echo date("d-m-Y", strtotime($payment->payment_date) )  ?></td>
+													<td><a target="_blank" href="assets/images/<?php echo $payment->payment_slip  ?>"  ><img src="assets/images/<?php echo $payment->payment_slip  ?>" width="100px" alt=""></a></td>
 													<td><?php echo $payment->statuspayment_name ?></td>
 													<td><button type="submit" value="<?php echo $payment->id_order ?>" name="id" class="secondary" >รายละเอียด</button></td>
 													
-												</tr>
+												</tr> 
 												<?php } ?>
 												 
 											</tbody>

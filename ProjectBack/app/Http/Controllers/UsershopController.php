@@ -80,7 +80,7 @@ class UsershopController extends Controller
 
          
 
-
+         
         if($model != NULL){
             if (Hash::check($request->password, $model->user_password)) {
             
@@ -94,7 +94,7 @@ class UsershopController extends Controller
             }   
         } else {
 
-                return redirect()->route('login');
+                return redirect()->route('loginform')->withErrors(["pass"=>"อีเมลล์หรือรหัสผ่านไม่ถูกต้อง"]);
             }
         }
 

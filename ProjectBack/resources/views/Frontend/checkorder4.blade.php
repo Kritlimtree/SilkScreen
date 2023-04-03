@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<?php $c=0; foreach($orderdetail as $key => $od){  
-			$sum[$c] = ($od->orderdetail_price*$od->quantity)+$od->wpu+$order[0]->blockprice;
+			$sum[$c] = ($od->orderdetail_price*$od->quantity)+$od->wpu;
 			$c++;
 		 }  ?>
 		<title>silk_screen</title>
@@ -130,7 +130,7 @@ function slider5(){
 							<!-- Header -->
 								<header id="header">
 									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
-									<p>ยินดีต้อนรับ คุณ admin</p>
+									<p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 									<ul class="icons">
 										<?php if(session('is_admin')==1){ ?>
 											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
@@ -158,16 +158,7 @@ function slider5(){
 											</div>	
 										</div>
 
-                                        <div class="col-6 col-12-medium">
-                                            <div id="boxCenter">		
-                                                <div class="displayShirt">
-                                                    <p><strong>เสื้อยืดที่เลือก</strong></p>
-													<?php foreach($shirtcolor as $key => $shirt){if($order[0]->id_shirtcolor==$shirt->id_shirtcolor){ ?>
-                                                        <div class="img-resize"><span><img src="assets/images/<?php echo $shirt->shirtcolor_picture; ?>"  alt="" /></span></div><br>
-														<?php }} ?>
-                                                </div>
-                                            </div>			
-                                        </div>
+                                         
 									</div>
 
 
@@ -190,9 +181,10 @@ function slider5(){
 																		<tbody>
 																			<tr>
 																				<td>ขนาด(Size)</td>
-																				<?php $c=0; foreach($shirtsize as $key => $size){ foreach($orderdetail as $key => $od){ if($size->id_shirtsize==$od->id_shirtprice){ ?>
-																				<td><?php echo $size->shirtsize_size ?></td>
-																				<?php $c++; }}} ?>
+																				<?php   $c=0; foreach($orderdetail as $key => $od){
+																					if($c<($order[0]->numshirtcolor)){ ?>
+																				<td><?php echo $od->shirtsize_size ?></td>
+																				<?php $quantity[$c]=0; $price[$c]=0; $c++;}  } ?>
 																				<td></td>
 																			</tr>
 																		
@@ -201,70 +193,112 @@ function slider5(){
 																				
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านบน(นิ้ว)</td>
-																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<?php $c1=0; foreach($orderdetail as $key => $od){ 
+																					if($c1<($order[0]->numshirtcolor)){ ?>
 																				<td><?php echo number_format($od->orderdetail_upper, 2) ?></td>
-																				<?php } ?>
+																				<?php }$c1++;} ?>
 																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านล่าง(นิ้ว)</td>
-																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<?php $c1=0; foreach($orderdetail as $key => $od){ 
+																					if($c1<($order[0]->numshirtcolor)){ ?>
 																				<td><?php echo number_format($od->orderdetail_lower, 2) ?></td>
-																				<?php } ?>
+																				<?php }$c1++;} ?>
 																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านซ้าย(นิ้ว)</td>
-																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<?php $c1=0; foreach($orderdetail as $key => $od){ 
+																					if($c1<($order[0]->numshirtcolor)){ ?>
 																				<td><?php echo number_format($od->orderdetail_left, 2) ?></td>
-																				<?php } ?>
+																				<?php }$c1++;} ?>
 																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านขวา(นิ้ว)</td>
-																				<?php foreach($orderdetail as $key => $od){  ?>
+																				<?php $c1=0; foreach($orderdetail as $key => $od){ 
+																					if($c1<($order[0]->numshirtcolor)){ ?>
 																				<td><?php echo number_format($od->orderdetail_right, 2) ?></td>
-																				<?php } ?>
+																				<?php }$c1++;} ?>
 																				<td>นิ้ว</td>
 																			</tr>
+
+																			 
+																			
+																				 
+																			<?php  $c1=0; $c3=0; for($i=0;$i<count($orderdetail)/$order[0]->numshirtcolor;$i++){    ?>
 																			<tr>
-																				<td>จำนวน(ตัว)</td>
-																				<?php foreach($orderdetail as $key => $od){  ?>
-																				<td><?php echo $od->quantity ?></td>
+																			<?php  foreach($orderdetail as $key => $od){ if($c1%($order[0]->numshirtcolor)==0){ ?>
+																				<td><span class="glyphicon glyphicon-trash"><img style="width:100px" class="img-fluid"  src="assets/images/<?php echo $orderdetail[$c1]->shirtcolor_picture ?>"></span></td>
+																				
+																				<?php $c1++; break; }$c1++;}  ?>
+																				<?php $c2=0; $c4=0; foreach($orderdetail as $key => $od){  if($c3<(($i+1)*$order[0]->numshirtcolor)){ ?>
+																					<td><?php echo $orderdetail[$c3]->quantity ?></td>
+																					 
+																				<?php $quantity[$c4]=$quantity[$c4]+$orderdetail[$c3]->quantity; 
+																						$price[$c4] = $price[$c4]+$orderdetail[$c3]->orderdetail_price;
+																						 $c3++; $c4++; }$c2++; }  ?>
+																						   
+																				<td>ตัว</td>
+																			</tr>
+																			 <?php } ?>
+
+ 
+																			<tr>
+																				<td>จำนวนรวม(ตัว)</td>
+																				<?php for($i=0;$i<count($quantity);$i++){  ?>
+																				<td><?php echo $quantity[$i] ?></td>
 																				<?php } ?>
 																				<td>ตัว</td>
 																			</tr>
+																			<?php if($order[0]->id_status!=1) { ?>
+																			<tr>
+																				<td>ราคาต่อตัว(บาท)</td>
+																				<?php for($i=0;$i<count($price);$i++){  ?>
+																				<td><?php echo number_format($price[$i]/$quantity[$i] , 2) ?></td>
+																				<?php } ?>
+																				<td>บาท</td>
+																			</tr>
 																			<tr>
 																				<td>ราคาต่อหน่วย(บาท)</td>
-																				<?php foreach($orderdetail as $key => $od){  ?>
-																				<td><?php echo number_format($od->orderdetail_price, 2) ?></td>
+																				<?php $tprice = 0; for($i=0;$i<count($price);$i++){  ?>
+																				<td><?php $tprice = $tprice+$price[$i]; echo number_format($price[$i], 2) ?></td>
 																				<?php } ?>
+																				<td>บาท</td>
+																			</tr>
+																			 <?php } ?>
+																			<tr>
+																				<td>ราคาค่าส่ง(บาท)</td>
+																				<?php  ?>
+																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($order[0]->delivery_price, 2) ?></td>
+																				 
 																				<td>บาท</td>
 																			</tr>
 																			<tr>
 																				<td>ราคาบล็อคพิมพ์(บาท)</td>
-																				<?php foreach($orderdetail as $key => $od){  ?>
-																				<td><?php echo number_format($order[0]->blockprice, 2) ?></td>
-																				<?php } ?>
+																				 
+																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($order[0]->blockprice, 2) ?></td>
+																				 
 																				<td>บาท</td>
 																			</tr>
-																			<tr>
-																				<td>ราคาค่าส่ง(บาท)</td>
-																				<?php foreach($orderdetail as $key => $od){  ?>
-																				<td><?php echo number_format($od->wpu, 2) ?></td>
-																				<?php } ?>
-																				<td>บาท</td>
-																			</tr>
+																			
 																			<tr>
 																				<td>ราคารวม(บาท)</td>
-																				<?php foreach($sum as $key => $sum){  ?>
-																				<td><?php echo number_format($sum, 2) ?></td>
-																				<?php } ?>
+																				<?php if($order[0]->order_price!=null) { ?>
+																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($tprice, 2) ?></td>
+																				<?php }else{ ?>
+																					<td colspan="<?php echo $order[0]->numshirtcolor ?>">กำลังประเมินราคา</td>
+																					<?php } ?>
 																				<td>บาท</td>
 																			</tr>
 																			<tr>
-																				<td colspan="<?php echo $c ?>">ราคาสุทธิ(บาท)</td>
-																				<td><?php echo number_format($order[0]->order_price, 2) ?></td>
+																				<td  >ราคาสุทธิ(บาท)</td>
+																				<?php if($order[0]->order_price!=null) { ?>
+																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($order[0]->order_price, 2) ?></td>
+																				<?php }else{ ?>
+																					<td colspan="<?php echo $order[0]->numshirtcolor ?>">กำลังประเมินราคา</td>
+																					<?php } ?>
 																				<td>บาท</td>
 																			</tr>
 																			
@@ -291,12 +325,32 @@ function slider5(){
                                                                         <label for="fname">ขนาดภาพกว้าง(นิ้ว): <?php echo number_format($orderdetail[0]->orderdetail_wide) ?></label><br>
                                                                         <label for="fname">ขนาดภาพยาว(นิ้ว): <?php echo number_format($orderdetail[0]->orderdetail_long) ?></label><br>
                                                                         
-																		<?php if($order[0]->id_status>=5){ ?>
-																		<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:green">ยังไม่ชำระ</span></label><br>
-																		<?php }else{ ?>
-																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">ชำระแล้ว</span></label><br>
+																		<?php if($order[0]->id_status==2){ ?>
+																		<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">ยังไม่ชำระ</span></label><br>
+																		<label for="lname">สถานะการชำระเงินคงเหลือ: <?php  echo number_format($order[0]->order_price,2) ?> บาท </label><br>
+																		<?php }else if($order[0]->id_status==1){ ?>
+																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">กำลังประเมินราคา</span></label><br>
+																			 
+																			 
+																		<?php }else if($order[0]->id_status==4&&$purchase[0]->id_statuspayment==2){ ?>
+																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">ชำระเต็มจำนวนไม่ครบ</span></label><br>
+																			<label for="lname">สถานะการชำระเงินคงเหลือ: <?php echo number_format($order[0]->order_price-$purchase[0]->payment_paid,2) ?> บาท </label><br>
+																			<?php }else if($order[0]->id_status==4&&$purchase[0]->id_statuspayment==1){ ?>
+																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">ชำระมัดจำไม่ครบ</span></label><br>
+																			<label for="lname">สถานะการชำระเงินคงเหลือ: <?php echo number_format(($order[0]->order_price*40/100)-$purchase[0]->payment_paid,2) ?> บาท </label><br>
+																		 
+																			<?php }else if($order[0]->id_status>5&&$order[0]->id_status<8){ ?>
+																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:green">ชำระมัดจำแล้ว</span></label><br>
+																			<?php }else if($order[0]->id_status==8){ ?>
+																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">รอชำระส่วนที่เหลือจากมัดจำ</span></label><br>
+																			<label for="lname">สถานะการชำระเงินคงเหลือ: <?php echo number_format($purchase[0]->payment_arrears,2) ?> บาท </label><br>
+																			<?php }else if($order[0]->id_status>=10&&$order[0]->id_status<=11){ ?>
+																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">รอชำระส่วนที่เหลือจากมัดจำไม่ครบ</span></label><br>
+																			<label for="lname">สถานะการชำระเงินคงเหลือ: <?php echo number_format(($order[0]->order_price*40/100)-$purchase[0]->payment_paid,2) ?> บาท </label><br>
+																			<?php }else if($order[0]->id_status>=12){ ?>
+																			<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:green">ชำระเสร็จสิ้น</span></label><br>
 																			<?php } ?>
-                                                                        <label for="lname">สถานะการชำระเงินคงเหลือ: <?php echo number_format($order[0]->order_price,2) ?> บาท </label><br>
+                                                                         
 																		<?php foreach($transport as $key => $trans){ if($trans->id_tramsport==$order[0]->id_post){ ?>
                                                                         <label for="lname">บริการขนส่งโดย: <?php echo $trans->transport_name ?></label><br>
 																		<?php }} ?>
@@ -311,11 +365,18 @@ function slider5(){
 															
 															
 															<div class="col-12 col-12-small">
-																<input type="button" class="button primary" value="ยกเลิก"></input>
+																<button type="button" onclick="history.back()" style="float: left;" class="button primary" value="ยกเลิก">ยกเลิก</button>
 																<?php if($order[0]->id_status>=5){ ?>
 																		 
 																		<?php }else{ ?>
-																			<button type="submit" class="button secondary" name="action" value="check">ชำระเงิน</button>
+																			 
+																			<form method="POST" action="{{ route('purchase') }}">
+																				<input type="hidden" name="id" value="<?php echo $order[0]->id_order ?>">
+																				{!! csrf_field() !!}
+																				<button type="submit" style="margin-left: 10px;" class="button secondary">
+																					<span class=" ">ชำระเงิน</span>
+																				</button>
+																			</form>
 																			<?php } ?>
 																 
 																<!-- <a href="checkorder3.html">ดำเนินการสั่งทำ</a> -->

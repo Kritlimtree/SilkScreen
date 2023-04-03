@@ -8,9 +8,9 @@
 	<head>
 	<?php
 		@ini_set('display_errors', '0');
-		$asd = serialize($_POST['demo-priority']);
+		 
 		
-		if($_FILES){
+		if($_FILES['logofile']['name'] != "" ){
 			session_start(); 
 			$logo = $_FILES['logofile'];
 			$dir = "assets/images/";
@@ -18,21 +18,33 @@
 			move_uploaded_file($_FILES['logofile']['tmp_name'],$logo);
 			
 			$_SESSION["screenPicture"]=$_FILES['logofile']['name'];
+		}else{
+			$_SESSION["screenPicture"]= $_POST['oldimage'];
 		}
 		if($_POST){
-			$option = explode(",", $_POST['demo-priority1']);
-			$color = $option[0];
-			$color_name = $option[1];
+			
+			 
+			foreach($_POST['demo-priority1'] as $value => $demo){
+				
+			$option[] = explode(",", $demo);
+			 }
+
+			foreach($option as $value => $op){
+				$color[] = $op[0];
+			$color_name[] = $op[1];
+			}
+			
 			$size = $_POST['demo-priority'];
 			$number = $_POST['number'];
 			 
 			$_SESSION["color"]=$color;
 			$_SESSION["color_name"]=$color_name;
+			 
 			$_SESSION["size"]=$size;
 			$_SESSION["number"]=$number;
-
+			 
 		}
-		
+		 
 		?>
 		<title>Order | silk_screen</title>
 		<meta charset="utf-8" />
@@ -40,21 +52,13 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-<style>
-	.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 50px;
-  left: 335px;
-  top: 10;
-  width: 495px;
-  height: 495px;
-  overflow: hidden;
-  background-color: white;
-}
+ <style>
+	 
 	/* .color{
 		
 	} */
@@ -80,7 +84,7 @@
 							<!-- Header -->
 								<header id="header">
 									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
-									<p>ยินดีต้อนรับ คุณ admin</p>
+									<p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 									<ul class="icons">
 									<?php if(session('is_admin')==1){ ?>
 											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
@@ -90,14 +94,12 @@
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 								</header>
-							
+							 
 									<form method="post" action="checkorder3.php" enctype="multipart/form-data">
 										@csrf
 							<!-- Content -->
 								<section>
-									<!-- <header class="main">
-										<h1>สั่งสกรีน</h1>
-									</header> -->
+									 
 
 									<div class="row gtr-200">
 										<div class="col-6 col-12-medium">
@@ -109,14 +111,7 @@
 											</div>	
 										</div>
 
-									<div class="col-6 col-12-medium">
-										<div id="boxCenter">		
-											<div class="displayShirt">
-												<p><strong>เสื้อยืดที่เลือก</strong></p>
-													<div class="img-resize"><span><img src="assets/images/<?php echo $_SESSION["color"]; ?>" alt="" /></span></div><br>
-											</div>
-										</div>			
-									</div>
+									 
 										
 										<div class="col-12 col-12-medium">
 											<!-- <h3>Form</h3> -->
@@ -124,6 +119,7 @@
 													
 														<div class="row gtr-uniform">
 
+														 
 															<!-- <div class="col-12 col-12-small">
 																<h4>ตารางขนาดของเสื้อยืด</h4>
 															</div> -->
@@ -134,9 +130,11 @@
 																		<tbody>
 																			<tr>
 																				<td>ขนาด<br>(Size)</td>
-																				<?php $c = 0 ; foreach($size as $key => $size) { ?>
-																				<td><?php echo $size ?></td>
-																				<?php $c++; } ?>
+																				<?php $c = 0 ; foreach($size as $key => $size1) { 
+																					foreach($shirtsize as $key => $sh){ if($sh->id_shirtsize==$size1){ ?>
+																				<td><?php echo $sh->shirtsize_size ?></td>
+																				<input type="hidden" name="size1[]" value="<?php echo $sh->id_shirtsize ?>" />
+																				<?php }}$c++; } ?>
 																				<td></td>
 																			</tr>
 																		
@@ -147,6 +145,7 @@
 																				<?php } ?>
 																				<td>ตัว</td>
 																			</tr>
+																			
 																			</tr>
 																			
 																				
@@ -165,9 +164,22 @@
 																				<?php } ?>
 																				<td>นิ้ว</td>
 																			</tr>
-																			 
-																			
-																			
+																			<?php  foreach ($option as $value => $o) { ?>
+																			<tr>
+																			<?php foreach($shirtcolor as $key => $sc){ if($sc->id_shirtcolor==$o[1]){ ?>
+																				<td><span class="glyphicon glyphicon-trash"><img style="width:100px" class="img-fluid"  src="assets/images/<?php echo $sc->shirtcolor_picture ?>"></span></td>
+																				 
+																				<?php }}  ?>
+																				<?php foreach($size as $key => $size2) { 
+																					foreach($shirtsize as $key => $sh1){ if($sh1->id_shirtsize==$size2){ ?>
+																					  
+																					<input type="hidden" name="count" value="<?php echo $c ?>" />
+																				<td><input type="float" id="demo-name" required name="color[]" min="0" value="" /></td>
+																				<?php }}} ?>
+																				<td>ตัว</td>
+																			</tr>
+																			<input type="hidden" name="option[]" value="<?php echo $o[1] ?>" />
+																			 <?php } ?>
 																		</tbody>
 																		<tfoot>
 																			<tr>
@@ -181,7 +193,7 @@
 																				<td>นิ้ว</td>
 																			</tr>
 																		</tfoot>
-																	
+																	 
 																	</table>
 																	
 																	
@@ -212,14 +224,14 @@
 													
 													?>
                                                     <option value="<?php echo $trans->id_tramsport ?>"><?php echo $trans->transport_name  ?></option>
-													<?php } ?>
+													<?php }  ?>
                                                 </select>
 												<br>
 															
 															
 															
 															<div class="col-12 col-12-small">
-																<input type="button" class="button primary" value="ยกเลิก"></input>
+																<input type="button" onclick="history.back()" class="button primary" value="ยกเลิก"></input>
 																
 																<button type="submit" class="button secondary" name="action" value="check">ยืนยันการสั่ง</button>
 																
@@ -230,9 +242,11 @@
 													</form>
 													 
 										</div>
+										
 								</section>
 
 						</div>
+						
 					</div>
 
 				<!-- Sidebar -->
@@ -280,6 +294,46 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js" defer></script>
 			<script src="assets/js/changecolor.js"></script>
-			
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+			<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+			<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+			<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+			<script>
+				$(document).ready(function (){
+					// Create
+					$(document).on('click','.createbtn',function (){
+					var id = $(this).val();
+					$('#createModal').modal('show'); 
+					 
+				});
+			});
+		</script>
+		<script>
+$(document).ready(function() {
+    var i=1; 
+    $('#add').click(function() {
+        i++;
+        $('#dynamic_field').append('<div id="row'+i+'"><label" for="member_'+ i +'">Member '+ i +'</label><input type="text" name="member_' + i + '" value=""><button type="button" class="btn_remove" name="remove" id="'+ i +'">X</button></div>')
+		var _token=$('input[name="_token"]').val();
+				$.ajax({
+					url:"{{route('color')}}",
+					method:"POST",
+					data:{_token:_token},
+					success:function(result){
+						 
+						$('#dynamic_field2').html(result);
+					}
+				})	
+    });
+    $(document).on('click', '.btn_remove', function() {
+        var button_id = $(this).attr("id");
+        $('#row' + button_id + '').remove();
+    });
+});
+ 
+</script>
+ 
 	</body>
-</html>
+</html> 

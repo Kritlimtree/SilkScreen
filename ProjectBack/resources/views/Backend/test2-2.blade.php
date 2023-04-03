@@ -54,19 +54,14 @@
 													<!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. </p> -->
 												</div>
 											</div>
-											<div class="col-5 col-12-medium">
-												<div class="displayShirt">
-													<p><strong>เสื้อยืดที่เลือก</strong></p>
-													<div class="img-resize"><span><img src="assets/images/<?php echo $order[0]->shirtcolor_picture; ?>" alt="" /></span></div><br>
-												</div>
-											</div>
+											
 											<div class="col-5 col-12-medium">
 												<div class="displayShirt">
 													<div id="boxCenter">
 														<p><strong>ตัวอย่างการสกรีน</strong></p>
 															<div id="display_image"></div><br>
 															<?php  if($order[0]->id_sample != ''){ ?>
-															<div class="img-resize"><span><img src="assets/images/<?php echo $order[0]->sample_picture; ?>"  alt="" /></span></div>
+															<div class="img-resize"><a target="_blank" href="assets/images/<?php echo $order[0]->sample_picture;  ?>"><img src="assets/images/<?php echo $order[0]->sample_picture; ?>"  alt="" /></a></div>
 															<?php  } ?>
 															<!-- <span>*กรุณาเลือกลายรูป*</span><br><br> -->
 															
@@ -97,52 +92,110 @@
 																		
 																			<tbody>
 																			<tr>
-																				<td>ขนาด</th>
-																				<?php foreach($order as $key => $size){ ?>
-																				<td><?php echo $size->shirtsize_size ?></td>
-																				<?php } ?>
+																			<td>ขนาด(Size)</td>
+																				<?php   $c=0; foreach($order as $key => $od){
+																					if($c<($order[0]->numshirtcolor)){ ?>
+																				<td><?php echo $od->shirtsize_size ?></td>
+																				<?php $size[$c]=$od->id_shirtprice; $quantity[$c]=0; $price[$c]=0; $c++;}  } ?>
+																				<td></td>
 																			</tr>
 																			
 																			<tr>
-																				<td>ระยะห่างของลายแบบกับขอบด้านบน(นิ้ว)</td>
-																				<?php foreach($order as $key => $up){ ?>
-																					<td><?php echo $up->orderdetail_upper ?></td>
-																				<?php } ?>
+																			<td>ระยะห่างของลายแบบกับขอบด้านบน(นิ้ว)</td>
+																			<?php   $c1=0; foreach($order as $key => $od){
+																					if($c1<($order[0]->numshirtcolor)){ ?>
+																					<td><?php echo number_format($od->orderdetail_upper,2) ?></td>
+																					<?php }$c1++;} ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																				<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านล่าง(นิ้ว)</td>
-																				<?php foreach($order as $key => $down){ ?>
-																					<td><?php echo $down->orderdetail_lower ?></td>
-																				<?php } ?>
+																				<?php   $c1=0; foreach($order as $key => $od){
+																					if($c1<($order[0]->numshirtcolor)){ ?>
+																					<td><?php echo number_format($od->orderdetail_lower,2) ?></td>
+																					<?php }$c1++;} ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านซ้าย(นิ้ว)</td>
-																				<?php foreach($order as $key => $left){ ?>
-																					<td><?php echo $left->orderdetail_left ?></td>
-																				<?php } ?>
+																				<?php   $c1=0; foreach($order as $key => $od){
+																					if($c1<($order[0]->numshirtcolor)){ ?>
+																					<td><?php echo number_format($od->orderdetail_left,2) ?></td>
+																					<?php }$c1++;} ?>
+																				<td>นิ้ว</td>
 																			</tr>
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านขวา(นิ้ว)</td>
-																				<?php foreach($order as $key => $right){ ?>
-																					<td><?php echo $right->orderdetail_right ?></td>
+																				<?php   $c1=0; foreach($order as $key => $od){
+																					if($c1<($order[0]->numshirtcolor)){ ?>
+																					<td><?php echo number_format($od->orderdetail_right,2) ?></td>
+																					<?php }$c1++;} ?>
+																				<td>นิ้ว</td>
+																			</tr>
+																			<?php  $c1=0; $c3=0; for($i=0;$i<count($order)/$order[0]->numshirtcolor;$i++){    ?>
+																			<tr>
+																			<?php  foreach($order as $key => $od){ if($c1%($order[0]->numshirtcolor)==0){ ?>
+																				<td><span class="glyphicon glyphicon-trash"><img style="width:100px" class="img-fluid"  src="assets/images/<?php echo $order[$c1]->shirtcolor_picture ?>"></span></td>
+																				
+																				<?php $c1++; break; }$c1++;}  ?>
+																				<?php $c2=0; $c4=0; foreach($order as $key => $od){  if($c3<(($i+1)*$order[0]->numshirtcolor)){ ?>
+																					<td><?php echo $order[$c3]->quantity ?></td>
+																					 
+																				<?php $quantity[$c4]=$quantity[$c4]+$order[$c3]->quantity; 
+																						$price[$c4] = $price[$c4]+$order[$c3]->orderdetail_price;
+																						 $c3++; $c4++; }$c2++; }  ?>
+																						   
+																				<td>ตัว</td>
+																			</tr>
+																			 <?php } ?>
+																			 <tr>
+																				<td>จำนวนรวม(ตัว)</td>
+																				<?php for($i=0;$i<count($quantity);$i++){  ?>
+																				<td><?php echo $quantity[$i] ?></td>
 																				<?php } ?>
+																				<td>ตัว</td>
 																			</tr>
 																			<tr>
-																				<td>จำนวน(ตัว)</td>
-																				<?php foreach($order as $key => $num){ ?>
-																					<td><?php echo $num->quantity ?></td>
-																				<?php } ?>
+																				<td>ราคาค่าบล๋อค(บาท)</td>
+																				 
+																					<td colspan="<?php echo $c ?>"><?php echo number_format($order[0]->blockprice,2) ?></td>
+																					<td>บาท</td>
 																			</tr>
-																			
+																			<tr>
+																				<td>ราคาค่าส่ง(บาท)</td>
+																				 
+																					<td colspan="<?php echo $c ?>"><?php echo number_format($order[0]->delivery_price,2) ?></td>
+																					<td>บาท</td>
+																			</tr>
 																			<tr>
 																				<td>ราคาที่ประเมิน(จำนวนตัว/ไซส์)</td>
-																				<?php foreach($order as $key => $price){ ?>
+																				<?php $c1=0; foreach($order as $key => $price){ if($c1<($order[0]->numshirtcolor)){?>
 																				<?php if($price->orderdetail_price == ''){ ?>
 																				<td><input type="float" name="appraise[]" value=""></input></td>
+																				<input type="hidden" name="shirt[]" value="<?php echo $order[$c1]->id_shirtprice; ?>"/>
 																				<?php }else{ ?>
-																					<td><?php echo $price->orderdetail_price ?></td>
+																					<td><?php echo number_format($price->orderdetail_price,2) ?></td>
 																				<?php } ?>
-																				<?php } ?>
+																				<?php $c1++;}} ?>
+																				<td>บาท</td>
+																			</tr>
+																			<?php if($order[0]->order_price!=null){ ?>
+																				
+																			<tr>
+																				<td>ราคารวมต่อไซส์(บาท)</td>
+																				<?php $c1=0; foreach($order as $key => $num){ if($c1<($order[0]->numshirtcolor)){?>
+																					<td><?php echo number_format($order[$c1]->orderdetail_price*$quantity[$c1],2) ?></td>
+																				<?php $c1++;} } ?>
+																				<td>บาท</td>
+																			</tr>
+
+																			<tr> 
+																				<td>ราคารวม(บาท)</td>
+																					<td colspan="<?php echo $c ?>"><?php echo number_format($order[0]->order_price,2) ?></td>
+																					<td>บาท</td>
+																			</tr>
+																			<?php } ?>
+																			
 																			</tr>
 																		</tbody>
 																	
@@ -176,9 +229,12 @@
 														<div class="boxOrder">
 														<label >สถานะออเดอร์:</label>
 														<select name="option" id="8">
-														<?php foreach($status as $key => $s){ ?>
-															<option value="<?php echo $s->id_status; ?>"><?php echo $s->status_name; ?></option>
-															<?php } ?>
+														<?php foreach($status as $key => $s){ 
+															if($s->id_status==$order[0]->id_status){ ?>
+															<option selected value="<?php echo $s->id_status; ?>"><?php echo $s->status_name; ?></option>
+															<?php }else{?>
+																<option value="<?php echo $s->id_status; ?>"><?php echo $s->status_name; ?></option>
+															<?php }} ?>
 														</select>
 														<label for="lname">หมายเลขรหัสพัสดุ: -</label>
 														<?php if($order[0]->postcode == ''){ ?>
@@ -191,9 +247,11 @@
 														<?php foreach($order as $key => $idorder){ ?>
 															<input type="hidden" name="idorder[]" value="<?php echo $idorder->id_orderdetail; ?>"/>
 															<?php } ?>
-															
+															<input type="hidden" name="blockprice" value="<?php echo $order[0]->blockprice; ?>"/>
+															<input type="hidden" name="delivery" value="<?php echo $order[0]->delivery_price; ?>"/>
 														<input type="hidden" name="id" value="<?php echo $order[0]->id_order; ?>"/>
 														<input type="hidden" name="type" value="<?php echo $order[0]->order_type; ?>"/>
+														 
 														<a href="order.html" onclick="return confirm('คุณต้องการยกเลิกออเดอร์นี้')" class="button primary">ยกเลิก</a>
 														<button type="submit" class="button secondary" name="action" value="check">บันทึก</input>
 														</div>

@@ -22,7 +22,21 @@ class OrderfController extends Controller
         $shirtcolor = shirtcolor::all();
         $shirtsize = shirtsize::all();
         $shirtsize1 = shirtsize::all();
-        return view('Frontend.order', compact(['shirtcolor','shirtsize','shirtsize1']));
+        $oldimage = order::where('order_orderdate','>',date("Ymd", strtotime(" -3 Month ")))->get();
+   
+        return view('Frontend.order', compact(['shirtcolor','shirtsize','shirtsize1','oldimage']));
+    }
+
+    public function color(){
+        
+        $shirtcolor = shirtcolor::all();
+        $output='<option value="" selected disabled>เลือกสี</option>';
+        foreach ($shirtcolor as $row){
+            $output.='<option value="'.$row->id_shirtcolor.'">'.$row->shirtcolor_name.'</option>';
+        }
+ 
+        echo $output;
+         
     }
 
     public function shopping(){
@@ -35,9 +49,11 @@ class OrderfController extends Controller
     
     public function buycolor(){
         
-        $screencolor = color::all();
+        $screencolor = color::orderBy('color_name')->get();
         $transport = transport::all();
-        return view('Frontend.buy', compact(['screencolor','transport']));
+        $shirtsize = shirtsize::all();
+        $shirtcolor = shirtcolor::all();
+        return view('Frontend.buy', compact(['screencolor','transport','shirtsize','shirtcolor']));
     }
 
     public function checkorder(Request $request){
@@ -46,28 +62,33 @@ class OrderfController extends Controller
         $screencolor = color::where('id_color', $request->screen_color)->get();
         $transporter = transport::where('id_tramsport', $request->transport)->get();
         $shirtsize = shirtsize::all();
+        $shirtcolor = shirtcolor::all(); 
         $data1 = freight::where('id_transport', $request->transport)->get();
          
-        return view('Frontend.checkorder3', compact(['block','screencolor','transporter','shirtsize','data1']));
+        return view('Frontend.checkorder3', compact(['block','screencolor','transporter','shirtsize','data1','shirtcolor']));
     }
 
     public function checkorderdetail(Request $request){
           
         $order = order::where('id_order', $request->id)->get();
-         
-        $screencolor = color::where('id_color', $order[0]->id_color)->get();
+        $purchase = order::join('payments','payments.id_order','orders.id_order')->where('orders.id_order', $request->id)
+        ->orderBy('payments.id_payment','desc')->get();
+        $screencolor = color::all();
         $shirtcolor = shirtcolor::all();
         $shirtsize = shirtsize::all();
-        $orderdetail = orderdetail::where('id_order', $order[0]->id_order)->get();
+        $orderdetail = orderdetail::join('shirtcolors','shirtcolors.id_shirtcolor','=','orderdetails.id_shirtcolor')
+        ->join('shirtsizes','shirtsizes.id_shirtsize','=','orderdetails.id_shirtprice')
+        ->where('id_order', $order[0]->id_order)->get();
         $transport = transport::all();
-        return view('Frontend.checkorder4', compact(['order','screencolor','orderdetail','shirtcolor','shirtsize','transport']));
+        
+        return view('Frontend.checkorder4', compact(['order','purchase','screencolor','orderdetail','shirtcolor','shirtsize','transport']));
     }
 
     public function sample(Request $request){
          
         $order = order::where('id_order', $request->id)->get();
         $sample = sample::where('id_sample', $order[0]->id_sample)->get();
-         
+        
         $orderdetail = orderdetail::where('id_order', $order[0]->id_order)->get();
         $transport = transport::all();
         return view('Frontend.simple', compact(['order','orderdetail','sample']));
@@ -75,6 +96,10 @@ class OrderfController extends Controller
 
     public function confirmsample(Request $request){
          
+        $order = order::join('samples','samples.id_sample','=','orders.id_sample')->where('samples.id_sample', $request->id)->update([
+            'id_status' => 7,
+             
+        ]);
         
         $sample = sample::where('id_sample', $request->id)->update([
             'sample_status' => $request->fix,
@@ -102,10 +127,6 @@ class OrderfController extends Controller
         $imageName="";
         
          $image = $request->bill->getClientOriginalName();
-         
-        
-         
-          
              $generate = hexdec(uniqid());
              $imageName = time() . '.' . $request->bill->extension();
               
@@ -129,38 +150,63 @@ class OrderfController extends Controller
     }
 
     public function storedetail(Request $request){
-         
+        
         $t=time();
+
+        $lastUsedSerialNumber = order::query()->orderByDesc('order_id')->first();
+         
         $order = order::create([
             'id_user' => session('id_user'),
             'picture' => $request->screenPicture[0],
-            'id_shirtcolor' => $request->colorname[0],
+            'delivery_price' => $request->wpu[0],
             'id_color' => $request->screencolor[0],
             'id_post' => $request->transport,
-            'order_id' => 'BTS123',
+            'numshirtcolor' => $request->count,
             'order_type' => $request->number,
             'blockprice' => $request->blockprice,
             'order_orderdate' => date("Y-m-d",$t),
         ]);
-         
+
+        if($lastUsedSerialNumber==null){
+            order::where('id_order', $order->id)->update([
+                'order_id' => 'BTS'.date("ymd").'001',
+            ]);
+        }else{
+            $numbers = preg_replace('/[^0-9]/', '', $lastUsedSerialNumber->order_id);
+            
+            $date = substr($numbers, 0, -3);
+            $threenumber = substr($numbers,-3);
+             
+            if ($date == date('ymd')) {           
+                $threenumber = str_pad(++$threenumber, 3, '0', STR_PAD_LEFT);       
+              }else{
+                $date = date('ymd');
+                $threenumber = '001'; 
+              }
+              // increment second sequence if lower than 999
+              order::where('id_order', $order->id)->update([
+                'order_id' => 'BTS'.$date.$threenumber,
+            ]);     
+        }
+
         if($request->number==1){
-        for($i=0;$i<count($request->unitprice);$i++){
+        for($i=0;$i<count($request->screen_color1);$i++){
         $model = orderdetail::create([
             
              
-            'id_shirtprice' => $request->size_id[$i],
+            'id_shirtprice' => $request->screen_color1[$i][0],
             'id_order' => $order->id,
             
+            'id_shirtcolor' => $request->screen_color1[$i][2],
+            'orderdetail_upper' => $request->w[$i%count($request->w)],
+            'orderdetail_lower' => $request->s[$i%count($request->s)],
+            'orderdetail_left' => $request->a[$i%count($request->a)],
+            'orderdetail_right' => $request->d[$i%count($request->d)],
+            'orderdetail_wide' => $request->wide[0],
+            'orderdetail_long' => $request->long[0],
+            'orderdetail_price' => $request->screen_color1[$i][3],
+            'quantity' => $request->screen_color1[$i][1],
              
-            'orderdetail_upper' => $request->w[$i],
-            'orderdetail_lower' => $request->s[$i],
-            'orderdetail_left' => $request->a[$i],
-            'orderdetail_right' => $request->d[$i],
-            'orderdetail_wide' => $request->wide[$i],
-            'orderdetail_long' => $request->long[$i],
-            'orderdetail_price' => $request->unitprice[$i],
-            'quantity' => $request->quantity[$i],
-            'wpu' => $request->wpu[$i],
             
         ]);
         order::where('id_order', $order->id)->update([
@@ -169,20 +215,20 @@ class OrderfController extends Controller
         ]);
     }
 }else{
-    for($i=0;$i<count($request->unitprice);$i++){
+    for($i=0;$i<count($request->screen_color1);$i++){
         $model = orderdetail::create([
              
              
-            'id_shirtprice' => $request->size_id[$i],
+            'id_shirtprice' => $request->screen_color1[$i][0],
             'id_order' => $order->id,
-             
-            'orderdetail_upper' => $request->w[$i],
-            'orderdetail_lower' => $request->s[$i],
-            'orderdetail_left' => $request->a[$i],
-            'orderdetail_right' => $request->d[$i],
-            'orderdetail_wide' => $request->wide[$i],
-            'orderdetail_long' => $request->long[$i],
-            'quantity' => $request->quantity[$i],
+            'id_shirtcolor' => $request->screen_color1[$i][2],
+            'orderdetail_upper' => $request->w[$i%count($request->w)],
+            'orderdetail_lower' => $request->s[$i%count($request->s)],
+            'orderdetail_left' => $request->a[$i%count($request->a)],
+            'orderdetail_right' => $request->d[$i%count($request->d)],
+            'orderdetail_wide' => $request->wide[0],
+            'orderdetail_long' => $request->long[0],
+            'quantity' => $request->screen_color1[$i][1],
              
         ]);
 order::where('id_order', $order->id)->update([
@@ -194,4 +240,8 @@ order::where('id_order', $order->id)->update([
  
         return redirect()->route('shopping');
     }
+
+
+     
+
 }

@@ -8,6 +8,7 @@
 	<head>
 		<title>silk_screen</title>
 		<meta charset="utf-8" />
+		 
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		
@@ -32,6 +33,7 @@
 		
 		
 		?>
+		 
 		<script type="text/javascript">function toMudjum(){
 			var image = document.querySelector('#qr');
     document.getElementById("money123").innerHTML = deposit;
@@ -54,7 +56,7 @@ function toFull(){
 
 							<!-- Header -->
 							<header id="header">
-								<p>ยินดีต้อนรับ คุณ admin</p>
+							<p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 
 								<ul class="icons">
 								<?php if(session('is_admin')==1){ ?>
@@ -105,13 +107,13 @@ function toFull(){
 														
 														<div class="col-3 col-12-small">
 															<input onclick="toMudjum()" type="radio" id="demo-priority-low" name="mf" value="1,<?php echo $deposit ?>">
-															<label for="demo-priority-low">เงินมัดจำ</label>
+															<label for="demo-priority-low">เงินมัดจำ(40%)</label>
 														</div>
 
 														<div class="col-4 col-12-small">
 															<input onclick="toFull()" type="radio" id="demo-priority-high" name="mf" value="2,<?php echo $price1 ?>">
 															<label for="demo-priority-high">จ่ายเต็มจำนวน</label>
-														</div>
+														</div> 
 														<label >จำนวนเงิน : <span id="money123"></span> บาท</label>
 														</div><br>
 														<input type="hidden" name="price" value="<?php echo $price1 ?>"></input>
@@ -182,7 +184,7 @@ function toFull(){
 												<div class="col-12 col-12-small">
 													<input type="hidden" name="id" value="<?php echo $purchase[0]->id_order ?>"></input>
 													 
-													<input type="button" class="button primary" value="ยกเลิก"></input>
+													<input type="button" onclick="history.back()" class="button primary" value="ยกเลิก"></input>
 													<input type="submit" class="button secondary" value="ตกลง"></input>
 												</div>
 </form >

@@ -304,8 +304,8 @@ hr {
 													<td><?php echo $block->block_wide  ?></td>
 													<td><?php echo $block->block_long  ?></td>
 													<td><?php echo number_format($block->block_price,2)  ?></td>
-													<td><button type="button" value="{{$block->id_block}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
-                                                    <td><button type="button" value="{{$block->id_block}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
+													<td><button type="button" value="{{$block->id_block}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">แก้ไข</button></td>
+                                                    <td><button type="button" value="{{$block->id_block}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">ลบ</button></td>
 												</tr>
 												<?php } ?>
 											</tbody>

@@ -304,8 +304,8 @@ hr {
                                                     </td>
 													<!-- <td>หลงเหลือยิ่ง</td> -->
 													<!-- <td>11/11/65</td> -->
-													<td><button type="button" value="{{$shc->id_shirtcolor}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
-                                                    <td><button type="button" value="{{$shc->id_shirtcolor}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
+													<td><button type="button" value="{{$shc->id_shirtcolor}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">แก้ไข</button></td>
+                                                    <td><button type="button" value="{{$shc->id_shirtcolor}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">ลบ</button></td>
 													
 													
 												</tr>

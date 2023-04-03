@@ -34,7 +34,7 @@ Route::get('/', function () {
 
 Route::get('/login.html', function () {
     return view('Frontend.login');
-});
+})->name('loginform');
 
 Route::post('/login', [UsershopController::class, 'login'])->name('login');
 
@@ -57,6 +57,8 @@ Route::get('/logout', [UsershopController::class, 'logout'])->name('logout');
 
 Route::get('/regis', [UsershopController::class, 'register'])->name('regis');
 
+Route::post('/transport', [FreightController::class, 'transport'])->name('transport');
+
 Route::post('/amphures', [UsershopController::class, 'amphures'])->name('amphures');
 
 Route::post('/district', [UsershopController::class, 'district'])->name('district');
@@ -74,6 +76,8 @@ Route::middleware(['auth.admin'])->group(function(){
 Route::get('orderf.php', [OrderfController::class, 'index'])->name('orderf');
 
 Route::post('buy.php', [OrderfController::class, 'buycolor'])->name('buy');
+
+Route::post('/color', [OrderfController::class, 'color'])->name('color');
 
 Route::post('checkorder3.php', [OrderfController::class, 'checkorder'])->name('checkorder3');
 

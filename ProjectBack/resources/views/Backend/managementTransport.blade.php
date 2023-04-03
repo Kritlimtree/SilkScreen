@@ -183,11 +183,11 @@ hr {
 								</header>
 								<div class="Center">
 									<div class="row-cols-3">
-                                        <div class="col-6 col-12-medium">
+                                        <div class="col-6 col-12-medium"  >
                                             <h3>จัดการค่าขนส่ง</h3>
                                         </div>
-                                        <div class="col-6 col-12-medium ">
-										<form action="{{ route('managementTransport_search') }}" method="POST" enctype="multipart/form-data">
+                                        <div class="col-6 col-12-medium " >
+										<form  action="{{ route('managementTransport_search') }}" method="POST" enctype="multipart/form-data">
 										@csrf
                                             <div class="col-6 float:left " style="margin: 20px 20px 20px 0px; wide: 100px;">
                                                 <select name="transportation_category" id="transportation-category" >
@@ -197,14 +197,14 @@ hr {
 													?>
                                                     <option value="<?php echo $transport->id_tramsport  ?>"<?php echo $selected ?> ><?php echo $transport->transport_name  ?></option>
 													<?php } ?>
-                                                </select><button type="submit" class="secondary" data-loading-text="Loading...">
-           									         <i class="bx bx-save text-4 mr-2"></i> บันทึกข้อมูล
+                                                </select>
+													
+                                            </div><button style="float: right;" type="submit" class="secondary" data-loading-text="Loading...">
+           									         <i class="bx bx-save text-4 mr-2"></i> เลือก
                											 </button><br>
 												
 												
 													</form>
-													
-                                            </div>
                                         </div>
                                         <button id="myBtn1" class="secondary createtransbtn float:left">เพิ่มบริษัทขนส่ง</button>
                                     </div>
@@ -337,8 +337,8 @@ hr {
 													<td><?php echo $freight->min  ?></td>
 													<td><?php echo $freight->max  ?></td>
 													<td><?php echo number_format($freight->price,2)  ?></td>
-													<td><button type="button" value="{{$freight->id_freight}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
-                                                    <td><button type="button" value="{{$freight->id_freight}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
+													<td><button type="button" value="{{$freight->id_freight}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">แก้ไข</button></td>
+                                                    <td><button type="button" value="{{$freight->id_freight}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">ลบ</button></td>
 												</tr>
 												<?php } ?>
 											</tbody>

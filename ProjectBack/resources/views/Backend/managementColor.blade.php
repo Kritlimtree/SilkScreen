@@ -302,8 +302,8 @@ hr {
 													<td><img src="assets/images/<?php echo $color->color_code  ?>" width="100px" alt=""></td>
                                                      
                                                     <!-- <td>13/10/65</td> -->
-                                                    <td><button type="button" value="{{$color->id_color}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">edit</button></td>
-                                                    <td><button type="button" value="{{$color->id_color}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></td>
+                                                    <td><button type="button" value="{{$color->id_color}}" class="secondary editbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">แก้ไข</button></td>
+                                                    <td><button type="button" value="{{$color->id_color}}" class="button primary deletebtn" data-bs-toggle="modal" data-bs-target="#exampleModal">ลบ</button></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

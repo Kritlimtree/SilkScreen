@@ -10,13 +10,21 @@
 	
 	session_start(); 
 	 
-	$_SESSION['color'] = 0; ?>
+	$_SESSION['color'] = 0; 
+	
+	 
+	?>
 		<title>Order | silk_screen</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
 		<script >function openModalBlack() {
   document.getElementById("ModalBlack").style.display = "block";
 }
@@ -49,6 +57,27 @@ function closeModalYellow() {
 }
 </script>
 <script type="text/javascript" src="assets/js/app1.js" defer></script>
+
+
+
+<script>
+function hiddenn(pvar) {
+    if(pvar==0){
+		document.getElementById("boxCenter").style.display = 'none';
+		document.getElementById("oldbox").style.display = 'none';
+	}else if(pvar==1){
+		document.getElementById("boxCenter").style.display = '';
+		document.getElementById("oldbox").style.display = 'none';
+		document.getElementById('image_input').value = '';
+		
+	}else if(pvar==2){
+		document.getElementById("boxCenter").style.display = 'none';
+		document.getElementById("oldbox").style.display = '';
+		
+	}
+}
+</script>
+ 
 <style>
 	.modal {
   display: none;
@@ -80,12 +109,15 @@ a {
 
 
 /* The Close Button */
-
+img {
+border: 0px;
+vertical-align:"middle"; 
+}
 
 </style>
 
 	</head>
-	<body class="is-preload">
+	<body class="is-preload" onload="hiddenn('0')">
 	
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -97,7 +129,7 @@ a {
 							<!-- Header -->
 								<header id="header">
 									<!-- <a href="index.html" class="logo"><strong>ยินดีต้อนรับ</strong> by HTML5 UP</a> -->
-									<p>ยินดีต้อนรับ คุณ admin</p>
+									<p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 									<ul class="icons">
 									<?php if(session('is_admin')==1){ ?>
 											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
@@ -118,21 +150,50 @@ a {
 
 									<div class="row gtr-200">
 										<div class="col-6 col-12-medium">
-
+										 
+											<h3 id="content">เลือกรูป</h3>
+											<div class="row gtr-200">
+												<div class="col-4 col-12-small">
+													<input onclick="hiddenn('1')" type="radio"  id="3" name="number1" value="1" >
+													<label for="3">รูปใหม่</label>
+												</div>
+												<div class="col-6 col-12-small">
+													<input onclick="hiddenn('2')" type="radio" id="4" name="number1" value="2">
+													<label for="4">รูปเก่า(ใช้รูปเก่าไม่คิดค้าบล็อคพิมพ์)</label>
+												</div>
+											</div>
+											 
 											<div id="boxCenter">
 												<div id="display_image"></div><br>
 												<span>*กรุณาเลือกลายรูป*</span><br><br>
-												<input type="file" id="image_input" required name="logofile" accept="images/png, images/jpeg">
+												<input type="file" id="image_input"  name="logofile" accept="images/png, images/jpeg">
+												
 											</div><br><br>
+											 
+											<div id="oldbox">
+												<div id="oldimage"></div><br>
+												<span>รูปเก่า</span><br><br>
+												<select name="oldimage" id="examplee1" style>
+												<option  value="" disabled selected >เลือกรูป</option>
+												 <?php foreach ($oldimage as $key => $old) { 
+													 
+													 ?>
+													 <option  value="<?php echo $old->picture  ?>" data-icon="<?php echo $old->picture  ?>"><?php echo $old->picture  ?></option>
+													 <?php } ?>
+												 </select>
+												 <br>
 
+												 <img src="" id="changesrc" alt="" width="400px" height="400px">
+											</div><br><br>
+											 
 											<h3 id="content">จำนวนสี</h3>
 											<div class="row gtr-200">
 												<div class="col-4 col-12-small">
-													<input onclick="color()" type="radio"  id="1" name="number" value="1" >
+													<input onclick="color()" type="radio"  id="1" name="number" value="1" required >
 													<label for="1">1 สี</label>
 												</div>
 												<div class="col-6 col-12-small">
-													<input onclick="morecolor()" type="radio" id="2" name="number" value="2">
+													<input onclick="morecolor()" type="radio" id="2" name="number" value="2" required >
 													<label for="2">มากกว่า 1 สี</label>
 												</div>
 											</div>
@@ -141,7 +202,7 @@ a {
 											<div class="row gtr-200">
 											<?php foreach ($shirtsize1 as $key => $shirtsize1) { ?>
 												<div class="col-3 col-12-small">
-													<input type="checkbox"  id="demo-<?php echo $shirtsize1->shirtsize_size ?>" name="demo-priority[]" value="<?php echo $shirtsize1->shirtsize_size ?>">
+													<input type="checkbox"  id="demo-<?php echo $shirtsize1->shirtsize_size ?>" name="demo-priority[]" value="<?php echo $shirtsize1->id_shirtsize ?>">
 													<label for="demo-<?php echo $shirtsize1->shirtsize_size ?>"><?php echo $shirtsize1->shirtsize_size ?></label>
 												</div>
 												
@@ -196,7 +257,7 @@ a {
 															<div class="col-4 col-12-small">
 																<div class="boxShowShirt">
 																	<div class="img-resize2 Center"><span><img style="width:115px; height:110px" name="img" value="<?php echo $shirtcolor->shirtcolor_name ?>" id="image" class="zoom colorshow" src="assets/images/<?php echo $shirtcolor->shirtcolor_picture ?>" onmouseover="openModalWhite();" onmouseout="closeModalWhite()" alt="" /></span></div><br>
-																	<input type="radio" required class="zoom colorshow" id="<?php echo $shirtcolor->shirtcolor_name ?>" name="demo-priority1" value="<?php echo $shirtcolor->shirtcolor_picture ?>,<?php echo $shirtcolor->id_shirtcolor ?>">
+																	<input type="checkbox"   class="zoom colorshow" id="<?php echo $shirtcolor->shirtcolor_name ?>" name="demo-priority1[]" value="<?php echo $shirtcolor->shirtcolor_picture ?>,<?php echo $shirtcolor->id_shirtcolor ?>">
 																	<label for="<?php echo $shirtcolor->shirtcolor_name ?>">สี<?php echo $shirtcolor->shirtcolor_name ?></label>
 																
 																</div>
@@ -236,8 +297,9 @@ a {
 																<input type="hidden" id="colorInputText">
 															</div> -->
 															<div class="col-12 col-12-small">
-																<input type="button" class="button primary" value="ยกเลิก"></input>
+																<input type="button" onclick="history.back()" class="button primary" value="ยกเลิก"></input>
 																<input type="hidden" name="controller" value="<span id='color'></span>"/>
+																 
 																<button type="submit" class="button secondary" name="action" value="check">ต่อไป</input>
 																
 															</div>
@@ -284,18 +346,28 @@ a {
 			</div>
 
 			
-
+			<script src="assets/js/order-selectbox.min.js"></script>
+			<script>
+    $('#examplee').IconSelectBox(true); // isImg: boolean 
+    $('.example2').IconSelectBox(false); // isImg: boolean 
+  </script>
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js" defer></script>
 			<script src="assets/js/changecolor.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+			<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+			<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+			<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 			
 			</script>
 	 
-			<script>
+			<script >
 				$(document).ready(function (){
 					// Create
 					$(document).on('mouseover','.colorshow',function (){
@@ -316,6 +388,15 @@ a {
 				});
 				
 			});
+			$(document).ready(function() {
+     $(document).on('change','#examplee1',function(){
+		
+		var image = document.querySelector('#changesrc');
+		var id = $(this).val();
+		console.log(id);
+        image.src = "assets/images/"+id;
+     });
+   });
 			</script>
 	</body>
-</html>
+</html> 
