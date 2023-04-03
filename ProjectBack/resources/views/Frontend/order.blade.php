@@ -178,7 +178,7 @@ vertical-align:"middle";
 												 <?php foreach ($oldimage as $key => $old) { 
 													 
 													 ?>
-													 <option  value="<?php echo $old->picture  ?>" data-icon="<?php echo $old->picture  ?>"><?php echo $old->picture  ?></option>
+													 <option  value="<?php echo $old->picture?>,<?php echo $old->id_order?>" data-icon="<?php echo $old->picture  ?>"><?php echo $old->picture  ?></option>
 													 <?php } ?>
 												 </select>
 												 <br>
@@ -393,8 +393,9 @@ vertical-align:"middle";
 		
 		var image = document.querySelector('#changesrc');
 		var id = $(this).val();
-		console.log(id);
-        image.src = "assets/images/"+id;
+		const myArray = id.split(",");
+		console.log(myArray[0]);
+        image.src = "assets/images/"+myArray[0];
      });
    });
 			</script>

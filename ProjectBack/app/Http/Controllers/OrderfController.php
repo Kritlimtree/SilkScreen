@@ -47,13 +47,18 @@ class OrderfController extends Controller
         return view('Frontend.shopping', compact(['order']));
     }
     
-    public function buycolor(){
+    public function buycolor(Request $request){
+        $id = explode(",",$request->oldimage);
         
+         
+        $order = order::join('orderdetails','orderdetails.id_order','=','orders.id_order')
+        ->where('orders.id_order',$id[1])->get();
         $screencolor = color::orderBy('color_name')->get();
         $transport = transport::all();
         $shirtsize = shirtsize::all();
         $shirtcolor = shirtcolor::all();
-        return view('Frontend.buy', compact(['screencolor','transport','shirtsize','shirtcolor']));
+         
+        return view('Frontend.buy', compact(['screencolor','transport','shirtsize','shirtcolor','order']));
     }
 
     public function checkorder(Request $request){

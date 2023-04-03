@@ -16,19 +16,21 @@
 			$dir = "assets/images/";
 			$logo = $dir . basename($_FILES['logofile']['name']);
 			move_uploaded_file($_FILES['logofile']['tmp_name'],$logo);
-			
+			$awd = '';
 			$_SESSION["screenPicture"]=$_FILES['logofile']['name'];
 		}else{
 			$_SESSION["screenPicture"]= $_POST['oldimage'];
+			$awd = explode(",", $_POST['oldimage']);
+			
 		}
 		if($_POST){
-			
+			 
 			 
 			foreach($_POST['demo-priority1'] as $value => $demo){
-				
+	 			
 			$option[] = explode(",", $demo);
 			 }
-
+ 
 			foreach($option as $value => $op){
 				$color[] = $op[0];
 			$color_name[] = $op[1];
@@ -184,12 +186,23 @@
 																		<tfoot>
 																			<tr>
 																				<td>ขนาดภาพกว้าง(นิ้ว)</td>	
+																				<?php if($awd == null){ ?>
 																				<td><input type="float" id="demo-name" required name="wide" max="11.69" min="1" value="" /></td>	
+																				<?php }else{ ?>
+																					<td><label for="fname"><?php echo number_format($order[0]->orderdetail_wide,2); ?></label></td>
+																					<input type="hidden" id="demo-name" name="wide" max="11.69" min="1" value="<?php echo $order[0]->orderdetail_wide; ?>" />
+                                                                         
+																					<?php } ?>
 																				<td>นิ้ว</td>					
 																			</tr>
 																			<tr>
 																				<td>ขนาดภาพยาว(นิ้ว)</td>
+																				<?php if($awd == null){ ?>
 																				<td><input type="float" id="demo-name" required name="long" max="16.54" min="1" value="" /></td>
+																				<?php }else{ ?>
+																					<td><label for="fname"><?php echo number_format($order[0]->orderdetail_long,2); ?></label></td>
+																					<input type="hidden" id="demo-name" name="long" max="11.69" min="1" value="<?php echo $order[0]->orderdetail_long; ?>" />
+																						<?php } ?>
 																				<td>นิ้ว</td>
 																			</tr>
 																		</tfoot>
