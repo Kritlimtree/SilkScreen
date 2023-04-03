@@ -15,6 +15,69 @@
 
 	<style>
 
+* {box-sizing: border-box;}
+body {font-family: Verdana, sans-serif;}
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
 a {
   -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
   -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
@@ -63,22 +126,37 @@ a {
 								</header>
 
 							<!-- Banner -->
-								<section id="banner">
-									<!-- <div class="content">
-										<header>
-											<h1>หน้าหลัก</h1>
-											<p>A free and fully responsive site template</p>
-										</header>
-										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
-										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
-										</ul>
-									</div> -->
-									<!-- <span class="image object">
-										<img src="images/pic10.jpg" alt="" />
-									</span> -->
-									<!-- <a href="white.html" target="_blank" style="font-size:12px" class="button icons" ><i class="fa fa-info-circle"></i></a>
-									<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div> -->
+								<section>
+									<div class="row gtr-200">
+										<div class="col-6">
+										<h2>บ้านต้นสนการพิมพ์</h2>
+										<p>ร้านบ้านต้นสนการพิมพ์ เป็นร้านที่ให้บริการสำหรับการสกรีนเสื้อแบบซิลค์สกรีน (Silk-Screen) โดยที่ร้านบ้านต้นสนการพิมพ์ได้เปิดให้บริการมาแล้วกว่า 20 ปี</p>
+										</div>
+										<div class="col-6">
+											<h3>ผลงานที่เคยทำ</h3>
+											<div class="slideshow-container" style="text-align:center">
+		
+											<div class="mySlides fade">
+											<!-- <div class="numbertext">1 / 2</div> -->
+											<img src="assets/images/show1.jpg" style="width:80%">
+											<!-- <div class="text">Caption Text</div> -->
+											</div>
+		
+											<div class="mySlides fade">
+											<!-- <div class="numbertext">2 / 2</div> -->
+											<img src="assets/images/show2.jpg" style="width:80%">
+											<!-- <div class="text">Caption Two</div> -->
+											</div>
+		
+											</div>
+											<br>
+		
+											<div style="text-align:center">
+											<span class="dot"></span> 
+											<span class="dot"></span> 
+											</div>
+										</div>
+									</div>
 								</section>
 
 							<!-- Section -->
@@ -257,10 +335,9 @@ a {
 									</header>
 									<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p> -->
 									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="#">abc@gmail.com</a></li>
-										<li class="icon solid fa-phone">(000) 000-0000</li>
-										<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-										Nashville, TN 00000-0000</li>
+										<li class="icon solid fa-envelope">อีเมล<br>baantonson.silkscreen@hotmail.com</li>
+										<li class="icon solid fa-phone">เบอร์โทรศัพท์<br>084-317-2553(จ๋าย)<br> 094-549-1388(น้อง)<br> 081-920-9709(บูรณ์)</li>
+										<li class="icon solid fa-home">46 หมู่ 8<br>ต.หนองกระทุ่ม อ.กำแพงแสน <br>จ.นครปฐม 73140</li>
 									</ul>
 								</section>
 
@@ -280,6 +357,27 @@ a {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				let slideIndex = 0;
+				showSlides();
+
+				function showSlides() {
+				let i;
+				let slides = document.getElementsByClassName("mySlides");
+				let dots = document.getElementsByClassName("dot");
+				for (i = 0; i < slides.length; i++) {
+					slides[i].style.display = "none";  
+				}
+				slideIndex++;
+				if (slideIndex > slides.length) {slideIndex = 1}    
+				for (i = 0; i < dots.length; i++) {
+					dots[i].className = dots[i].className.replace(" active", "");
+				}
+				slides[slideIndex-1].style.display = "block";  
+				dots[slideIndex-1].className += " active";
+				setTimeout(showSlides, 3000); // Change image every 3 seconds
+				}
+			</script>
 
 	</body>
 </html>

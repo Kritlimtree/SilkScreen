@@ -311,7 +311,7 @@ function toFull(){
 																			 <?php $c3++; } ?>
 																			  
 																			 <tr>
-																				<td>จำนนรวม(ตัว)</td>
+																				<td>จำนวนรวม(ตัว)</td>
 																			 <?php foreach($quantity as $key => $q1){ ?>
 																				
 																				 
@@ -430,7 +430,7 @@ function toFull(){
 															<div class="col-12 col-12-small">
 																<input type="button" onclick="history.back()" class="button primary" value="ยกเลิก"></input>
 																
-																<button type="submit" class="button secondary" name="action" value="check">ชำระเงิน</button>
+																<button type="submit" class="button secondary" name="action" value="check">ยืนยันการสั่งซื้อ</button>
 																<!-- <a href="checkorder3.html">ดำเนินการสั่งทำ</a> -->
 																
 															</div>

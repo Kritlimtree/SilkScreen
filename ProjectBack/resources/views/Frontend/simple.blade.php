@@ -68,14 +68,14 @@
 															 
 															<div class="col-8 col-12-small">
 																<input type="radio" id="demo-priority-low" name="fix" value="1" required>
-																<label for="demo-priority-low">งานถูกต้อง</label>
+																<label for="demo-priority-low">ตัวอย่างถูกต้อง</label>
 															</div>
 															<div class="col-8 col-12-small">
 																<input type="radio" id="demo-priority-normal" name="fix" value="2" required>
-																<label for="demo-priority-normal">งานไม่ถูกต้อง</label>
+																<label for="demo-priority-normal">ตัวอย่างไม่ถูกต้อง</label>
 															</div><br>
                                                             <div class="col-10 col-12-small">
-                                                                <h4>หมายเหตุ / สาเหตุที่งานไม่ถูกต้อง</h4>
+                                                                <h4>หมายเหตุ / สาเหตุที่ตัวอย่างไม่ถูกต้อง</h4>
                                                                 <div class="col-12">
                                                                     <textarea name="message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
                                                                 </div><br>
@@ -183,10 +183,9 @@
 								</header>
 								<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p> -->
 								<ul class="contact">
-									<li class="icon solid fa-envelope"><a href="#">abc@gmail.com</a></li>
-									<li class="icon solid fa-phone">(000) 000-0000</li>
-									<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-									Nashville, TN 00000-0000</li>
+									<li class="icon solid fa-envelope">อีเมล<br>baantonson.silkscreen@hotmail.com</li>
+									<li class="icon solid fa-phone">เบอร์โทรศัพท์<br>084-317-2553(จ๋าย)<br> 094-549-1388(น้อง)<br> 081-920-9709(บูรณ์)</li>
+									<li class="icon solid fa-home">46 หมู่ 8<br>ต.หนองกระทุ่ม อ.กำแพงแสน <br>จ.นครปฐม 73140</li>
 								</ul>
 							</section>
 

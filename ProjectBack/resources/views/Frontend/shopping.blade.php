@@ -414,10 +414,9 @@ h4{
 									</header>
 									<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p> -->
 									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="#">abc@gmail.com</a></li>
-										<li class="icon solid fa-phone">(000) 000-0000</li>
-										<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-										Nashville, TN 00000-0000</li>
+										<li class="icon solid fa-envelope">อีเมล<br>baantonson.silkscreen@hotmail.com</li>
+										<li class="icon solid fa-phone">เบอร์โทรศัพท์<br>084-317-2553(จ๋าย)<br> 094-549-1388(น้อง)<br> 081-920-9709(บูรณ์)</li>
+										<li class="icon solid fa-home">46 หมู่ 8<br>ต.หนองกระทุ่ม อ.กำแพงแสน <br>จ.นครปฐม 73140</li>
 									</ul>
 								</section>
 
