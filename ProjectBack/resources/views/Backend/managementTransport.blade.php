@@ -199,9 +199,11 @@ hr {
 													<?php } ?>
                                                 </select>
 													
-                                            </div><button style="float: right;" type="submit" class="secondary" data-loading-text="Loading...">
+                                            </div>
+											<div class="col-6 col-12-medium " >
+												<button style="float: right;" type="submit" class="secondary" data-loading-text="Loading...">
            									         <i class="bx bx-save text-4 mr-2"></i> เลือก
-               											 </button><br>
+               											 </button><br></div>
 												
 												
 													</form>

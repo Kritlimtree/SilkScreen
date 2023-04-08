@@ -195,7 +195,7 @@ hr {
 							<section id="banner">
 								<header>
 								</header>
-								<div class="Center">
+								<div class="Center2">
 									<h3>ข้อมูลของลูกค้า</h3>
 									<form action="{{ route('user_show') }}" method="POST" enctype="multipart/form-data">
 										@csrf 

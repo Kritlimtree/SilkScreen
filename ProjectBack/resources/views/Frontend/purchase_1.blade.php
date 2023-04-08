@@ -71,7 +71,7 @@ function toFull(){
 							<!-- Banner -->
 							
 							<section>
-							<?php if($purchase[0]->id_status==2||$purchase[0]->id_status==4||$purchase[0]->id_status==8||$purchase[0]->id_status==10){ ?>
+							<?php if($purchase[0]->id_status==2||$purchase[0]->id_status==4||$purchase[0]->id_status==9||$purchase[0]->id_status==11){ ?>
 								<form  method="post" action="payment" enctype="multipart/form-data">
 									@csrf
 								<div class="content">
@@ -126,10 +126,10 @@ function toFull(){
 															?>
 															
 															 
-															<?php if($purchase[0]->id_status==4&&($purchase[0]->id_statuspayment==1||$purchase[0]->id_statuspayment==4)){ 
+															<?php if($purchase[0]->id_status==4&&($purchase[0]->id_statuspayment==1||$purchase[0]->id_statuspayment==3)){ 
 																$price = $price1*40/100 - $paid;
 																?>
-																<input type="hidden" name="mf" value="4,<?php echo $price ?>">
+																<input type="hidden" name="mf" value="3,<?php echo $price ?>">
 																<input type="hidden" name="price" value="<?php echo $purchase[0]->payment_arrears ?>"></input>
 																<?php }else if($purchase[0]->id_status==4&&($purchase[0]->id_statuspayment==2||$purchase[0]->id_statuspayment==4)){ 
 																	$price = $price1 - $paid;
@@ -144,7 +144,7 @@ function toFull(){
 															<label >จำนวนเงิน : <?php echo $price ?> บาท</label>
 
 															
-															<?php }else if($purchase[0]->id_status==10){ 
+															<?php }else if($purchase[0]->id_status==11){ 
 																$paid = 0;
 																foreach($purchase as $key => $p){
 																	$paid = $paid+$p->payment_paid;
@@ -157,11 +157,11 @@ function toFull(){
 															<label for="fname">ชำระเงินส่วนที่ขาด </label>
 															<label >จำนวนเงิน : <?php echo $price ?> บาท</label>
 
-																<input type="hidden" name="mf" value="5,<?php echo $price ?>">
+																<input type="hidden" name="mf" value="6,<?php echo $price ?>">
 																<input type="hidden" name="price" value="<?php echo $purchase[0]->payment_arrears ?>"></input>
 															</div><br>
 															 
-														<?php } else if($purchase[0]->id_status==8){ 
+														<?php } else if($purchase[0]->id_status==9){ 
 															$paid = 0;
 															foreach($purchase as $key => $p){
 																$paid = $paid+$p->payment_paid;
@@ -173,7 +173,7 @@ function toFull(){
 															<img id="qr" src = "https://promptpay.io/0873717758/<?php echo $price ?>.png" alt="">
 															<label for="fname">ชำระเงินส่วนที่เหลือ </label>
 															<label >จำนวนเงิน : <?php echo $price ?> บาท</label>
-															<input type="hidden" name="mf" value="3,<?php echo $price ?>">
+															<input type="hidden" name="mf" value="5,<?php echo $price ?>">
 															<input type="hidden" name="price" value="<?php echo $purchase[0]->payment_arrears ?>"></input>
 															</div><br>
 														<?php } ?>
@@ -210,15 +210,15 @@ function toFull(){
 										<h1>รอยืนยันการชำระเงินส่วนที่ขาด</h1>
 									<?php }else if($purchase[0]->id_status==6){ ?>
 										<h1>รอตรวจสอบตัวอย่าง</h1>
-									<?php }else if($purchase[0]->id_status==7){ ?>
+									<?php }else if($purchase[0]->id_status==8){ ?>
 										<h1>กำลังผลิตสินค้า</h1>
-									<?php }else if($purchase[0]->id_status==9){ ?>
+									<?php }else if($purchase[0]->id_status==10){ ?>
 										<h1>รอยืนยันการำระเงินส่วนที่เหลือจากมัดจำ</h1>
-									<?php }else if($purchase[0]->id_status==11){ ?>
-										<h1>รอยืนยันการชำระเงินส่วนที่เหลือของมัดจำที่จ่ายไม่ครบ</h1>
 									<?php }else if($purchase[0]->id_status==12){ ?>
-										<h1>กำลังจัดส่งสินค้า</h1>
+										<h1>รอยืนยันการชำระเงินส่วนที่เหลือของมัดจำที่จ่ายไม่ครบ</h1>
 									<?php }else if($purchase[0]->id_status==13){ ?>
+										<h1>กำลังจัดส่งสินค้า</h1>
+									<?php }else if($purchase[0]->id_status==14){ ?>
 										<h1>สำเร็จ</h1>
 									<?php } ?>
 									

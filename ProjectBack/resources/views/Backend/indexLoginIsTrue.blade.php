@@ -196,14 +196,14 @@ hr {
 									@csrf
 								<section id="banner">
 								
-									<div class="Center">
+									<div class="Center2">
 										<h4>Search</h4>
 									<input type="text" id="Search_All">
 										<h3 class="display-inline">ออร์เดอร์ที่อยู่ในระหว่างการดำเนินการ</h3> 
 
 										<div class="table-wrapper">
 											<table class="alt">
-											<table class="alt" id="table1" style="width:100%">
+											<table id="table1" class="table table-striped"  >
 												<thead>
 													<tr>
 													<td>id order</td>
@@ -250,12 +250,12 @@ hr {
 									</span> -->
 									
 								</section>
-								<section>
-								<div class="Center">
+								<section id="banner">
+								<div class="Center2">
 									<h3>ออเดอร์ที่ยังไม่ได้ประเมินราคา</h3>
 									<div class="table-wrapper">
 										<table class="alt">
-										<table class="alt" id="table2" style="width:100%">
+										<table id="table2" class="table table-striped" style="width:100%">
 										<thead>
 										 
 													<tr>
@@ -295,12 +295,12 @@ hr {
 									
 								</div>
 								</section>
-								<section>
-								<div class="Center">
+								<section id="banner">
+								<div class="Center2">
 									<h3>ออเดอร์ที่ต้องแก้ไขตัวอย่าง</h3>
 									<div class="table-wrapper">
 										<table class="alt">
-										<table class="alt" id="table3" style="width:100%">
+										<table id="table3" class="table table-striped" style="width:100%">
 											<thead>
 												<tr>												
 													<td>id order</td>

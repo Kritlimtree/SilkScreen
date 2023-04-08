@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('payment_slip');
             $table->string('payment_4num');
             $table->float('payment_arrears');
+            $table->float('payment_paid');
             $table->date('payment_date');
             $table->timestamps();
         });

@@ -24,6 +24,13 @@ return new class extends Migration
             $table->string('postcode');
             $table->date('order_orderdate');
             $table->date('order_deliverydate');
+            $table->string('picture');
+            $table->integer('id_color');
+            $table->integer('blockprice');
+            $table->integer('id_sample');
+            $table->integer('numshirtcolor');
+            $table->integer('delivery_price');
+            $table->integer('status_payment');
             $table->timestamps();
         });
     }

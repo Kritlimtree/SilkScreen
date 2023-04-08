@@ -150,7 +150,7 @@ vertical-align:"middle";
 
 									<div class="row gtr-200">
 										<div class="col-6 col-12-medium">
-										 
+									 
 											<h3 id="content">เลือกรูป</h3>
 											<div class="row gtr-200">
 												<div class="col-4 col-12-small">
@@ -159,33 +159,37 @@ vertical-align:"middle";
 												</div>
 												<div class="col-6 col-12-small">
 													<input onclick="hiddenn('2')" type="radio" id="4" name="number1" value="2">
-													<label for="4">รูปเก่า(ใช้รูปเก่าไม่คิดค้าบล็อคพิมพ์)</label>
+													<label for="4">รูปเก่า(ถ้าใช้รูปเก่าอายุไม่เกิน 3 เดือนไม่คิดค้าบล็อคพิมพ์)</label>
 												</div>
 											</div>
 											 
+												 
 											<div id="boxCenter">
 												<div id="display_image"></div><br>
 												<span>*กรุณาเลือกลายรูป*</span><br><br>
 												<input type="file" id="image_input"  name="logofile" accept="images/png, images/jpeg">
 												
 											</div><br><br>
-											 
+											 <?php if(count($oldimage)!=0){ ?>
 											<div id="oldbox">
 												<div id="oldimage"></div><br>
 												<span>รูปเก่า</span><br><br>
 												<select name="oldimage" id="examplee1" style>
-												<option  value="" disabled selected >เลือกรูป</option>
+												 
 												 <?php foreach ($oldimage as $key => $old) { 
 													 
 													 ?>
-													 <option  value="<?php echo $old->picture?>,<?php echo $old->id_order?>" data-icon="<?php echo $old->picture  ?>"><?php echo $old->picture  ?></option>
+													 <option  value="<?php echo $old->picture?>,<?php echo $old->id_order?>" data-icon="<?php echo $old->picture  ?>"><?php echo $old->order_id  ?></option>
 													 <?php } ?>
 												 </select>
 												 <br>
 
-												 <img src="" id="changesrc" alt="" width="400px" height="400px">
+												 <img src="assets/images/<?php echo $oldimage[0]->picture?>" id="changesrc" alt="" width="400px" height="400px">
 											</div><br><br>
-											 
+											<?php }else{ ?>
+												<input type="hidden" id="examplee1" name="oldimage" value="0,0" />
+                                                                         
+												<?php } ?>
 											<h3 id="content">จำนวนสี</h3>
 											<div class="row gtr-200">
 												<div class="col-4 col-12-small">
@@ -251,8 +255,7 @@ vertical-align:"middle";
 
 															<!-- color T-shirt -->
 															<h3 id="content">สีเสื้อยืด</h3>
-															<div class="col-4 col-12-small"></div>
-															<div class="col-4 col-12-small"></div>
+															
 															<?php foreach ($shirtcolor as $key => $shirtcolor) { ?>
 															<div class="col-4 col-12-small">
 																<div class="boxShowShirt">
@@ -301,7 +304,7 @@ vertical-align:"middle";
 																<input type="hidden" name="controller" value="<span id='color'></span>"/>
 																 
 																<button type="submit" class="button secondary" name="action" value="check">ต่อไป</input>
-																
+																 
 															</div>
 
 														</div>

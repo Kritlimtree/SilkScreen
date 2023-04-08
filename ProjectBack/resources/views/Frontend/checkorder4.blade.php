@@ -237,7 +237,7 @@ function slider5(){
 																					<td><?php echo $orderdetail[$c3]->quantity ?></td>
 																					 
 																				<?php $quantity[$c4]=$quantity[$c4]+$orderdetail[$c3]->quantity; 
-																						$price[$c4] = $price[$c4]+$orderdetail[$c3]->orderdetail_price;
+																						$price[$c4] = $price[$c4]+($orderdetail[$c3]->orderdetail_price*$orderdetail[$c3]->quantity);
 																						 $c3++; $c4++; }$c2++; }  ?>
 																						   
 																				<td>ตัว</td>
@@ -286,7 +286,7 @@ function slider5(){
 																			<tr>
 																				<td>ราคารวม(บาท)</td>
 																				<?php if($order[0]->order_price!=null) { ?>
-																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($tprice, 2) ?></td>
+																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($order[0]->order_price-$order[0]->blockprice-$order[0]->delivery_price, 2) ?></td>
 																				<?php }else{ ?>
 																					<td colspan="<?php echo $order[0]->numshirtcolor ?>">กำลังประเมินราคา</td>
 																					<?php } ?>
@@ -304,7 +304,19 @@ function slider5(){
 																			
 																			
 																		</tbody>
-																	
+																		<tfoot>
+																			<tr>
+																				<td>ขนาดภาพกว้าง(นิ้ว)</td>	
+																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($orderdetail[0]->orderdetail_wide) ?></td>	
+																				<td>นิ้ว</td>					
+																			</tr>
+																			<tr>
+																				<td>ขนาดภาพยาว(นิ้ว)</td>
+																				 
+																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($orderdetail[0]->orderdetail_long) ?></td>
+																				<td>นิ้ว</td>
+																			</tr>
+																		</tfoot>
 																	</table>
 																</div>
 
@@ -322,8 +334,7 @@ function slider5(){
 																		<?php } ?>
                                                                         <br>
                                                                         <!-- <input type="text" id="addr" name="addr" value="12 nowhere"><br> -->
-                                                                        <label for="fname">ขนาดภาพกว้าง(นิ้ว): <?php echo number_format($orderdetail[0]->orderdetail_wide) ?></label><br>
-                                                                        <label for="fname">ขนาดภาพยาว(นิ้ว): <?php echo number_format($orderdetail[0]->orderdetail_long) ?></label><br>
+                                                                        
                                                                         
 																		<?php if($order[0]->id_status==2){ ?>
 																		<label for="lname">สถานะการชำระเงินมัดจำ: <span style="color:red">ยังไม่ชำระ</span></label><br>

@@ -9,15 +9,15 @@
 	<?php
 		@ini_set('display_errors', '0');
 		session_start();
-		
+		 
 		if($_POST){
+			 
 			 
 			if($_SESSION["number"]==1){
 			$screen_color = $_POST['screen_color'];
 			
 			  
-			 
-			 
+			
 			}else{
 				$screen_color = '';
 			
@@ -60,7 +60,7 @@
 				$weight = $weight+$quantity[$count]*0.2;
 				$count++;
 			}
-
+			 
 			foreach($data1 as $key => $data){
 				$weightunit[] = $data;
 				 
@@ -108,7 +108,7 @@
 		foreach($price as $key => $up){
 			foreach($weightunit as $key => $wu){		
 				  
-					if($wu->min < $weight && $wu->max >= $weight){
+					if($wu->min <= $weight && $wu->max >= $weight){
 						 
 						$weightprice[$c] = $price[$c];
 						$wpu[$c] = $wu->price;
@@ -250,7 +250,7 @@ function toFull(){
 																		<tbody>
 																			<tr>
 																				<td>ขนาด(Size)</td>
-																				<?php $c = 0 ; foreach($_SESSION["size"] as $key => $size) { ?>
+																				<?php $c = 0 ; foreach($_POST["size2"] as $key => $size) { ?>
 																				<td><?php echo $size ?></td>
 																				<?php $c++; } ?>
 																				<td></td>
@@ -319,6 +319,20 @@ function toFull(){
 																				<?php } ?>
 																				<td>บาท</td>
 																			</tr>
+																			<tr>
+																				<td>ราคาค่าส่ง(บาท)</td>
+																				 
+																				<td colspan="<?php echo $c ?>"><?php echo number_format($wpu[0],2); ?></td>
+																				 
+																				<td>บาท</td>
+																			</tr>
+																			<tr>
+																				<td>ราคาบล็อคพิมพ์(บาท)</td>
+																				 
+																				<td colspan="<?php echo $c ?>"><?php echo number_format($blockprice,2); ?></td>
+																				 
+																				<td>บาท</td>
+																			</tr>
 																			<?php if($_SESSION["number"]==1) { ?>
 																			<tr>
 																				<td>ราคาต่อหน่วย(บาท)</td>
@@ -344,22 +358,21 @@ function toFull(){
 																				<td>บาท</td>
 																			</tr>
 																			<?php } ?>
-																			<tr>
-																				<td>ราคาค่าส่ง(บาท)</td>
-																				 
-																				<td colspan="<?php echo $c ?>"><?php echo number_format($wpu[0],2); ?></td>
-																				 
-																				<td>บาท</td>
-																			</tr>
-																			<tr>
-																				<td>ราคาบล็อคพิมพ์(บาท)</td>
-																				 
-																				<td colspan="<?php echo $c ?>"><?php echo number_format($blockprice,2); ?></td>
-																				 
-																				<td>บาท</td>
-																			</tr>
+																			 
 																		</tbody>
-																	
+																		<tfoot>
+																			<tr>
+																				<td>ขนาดภาพกว้าง(นิ้ว)</td>	
+																				<td colspan="<?php echo $c ?>"><?php echo number_format($_SESSION["wide"],2); ?></td>	
+																				<td>นิ้ว</td>					
+																			</tr>
+																			<tr>
+																				<td>ขนาดภาพยาว(นิ้ว)</td>
+																				 
+																				<td colspan="<?php echo $c ?>"><?php echo number_format($_SESSION["long"],2); ?></td>
+																				<td>นิ้ว</td>
+																			</tr>
+																		</tfoot>
 																	</table>
 																</div>
 
@@ -429,7 +442,7 @@ function toFull(){
 															
 															<div class="col-12 col-12-small">
 																<input type="button" onclick="history.back()" class="button primary" value="ยกเลิก"></input>
-																
+																<input type="hidden" name="imageName" value="<?php echo $_POST['imageName']; ?>" />
 																<button type="submit" class="button secondary" name="action" value="check">ยืนยันการสั่งซื้อ</button>
 																<!-- <a href="checkorder3.html">ดำเนินการสั่งทำ</a> -->
 																

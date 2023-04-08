@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tambons', function (Blueprint $table) {
-            $table->id('id_tumbon');
-            $table->integer('id_district');
-            $table->string('tumbon_name');
-            $table->timestamps();
+        Schema::create('statuspayments', function (Blueprint $table) {
+            $table->id('id');
+            $table->string('name');
+            ;
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tambons');
+        Schema::dropIfExists('statuspayments');
     }
 };

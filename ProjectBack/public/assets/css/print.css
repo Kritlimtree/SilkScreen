@@ -1,0 +1,16 @@
+@page{
+    size: A4;
+    margin: 10;
+}
+#print-btn{
+    display: none;
+    visibility: none;
+} 
+#cancle-btn{
+    display: none;
+    visibility: none;
+} 
+#enter-btn{
+    display: none;
+    visibility: none;
+} 

@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('districts', function (Blueprint $table) {
-            $table->id('id_district');
-            $table->integer('id_province');
-            $table->integer('postcode');
-            $table->string('district_name');
-            $table->timestamps();
+            $table->id('id');
+            $table->integer('zip_code');
+            $table->string('district_name_th');
+            $table->string('district_name_en');
+            $table->integer('amphure_id');
         });
     }
 

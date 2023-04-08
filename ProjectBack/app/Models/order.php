@@ -13,5 +13,6 @@ class order extends Model
     protected $fillable = [
         'id_order','id_user','id_status','id_post','order_id','order_type','picture','id_color',
         'order_price','postcode','order_orderdate','order_deliverydate','blockprice','id_sample','numshirtcolor','delivery_price'
+        ,'status_payment'
     ];
 }

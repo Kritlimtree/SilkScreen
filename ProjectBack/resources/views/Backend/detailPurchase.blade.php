@@ -74,6 +74,7 @@ div.desc {
 											<input type="hidden" id="id" name="id">
 											<input type="hidden" name="st" value="1">
 											<input type="hidden" name="id_status" id="id_status" >
+											<input type="hidden" name="id_statuspayment" id="id_statuspayment" >
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
            									         <i class="bx bx-save text-4 mr-2"></i> บันทึกข้อมูล
@@ -145,12 +146,13 @@ div.desc {
 													<td><?php echo number_format($p->payment_paid,2) ?></td>
 													<?php if($c==sizeof($payment)){ ?>
 														<input type="hidden" name="st" value="0">
-														<input type="hidden" name="id_status" value="<?php echo $p->id_statuspayment ?>">
+														<input type="hidden" name="id_status" value="<?php echo $p->id_status ?>">
+														<input type="hidden" name="id_statuspayment" value="<?php echo $p->id_statuspayment ?>">
 														<input type="hidden" name="price" value="<?php echo $p->payment_paid ?>">
 													<input type="hidden" name="id" class="button primary" value="<?php echo $p->id_payment  ?>"></input>
 													<?php } ?>
-														
-													
+													 
+													 
 													<td>
 													<a target="_blank" href="assets/images/<?php echo $p->payment_slip  ?>"><span><img src="assets/images/<?php echo $p->payment_slip  ?>" width="100px" alt=""></span></a></td>
 													
@@ -171,7 +173,7 @@ div.desc {
                                 <div class="Center3">
                                     <!-- <div class="row col-6 col-6-medium"> -->
 										
-									 <button type="button" value="<?php echo $p->id_payment  ?>,<?php echo $p->id_statuspayment ?>" id="myBtn1" class="danger createbtn">จำนวนไม่ถูกต้อง</button>  
+									 <button type="button" value="<?php echo $p->id_payment  ?>,<?php echo $p->id_status ?>,<?php echo $p->id_statuspayment ?>" id="myBtn1" class="danger createbtn">จำนวนไม่ถูกต้อง</button>  
                                     <input type="submit" class="button secondary" value="จำนวนถูกต้อง"></input>
 									
                                       
@@ -285,6 +287,7 @@ div.desc {
 					var id = id1.split(",");
 					$('#id').val(id[0]);
 					$('#id_status').val(id[1]);
+					$('#id_statuspayment').val(id[2]);
 					$('#createModal').modal('show'); 
 					 
 				});

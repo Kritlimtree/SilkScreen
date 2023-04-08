@@ -15,12 +15,9 @@ return new class extends Migration
     {
         Schema::create('orderdetails', function (Blueprint $table) {
             $table->id('id_orderdetail');
-            $table->integer('id_shirtcolor');
-            $table->integer('id_color');
             $table->integer('id_shirtprice');
             $table->integer('id_order');
-            $table->string('orderdetail_picture');
-            $table->integer('orderdetail_number');
+            $table->integer('id_shirtcolor');
             $table->float('orderdetail_upper');
             $table->float('orderdetail_lower');
             $table->float('orderdetail_left');
@@ -28,6 +25,7 @@ return new class extends Migration
             $table->float('orderdetail_wide');
             $table->float('orderdetail_long');
             $table->float('orderdetail_price');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

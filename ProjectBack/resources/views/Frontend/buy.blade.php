@@ -8,10 +8,10 @@
 	<head>
 	<?php
 		@ini_set('display_errors', '0');
+		 session_start();
 		 
-		
 		if($_FILES['logofile']['name'] != "" ){
-			session_start(); 
+			 
 			$logo = $_FILES['logofile'];
 			$dir = "assets/images/";
 			$logo = $dir . basename($_FILES['logofile']['name']);
@@ -19,11 +19,13 @@
 			$awd = '';
 			$_SESSION["screenPicture"]=$_FILES['logofile']['name'];
 		}else{
-			$_SESSION["screenPicture"]= $_POST['oldimage'];
 			$awd = explode(",", $_POST['oldimage']);
+			$_SESSION["screenPicture"]= $awd[0];
+			
 			
 		}
 		if($_POST){
+			 
 			 
 			 
 			foreach($_POST['demo-priority1'] as $value => $demo){
@@ -60,17 +62,13 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
  <style>
-	 
-	/* .color{
-		
-	} */
-
-/* Modal Content */
-
-
-/* The Close Button */
-
-
+.input {
+ 
+  width: 4px;
+  height: 495px;
+ 
+}
+	
 </style>
 
 	</head>
@@ -136,25 +134,20 @@
 																					foreach($shirtsize as $key => $sh){ if($sh->id_shirtsize==$size1){ ?>
 																				<td><?php echo $sh->shirtsize_size ?></td>
 																				<input type="hidden" name="size1[]" value="<?php echo $sh->id_shirtsize ?>" />
+																				<input type="hidden" name="size2[]" value="<?php echo $sh->shirtsize_size ?>" />
 																				<?php }}$c++; } ?>
 																				<td></td>
 																			</tr>
 																		
-																			<tr>
-																				<td>จำนวน(ตัว)</td>
-																				<?php for($i=0;$i<$c;$i++) { ?>
-																				<td><input type="float" id="demo-name" required name="quantity[]" min="1" value="" /></td>
-																				<?php } ?>
-																				<td>ตัว</td>
-																			</tr>
+																			 
 																			
-																			</tr>
+																			 
 																			
 																				
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านบน(นิ้ว)</td>
 																				<?php for($i=0;$i<$c;$i++) { ?>
-																				<td><input type="float" id="demo-name" required name="top[]" min="1" value="" /></td>
+																				<td><input size="1" type="float" id="demo-name" required name="top[]" min="1" value="1" /></td>
 																				<?php } ?>
 																				<td>นิ้ว</td>
 																			</tr>
@@ -162,7 +155,7 @@
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านซ้าย(นิ้ว)</td>
 																				<?php for($i=0;$i<$c;$i++) { ?>
-																				<td><input type="float" id="demo-name" required name="left[]" min="1" value="" /></td>
+																				<td><input size="1" type="float" id="demo-name" required name="left[]" min="1" value="1" /></td>
 																				<?php } ?>
 																				<td>นิ้ว</td>
 																			</tr>
@@ -176,7 +169,7 @@
 																					foreach($shirtsize as $key => $sh1){ if($sh1->id_shirtsize==$size2){ ?>
 																					  
 																					<input type="hidden" name="count" value="<?php echo $c ?>" />
-																				<td><input type="float" id="demo-name" required name="color[]" min="0" value="" /></td>
+																				<td><input size="1" type="float" id="demo-name" required name="color[]" min="0" value="0" /></td>
 																				<?php }}} ?>
 																				<td>ตัว</td>
 																			</tr>
@@ -187,7 +180,7 @@
 																			<tr>
 																				<td>ขนาดภาพกว้าง(นิ้ว)</td>	
 																				<?php if($awd == null){ ?>
-																				<td><input type="float" id="demo-name" required name="wide" max="11.69" min="1" value="" /></td>	
+																				<td><input size="1" type="float" id="demo-name" required name="wide" max="11.69" min="1" value="1" /></td>	
 																				<?php }else{ ?>
 																					<td><label for="fname"><?php echo number_format($order[0]->orderdetail_wide,2); ?></label></td>
 																					<input type="hidden" id="demo-name" name="wide" max="11.69" min="1" value="<?php echo $order[0]->orderdetail_wide; ?>" />
@@ -198,7 +191,7 @@
 																			<tr>
 																				<td>ขนาดภาพยาว(นิ้ว)</td>
 																				<?php if($awd == null){ ?>
-																				<td><input type="float" id="demo-name" required name="long" max="16.54" min="1" value="" /></td>
+																				<td><input size="1" type="float" id="demo-name" required name="long" max="16.54" min="1" value="1" /></td>
 																				<?php }else{ ?>
 																					<td><label for="fname"><?php echo number_format($order[0]->orderdetail_long,2); ?></label></td>
 																					<input type="hidden" id="demo-name" name="long" max="11.69" min="1" value="<?php echo $order[0]->orderdetail_long; ?>" />
@@ -245,7 +238,7 @@
 															
 															<div class="col-12 col-12-small">
 																<input type="button" onclick="history.back()" class="button primary" value="ยกเลิก"></input>
-																
+																<input type="hidden" name="imageName" value="<?php echo $imageName; ?>" />
 																<button type="submit" class="button secondary" name="action" value="check">ยืนยันการสั่ง</button>
 																
 																
