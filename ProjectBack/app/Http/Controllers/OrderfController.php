@@ -39,8 +39,7 @@ class OrderfController extends Controller
         return view('Frontend.shopping', compact(['order']));
     }
     
-    public function buycolor(Request $request){    
-         
+    public function buycolor(Request $request){     
          $imageName="";
          if (!empty($request->file('logofile'))) {
             $imageName = hexdec(uniqid()) . '.' . $request->file('logofile')->extension();
@@ -49,7 +48,6 @@ class OrderfController extends Controller
             $image=explode(',',$request->oldimage);
             $imageName=$image[0];
         }
-         
         $id = explode(",",$request->oldimage);
         $order = order::join('orderdetails','orderdetails.id_order','=','orders.id_order')
         ->where('orders.id_order',$id[1])->get();
@@ -71,7 +69,6 @@ class OrderfController extends Controller
     }
 
     public function checkorderdetail(Request $request){
-          
         $order = order::where('id_order', $request->id)->get();
         $purchase = order::join('payments','payments.id_order','orders.id_order')->where('orders.id_order', $request->id)
         ->orderBy('payments.id_payment','desc')->get();
@@ -82,27 +79,22 @@ class OrderfController extends Controller
         ->join('shirtsizes','shirtsizes.id_shirtsize','=','orderdetails.id_shirtprice')
         ->where('id_order', $order[0]->id_order)->get();
         $transport = transport::all();
-        
         return view('Frontend.checkorder4', compact(['order','purchase','screencolor','orderdetail','shirtcolor','shirtsize','transport']));
     }
 
     public function sample(Request $request){
-         
         $order = order::where('id_order', $request->id)->get();
         $sample = sample::where('id_sample', $order[0]->id_sample)->get();
-        
         $orderdetail = orderdetail::where('id_order', $order[0]->id_order)->get();
         $transport = transport::all();
         return view('Frontend.simple', compact(['order','orderdetail','sample']));
     }
 
     public function confirmsample(Request $request){
-         
         $order = order::join('samples','samples.id_sample','=','orders.id_sample')->where('samples.id_sample', $request->id)->update([
             'id_status' => 7,
              
         ]);
-        
         $sample = sample::where('id_sample', $request->id)->update([
             'sample_status' => $request->fix,
             'sample_detail' => $request->message,
@@ -111,49 +103,38 @@ class OrderfController extends Controller
     }
 
     public function purchase(Request $request){
-        
          $purchase = order::where('id_order', $request->id)->get();
         if($purchase[0]->id_status==4||$purchase[0]->id_status==9||$purchase[0]->id_status==11){
             $purchase = order::join('payments','payments.id_order','orders.id_order')->where('orders.id_order', $request->id)
         ->orderBy('payments.id_payment','desc')->get();
         }
-        
-          
         return view('Frontend.purchase_1', compact(['purchase']));
     }
 
     public function payment(Request $request){
         $item = explode(",", $request->mf);
-        
-         
         $imageName="";
-        
-         $image = $request->bill->getClientOriginalName();
+        $image = $request->bill->getClientOriginalName();
              $generate = hexdec(uniqid());
              $imageName = time() . '.' . $request->bill->extension();
-              
              $request->bill->move(public_path('assets/images/'), $imageName);
               $order = order::where('id_order',$request->id)->get();
               if($order[0]->id_status <3){
               order::where('id_order',$request->id)->update([
                 'id_status' => 3,
               ]);
-               
             }else if($order[0]->id_status ==4){
                 order::where('id_order',$request->id)->update([
                     'id_status' => 5,
                   ]);
-                  
             }else if($order[0]->id_status ==9){
                 order::where('id_order',$request->id)->update([
                     'id_status' => 10,
                   ]);
-                   
             }else if($order[0]->id_status ==11){
                 order::where('id_order',$request->id)->update([
                     'id_status' => 12,
                   ]);
-                 
             }
         $payment = payment::create([
             'id_order' => $request->id,
@@ -164,7 +145,6 @@ class OrderfController extends Controller
             'payment_paid' => $item[1],
             'payment_date' => $request->date,
         ]);
-         
         return redirect()->route('shopping');
     }
 
@@ -189,17 +169,14 @@ class OrderfController extends Controller
             ]);
         }else{
             $numbers = preg_replace('/[^0-9]/', '', $lastUsedSerialNumber->order_id);
-            
             $date = substr($numbers, 0, -3);
             $threenumber = substr($numbers,-3);
-             
             if ($date == date('ymd')) {           
                 $threenumber = str_pad(++$threenumber, 3, '0', STR_PAD_LEFT);       
               }else{
                 $date = date('ymd');
                 $threenumber = '001'; 
               }
-              // increment second sequence if lower than 999
               order::where('id_order', $order->id)->update([
                 'order_id' => 'BTS'.$date.$threenumber,
             ]);     

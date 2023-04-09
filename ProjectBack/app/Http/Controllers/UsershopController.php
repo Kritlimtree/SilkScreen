@@ -19,8 +19,6 @@ class UsershopController extends Controller
 
     public function forgotpassword(Request $request)
     {
-        
-         
         return view('Frontend.emailforgot');
     }
 
@@ -66,8 +64,7 @@ class UsershopController extends Controller
         echo $output;
     }
 
-    public function login(Request $request){
-         
+    public function login(Request $request){   
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -77,14 +74,8 @@ class UsershopController extends Controller
             'c.required' => 'กรุณากรอก password',
         ]);
         $model = usershop::where('user_email', $request->email)->first();
-
-         
-
-         
         if($model != NULL){
             if (Hash::check($request->password, $model->user_password)) {
-            
-            
                 $request->session()->put('user_name', $model['user_name']);
                 $request->session()->put('is_admin', $model['is_admin']);
                 $request->session()->put('id_user', $model['id_user']);
@@ -93,18 +84,14 @@ class UsershopController extends Controller
                 return redirect()->route('login')->withErrors(["pass"=>"อีเมลล์หรือรหัสผ่านไม่ถูกต้อง"]);
             }   
         } else {
-
                 return redirect()->route('loginform')->withErrors(["pass"=>"อีเมลล์หรือรหัสผ่านไม่ถูกต้อง"]);
             }
         }
 
     public function logout(Request $request)
     {
-         
         $request->session()->forget('user_name');
         $request->session()->flush();
-
-        // print_r(session('user'));
         return view('Frontend.index');
     }
 
@@ -129,7 +116,6 @@ class UsershopController extends Controller
                 'regex:/[a-z]/',      // must contain at least one lowercase letter
                 'regex:/[A-Z]/',      // must contain at least one uppercase letter
                 'regex:/[0-9]/',      // must contain at least one digit
-                
                 'required_with:passConflim', 
                 'same:passConflim', 
             ],
@@ -153,13 +139,10 @@ class UsershopController extends Controller
             'pass.regex' => 'ต้องมีตัวพิมพ์เล็ก ตัวพิมพ์ใหญ่ ตัวเลข ตัวอักษรพิเศษ',
             'pass.regex:/[A-Z]/' => 'รหัสผ่านต้องมีตัวพิมพ์ใหญ่',
             'pass.regex:/[0-9]/' => 'รหัสผ่านต้องมีตตัวเลข',
-            
             'required_with:passConflim' => 'กรุณายืนยันรหัสผ่าน',
             'same' => 'รหัสผ่านไม่ตรงกัน',
             'passConflim.min:10' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',
         ]);
-        
-
         usershop::create([
             'id_tumbon' => $request->district,
             'user_name' => $request->name,
@@ -169,7 +152,6 @@ class UsershopController extends Controller
             'user_password' => $password,
             'user_address' => $request->address,
             'is_admin' => '0',
-             
         ]);
         return redirect()->route('login');
     }
@@ -182,13 +164,11 @@ class UsershopController extends Controller
         ->join('provinces','provinces.id','=','amphures.province_id')
         ->where('usershops.id_user', session('id_user'))
         ->get();
-        
         return view('Frontend.edit_user', compact(['province','user']));
     }
 
     public function edit_user_store(Request $request)
     {
-         
         $password = Hash::make($request->pass);
         $credentials = $request->validate([
             'email' => 'required|unique:usershops,user_email|email',
@@ -236,8 +216,6 @@ class UsershopController extends Controller
             'same' => 'รหัสผ่านไม่ตรงกัน',
             'passConflim.min:10' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',
         ]);
-        
-
         usershop::where('usershops.id_user', session('id_user'))->update([
             'id_tumbon' => $request->district,
             'user_name' => $request->name,
@@ -247,7 +225,6 @@ class UsershopController extends Controller
             'user_password' => $password,
             'user_address' => $request->address,
             'is_admin' => '0',
-             
         ]);
         return redirect()->route('indexLoginIsTrue');
     }

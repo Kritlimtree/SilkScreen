@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 class BlockController extends Controller
 {
     public function index(){
-        
         $data = block::all();
         return view('Backend.managementBlock', compact(['data']));
     }
@@ -23,8 +22,7 @@ class BlockController extends Controller
     }
 
     public function edit($id)
-    {
-        
+    {     
         $block = block::where('id_block', $id)->get();
         return response()->json([
             'status'=>200,
@@ -45,8 +43,7 @@ class BlockController extends Controller
 
 
     public function destroy(Request $id)
-    {
-       
+    { 
         block::where('id_block', $id->id_block)->delete();
         return redirect()->route('managementBlock');
     }

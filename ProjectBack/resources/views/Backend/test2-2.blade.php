@@ -9,7 +9,7 @@
 		<?php 
 		@ini_set('display_errors', '0');
 			session_start();
-			
+			 
 		?>
 		<style>
 			input[type="float"],
@@ -36,7 +36,7 @@
 									<p>ยินดีต้อนรับ คุณ admin</p>
 									<ul class="icons">
 									<li><a href="indexLoginIsTrue.html" class="logo">ไปหน้าบ้าน</a></li>
-										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
+										<li><a href="{{ route('edit_user') }}" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
@@ -189,7 +189,7 @@
 																			</tr>
 																			<?php } ?>
 																			<?php if($order[0]->order_price!=null){ ?>
-																			<td>ราคารวมต่อตัว(บาท)</td>
+																			<td>ราคาต่อตัว(บาท)</td>
 																				<?php $c1=0; foreach($order as $key => $num){ if($c1<($order[0]->numshirtcolor)){?>
 																					<td><?php echo number_format($order[$c1]->orderdetail_price,2) ?></td>
 																				<?php $c1++;} } ?>
@@ -251,11 +251,11 @@
 																<?php }else if($order[0]->status_payment==1){ ?>
 																	<label for="fname">การชำระเงิน: <span style="color:green">เสร็จสิ้น</span></label>
 																<?php }else if($order[0]->status_payment==2){ 
-																	$pay = 0 ;
-																	foreach($order as $key => $payment){
-																		$pay = $payment->payment_paid+$pay;
+																	$pays = 0 ;
+																	foreach($payment as $key => $pay){
+																		$pays = $pay->payment_paid+$pays;
 																	} ?>
-																	<label for="fname">การชำระเงิน: <span style="color:green"><?php echo $pay-$order[0]->order_price; ?></span></label>
+																	<label for="fname">การชำระเงิน: <span style="color:green"> เกิน <?php echo $pays-$order[0]->order_price; ?> บาท</span></label>
 																<?php } ?>
 														</div>
 													</div>
@@ -374,7 +374,7 @@
 																	foreach($order as $key => $payment){
 																		$pay = $payment->payment_paid+$pay;
 																	} ?>
-																	<label for="fname">การชำระเงิน: <span style="color:green"><?php echo $pay-$order[0]->order_price; ?></span></label>
+																	<label for="fname">การชำระเงิน: <span style="color:green"> เกิน <?php echo $pay-$order[0]->order_price; ?> บาท</span></label>
 																<?php } ?>
 														</div>
 													</div>
@@ -520,7 +520,7 @@
 																			<?php } ?>
 																			<?php if($order[0]->order_price!=null){ ?>
 																				<tr>
-																			<td>ราคารวมต่อตัว(บาท)</td>
+																			<td>ราคาต่อตัว(บาท)</td>
 																				<?php $c1=0; foreach($order as $key => $num){ if($c1<($order[0]->numshirtcolor)){?>
 																					<td><?php echo number_format($order[$c1]->orderdetail_price,2) ?></td>
 																				<?php $c1++;} } ?>

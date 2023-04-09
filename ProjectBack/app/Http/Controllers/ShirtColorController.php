@@ -14,16 +14,12 @@ class ShirtColorController extends Controller
 
     public function store(Request $request){
         $imageName="";
-        
-         
         if (!empty($request->shirtcolor_picture)) {
             $generate = hexdec(uniqid());
             $imageName = time() . '.' . $request->shirtcolor_picture->extension();
-             
             $request->shirtcolor_picture->move(public_path('assets/images/'), $imageName);
         }
         $model = shirtcolor::create([
-
             'shirtcolor_name' => $request->shirtcolor_name,
             'shirtcolor_picture' => $imageName,
             
@@ -43,7 +39,6 @@ class ShirtColorController extends Controller
 
     public function update(Request $request)
     {
-        
         if (isset($request->id_shirtcolor) && !empty($request->id_shirtcolor)) {
             $model = shirtcolor::where('id_shirtcolor', $request->id_shirtcolor)->first();
             if(!empty($model->shirtcolor_picture)&&file_exists(public_path('assets/images/' . $model->shirtcolor_picture))){
@@ -51,16 +46,13 @@ class ShirtColorController extends Controller
             }
             $imageName = time() . '.' . $request->shirtcolor_picture->extension();
             $request->shirtcolor_picture->move(public_path('assets/images/'), $imageName);
-
         }
-
         shirtcolor::where('id_shirtcolor', $request->id_shirtcolor)->update([
             'shirtcolor_name' => $request->input('shirtcolor_name'),
             'shirtcolor_picture' => $imageName,
         ]);
         return redirect()->route('managementColorTshirt');
     }
-
 
     public function destroy(Request $id)
     {

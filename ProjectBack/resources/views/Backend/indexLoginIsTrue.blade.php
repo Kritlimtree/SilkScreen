@@ -187,7 +187,7 @@ hr {
 									
 											<li><a href="indexLoginIsTrue.html" class="logo">ไปหน้าบ้าน</a></li>
 											
-										<li><a href="profile.html" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
+										<li><a href="{{ route('edit_user') }}" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->

@@ -6,20 +6,16 @@ use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
-    public function index(){
-        
+    public function index(){   
         $data = color::all();
         return view('Backend.managementColor', compact(['data']));
     }
 
     public function store(Request $request){
         $imageName="";
-        
-         
         if (!empty($request->color_code)) {
             $generate = hexdec(uniqid());
-            $imageName = time() . '.' . $request->color_code->extension();
-             
+            $imageName = time() . '.' . $request->color_code->extension(); 
             $request->color_code->move(public_path('assets/images/'), $imageName);
         }
         $model = color::create([
@@ -31,7 +27,6 @@ class ColorController extends Controller
 
     public function edit($id)
     {
-        
         $color = color::where('id_color', $id)->get();
         return response()->json([
             'status'=>200,
@@ -42,12 +37,9 @@ class ColorController extends Controller
     public function update(Request $request)
     {
         $imageName="";
-        
-         
         if (!empty($request->color_code)) {
             $generate = hexdec(uniqid());
             $imageName = time() . '.' . $request->color_code->extension();
-             
             $request->color_code->move(public_path('assets/images/'), $imageName);
         }
         color::where('id_color', $request->id_color)->update([
@@ -60,7 +52,6 @@ class ColorController extends Controller
 
     public function destroy(Request $id)
     {
-       
         color::where('id_color', $id->id_color)->delete();
         return redirect()->route('managementColor');
     }
