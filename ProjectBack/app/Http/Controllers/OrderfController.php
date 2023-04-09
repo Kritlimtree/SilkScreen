@@ -40,10 +40,7 @@ class OrderfController extends Controller
     }
     
     public function buycolor(Request $request){     
-<<<<<<< Updated upstream
-=======
-         
->>>>>>> Stashed changes
+ 
         $request->validate([
             'demo-priority' => 'required',
             'demo-priority1' => 'required',

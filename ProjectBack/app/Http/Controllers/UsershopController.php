@@ -71,15 +71,9 @@ class UsershopController extends Controller
         ],[
             'email.required' => 'กรุณากรอกอีเมล',
             'email.email' => 'กรุณากรอก E-mail',
-<<<<<<< Updated upstream
+ 
             'password.required' => 'กรุณากรอกรหัสผ่าน',
-=======
-<<<<<<< HEAD
-            'password.required' => 'กรุณากรอก password',
-=======
-            'password.required' => 'กรุณากรอกรหัสผ่าน',
->>>>>>> 119e0186fcc90360c108a13a95a4c6d260a3a3cf
->>>>>>> Stashed changes
+ 
         ]);
         $model = usershop::where('user_email', $request->email)->first();
         if($model != NULL){
