@@ -40,6 +40,13 @@ class OrderfController extends Controller
     }
     
     public function buycolor(Request $request){     
+        $request->validate([
+            'demo-priority' => 'required',
+            'demo-priority1' => 'required',
+        ],[
+            'demo-priority.required' => 'กรุณาเลือกไซส์เสื้อ',
+            'demo-priority1.required' => 'กรุณากรอกสีเสื้อ',
+        ]);
          $imageName="";
          if (!empty($request->file('logofile'))) {
             $imageName = hexdec(uniqid()) . '.' . $request->file('logofile')->extension();

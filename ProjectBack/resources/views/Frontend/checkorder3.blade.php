@@ -25,7 +25,7 @@
 			
 			$option[] = $_POST['option'];
 			$c2=0;
-		   $quantity[$c2] = 0;
+		    $quantity[$c2] = 0;
 		 
 		   foreach($_POST['color'] as $value){
 			
@@ -319,6 +319,28 @@ function toFull(){
 																				<?php } ?>
 																				<td>บาท</td>
 																			</tr>
+																			<?php if($_SESSION["number"]==1) { ?>
+																			<tr>
+																				<td>ราคาต่อหน่วย(บาท)</td>
+																				<?php foreach($unit as $key => $unit) { 
+																					if($quantity[0]!=0){ ?>
+																				<td><?php echo number_format($unit,2); ?></td>
+																				<?php }else{ ?>
+																					<td><?php echo number_format(0,2); ?></td>
+																					<?php }} ?>
+																				<td>บาท</td>
+																			</tr>
+																			 
+																			 
+																			 
+																			<tr>
+																				<td>ราคารวมแต่ละไซส์(บาท)</td>
+																				<?php foreach($unitprice as $key => $p) { ?>
+																				<td><?php echo number_format($p,2); ?></td>
+																				<?php } ?>
+																				<td>บาท</td>
+																			</tr>
+																			<?php } ?>
 																			<tr>
 																				<td>ราคาค่าส่ง(บาท)</td>
 																				 
@@ -333,25 +355,8 @@ function toFull(){
 																				 
 																				<td>บาท</td>
 																			</tr>
+																			 
 																			<?php if($_SESSION["number"]==1) { ?>
-																			<tr>
-																				<td>ราคาต่อหน่วย(บาท)</td>
-																				<?php foreach($unit as $key => $unit) { ?>
-																				<td><?php echo number_format($unit,2); ?></td>
-																				<?php } ?>
-																				<td>บาท</td>
-																			</tr>
-																			 
-																			 
-																			 
-																			<tr>
-																				<td>ราคารวม(บาท)</td>
-																				<?php foreach($unitprice as $key => $p) { ?>
-																				<td><?php echo number_format($p,2); ?></td>
-																				<?php } ?>
-																				<td>บาท</td>
-																			</tr>
-																			 
 																			<tr>
 																				<td>ราคาสุทธิ(บาท)</td>
 																				<td  colspan="<?php echo $c ?>"><?php echo number_format($sum,2); ?></td>

@@ -147,7 +147,7 @@
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านบน(นิ้ว)</td>
 																				<?php for($i=0;$i<$c;$i++) { ?>
-																				<td><input size="1" type="float" id="demo-name" required name="top[]" min="1" value="1" /></td>
+																				<td><input required size="1" type="float" id="demo-name" required name="top[]" min="1" value="1" /></td>
 																				<?php } ?>
 																				<td>นิ้ว</td>
 																			</tr>
@@ -155,7 +155,7 @@
 																			<tr>
 																				<td>ระยะห่างของลายแบบกับขอบด้านซ้าย(นิ้ว)</td>
 																				<?php for($i=0;$i<$c;$i++) { ?>
-																				<td><input size="1" type="float" id="demo-name" required name="left[]" min="1" value="1" /></td>
+																				<td><input required size="1" type="float" id="demo-name" required name="left[]" min="1" value="1" /></td>
 																				<?php } ?>
 																				<td>นิ้ว</td>
 																			</tr>
@@ -169,7 +169,7 @@
 																					foreach($shirtsize as $key => $sh1){ if($sh1->id_shirtsize==$size2){ ?>
 																					  
 																					<input type="hidden" name="count" value="<?php echo $c ?>" />
-																				<td><input size="1" type="float" id="demo-name" required name="color[]" min="0" value="0" /></td>
+																				<td><input required size="1" type="float" id="demo-name" required name="color[]" min="0" value="0" /></td>
 																				<?php }}} ?>
 																				<td>ตัว</td>
 																			</tr>
@@ -180,7 +180,7 @@
 																			<tr>
 																				<td>ขนาดภาพกว้าง(นิ้ว)</td>	
 																				<?php if($awd == null){ ?>
-																				<td><input size="1" type="float" id="demo-name" required name="wide" max="11.69" min="1" value="1" /></td>	
+																				<td><input required size="1" type="float" id="demo-name" required name="wide" max="11.69" min="1" value="1" /></td>	
 																				<?php }else{ ?>
 																					<td><label for="fname"><?php echo number_format($order[0]->orderdetail_wide,2); ?></label></td>
 																					<input type="hidden" id="demo-name" name="wide" max="11.69" min="1" value="<?php echo $order[0]->orderdetail_wide; ?>" />
@@ -191,7 +191,7 @@
 																			<tr>
 																				<td>ขนาดภาพยาว(นิ้ว)</td>
 																				<?php if($awd == null){ ?>
-																				<td><input size="1" type="float" id="demo-name" required name="long" max="16.54" min="1" value="1" /></td>
+																				<td><input required size="1" type="float" id="demo-name" required name="long" max="16.54" min="1" value="1" /></td>
 																				<?php }else{ ?>
 																					<td><label for="fname"><?php echo number_format($order[0]->orderdetail_long,2); ?></label></td>
 																					<input type="hidden" id="demo-name" name="long" max="11.69" min="1" value="<?php echo $order[0]->orderdetail_long; ?>" />
@@ -210,7 +210,8 @@
 																	<div class="col-6 col-12-xsmall">
 																		<h3 id="content">สีที่จะใช้สกรีน</h3>
 																	</div>
-																	<select name="screen_color" id="example" style>
+																	 
+																	<select required name="screen_color" id="example" style>
 												 
 												<?php foreach ($screencolor as $key => $screencolor1) { 
 													
@@ -224,8 +225,11 @@
 																</div>
 															</div>
 															<br>
-															<select name="transport" id="myval" >
-												<option value="-1" selected disabled>กรุณาเลือกบริษัทขนส่ง</option>
+															<div class="col-6 col-12-xsmall">
+																		<h3 id="content">กรุณาเลือกบริษัทขนส่ง</h3>
+																	</div>
+															<select name="transport" id="myval" required>
+												<option value="" selected disabled>กรุณาเลือกบริษัทขนส่ง</option>
 												<?php foreach ($transport as $key => $trans) { 
 													
 													?>
@@ -233,7 +237,7 @@
 													<?php }  ?>
                                                 </select>
 												<br>
-															
+												 
 															
 															
 															<div class="col-12 col-12-small">
@@ -305,6 +309,7 @@
 			<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 			<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 			<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+			{{csrf_field()}}
 			<script>
 				$(document).ready(function (){
 					// Create

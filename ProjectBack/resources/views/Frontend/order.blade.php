@@ -154,11 +154,11 @@ vertical-align:"middle";
 											<h3 id="content">เลือกรูป</h3>
 											<div class="row gtr-200">
 												<div class="col-4 col-12-small">
-													<input onclick="hiddenn('1')" type="radio"  id="3" name="number1" value="1" >
+													<input onclick="hiddenn('1')" type="radio"  id="3" name="number1" value="1" required>
 													<label for="3">รูปใหม่</label>
 												</div>
 												<div class="col-6 col-12-small">
-													<input onclick="hiddenn('2')" type="radio" id="4" name="number1" value="2">
+													<input onclick="hiddenn('2')" type="radio" id="4" name="number1" value="2" required>
 													<label for="4">รูปเก่า(ถ้าใช้รูปเก่าอายุไม่เกิน 3 เดือนไม่คิดค้าบล็อคพิมพ์)</label>
 												</div>
 											</div>
@@ -203,17 +203,22 @@ vertical-align:"middle";
 											</div>
 
 											<h3 id="content">ไซส์เสื้อยืด</h3>
+											 
 											<div class="row gtr-200">
 											<?php foreach ($shirtsize1 as $key => $shirtsize1) { ?>
 												<div class="col-3 col-12-small">
 													<input type="checkbox"  id="demo-<?php echo $shirtsize1->shirtsize_size ?>" name="demo-priority[]" value="<?php echo $shirtsize1->id_shirtsize ?>">
 													<label for="demo-<?php echo $shirtsize1->shirtsize_size ?>"><?php echo $shirtsize1->shirtsize_size ?></label>
 												</div>
-												
-												
-												<?php } ?>
+											<?php } ?>
 											</div>
-
+											@if ($errors->has('demo-priority'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('demo-priority') }}</li> 
+													</ul>
+												</div>
+											@endif
 											</div>
 										
 										<div class="col-6 col-12-medium">
@@ -255,7 +260,13 @@ vertical-align:"middle";
 
 															<!-- color T-shirt -->
 															<h3 id="content">สีเสื้อยืด</h3>
-															
+															@if ($errors->has('demo-priority1'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('demo-priority1') }}</li> 
+													</ul>
+												</div>
+											@endif
 															<?php foreach ($shirtcolor as $key => $shirtcolor) { ?>
 															<div class="col-4 col-12-small">
 																<div class="boxShowShirt">
@@ -265,7 +276,7 @@ vertical-align:"middle";
 																
 																</div>
 															</div>
-
+															 
 															
 															<div id="<?php echo $shirtcolor->shirtcolor_name ?>" class="modal">
 

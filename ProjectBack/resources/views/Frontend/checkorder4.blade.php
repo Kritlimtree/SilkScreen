@@ -261,10 +261,12 @@ function slider5(){
 																				<td>บาท</td>
 																			</tr>
 																			<tr>
-																				<td>ราคาต่อหน่วย(บาท)</td>
-																				<?php $tprice = 0; for($i=0;$i<count($price);$i++){  ?>
-																				<td><?php $tprice = $tprice+$price[$i]; echo number_format($price[$i], 2) ?></td>
-																				<?php } ?>
+																				<td>ราคารวมแต่ละไซส์(บาท)</td>
+																				<?php if($order[0]->order_price!=null) { ?>
+																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($order[0]->order_price-$order[0]->blockprice-$order[0]->delivery_price, 2) ?></td>
+																				<?php }else{ ?>
+																					<td colspan="<?php echo $order[0]->numshirtcolor ?>">กำลังประเมินราคา</td>
+																					<?php } ?>
 																				<td>บาท</td>
 																			</tr>
 																			 <?php } ?>
@@ -283,15 +285,7 @@ function slider5(){
 																				<td>บาท</td>
 																			</tr>
 																			
-																			<tr>
-																				<td>ราคารวม(บาท)</td>
-																				<?php if($order[0]->order_price!=null) { ?>
-																				<td colspan="<?php echo $order[0]->numshirtcolor ?>"><?php echo number_format($order[0]->order_price-$order[0]->blockprice-$order[0]->delivery_price, 2) ?></td>
-																				<?php }else{ ?>
-																					<td colspan="<?php echo $order[0]->numshirtcolor ?>">กำลังประเมินราคา</td>
-																					<?php } ?>
-																				<td>บาท</td>
-																			</tr>
+																			 
 																			<tr>
 																				<td  >ราคาสุทธิ(บาท)</td>
 																				<?php if($order[0]->order_price!=null) { ?>
