@@ -69,9 +69,9 @@ class UsershopController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ],[
-            'email.required' => 'กรุณากรอก E-mail',
+            'email.required' => 'กรุณากรอกอีเมล',
             'email.email' => 'กรุณากรอก E-mail',
-            'c.required' => 'กรุณากรอก password',
+            'password.required' => 'กรุณากรอกรหัสผ่าน',
         ]);
         $model = usershop::where('user_email', $request->email)->first();
         if($model != NULL){
