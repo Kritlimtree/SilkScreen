@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 class ShirtColorController extends Controller
 {
     public function index(){
-        
         $data = shirtcolor::all();
         return view('Backend.managementColorTshirt', compact(['data']));
     }
@@ -56,7 +55,6 @@ class ShirtColorController extends Controller
 
     public function destroy(Request $id)
     {
-       
         shirtcolor::where('id_shirtcolor', $id->id_shirtcolor)->delete();
         return redirect()->route('managementColorTshirt');
     }

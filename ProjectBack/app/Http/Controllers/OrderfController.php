@@ -40,6 +40,10 @@ class OrderfController extends Controller
     }
     
     public function buycolor(Request $request){     
+<<<<<<< Updated upstream
+=======
+         
+>>>>>>> Stashed changes
         $request->validate([
             'demo-priority' => 'required',
             'demo-priority1' => 'required',
@@ -66,6 +70,7 @@ class OrderfController extends Controller
     }
 
     public function checkorder(Request $request){
+         
         $block = block::orderBy('block_wide')->get();
         $screencolor = color::where('id_color', $request->screen_color)->get();
         $transporter = transport::where('id_tramsport', $request->transport)->get();

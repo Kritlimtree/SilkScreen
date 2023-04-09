@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 class ShirtSizeController extends Controller
 {
     public function index(){
-        
         $data = shirtsize::all();
         return view('Backend.managementSize', compact(['data']));
     }
@@ -46,7 +45,6 @@ class ShirtSizeController extends Controller
 
     public function destroy(Request $id)
     {
-       
         shirtsize::where('id_shirtsize', $id->id_shirtsize)->delete();
         return redirect()->route('managementSize');
     }
