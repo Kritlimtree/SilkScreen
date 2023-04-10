@@ -53,6 +53,13 @@ class OrderfController extends Controller
             $imageName = hexdec(uniqid()) . '.' . $request->file('logofile')->extension();
             $request->file('logofile')->move(public_path('assets/images/'), $imageName);
         }else{
+            if($request->number1==1){
+                $request->validate([
+                    'logofile' => 'required',
+                ],[
+                    'logofile.required' => 'กรุณาเลือกรูปที่จะใช้สกรีน',
+                ]);
+            }
             $image=explode(',',$request->oldimage);
             $imageName=$image[0];
         }

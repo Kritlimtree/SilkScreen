@@ -190,6 +190,13 @@ vertical-align:"middle";
 												<input type="hidden" id="examplee1" name="oldimage" value="0,0" />
                                                                          
 												<?php } ?>
+												@if ($errors->has('logofile'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('logofile') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<h3 id="content">จำนวนสี</h3>
 											<div class="row gtr-200">
 												<div class="col-4 col-12-small">
