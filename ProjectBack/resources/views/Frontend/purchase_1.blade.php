@@ -84,7 +84,7 @@ function toFull(){
 											
 										
 												<div id="display_image"></div><br>
-												<input type="file" name="bill" id="image_input" accept="image/png, image/jpeg">
+												<input required type="file" name="bill" id="image_input" accept="image/png, image/jpeg">
 											</div><br><br>
 												
 										
@@ -94,9 +94,9 @@ function toFull(){
 										
 												
 												<label for="fname">วันที่โอนเงิน:</label>
-												<input type="date" id="day" name="date"  value=""><br><br>
+												<input required type="date" id="day" name="date"  value=""><br><br>
 												<label for="lname">เลขบัญชี 4 ตัวท้าย:</label>
-												<input type="number" id="number" name="num"  placeholder="xxxx"><br><br>
+												<input required type="number" id="number" name="num"  placeholder="xxxx"><br><br>
 												<label for="lname">สแกนจ่าย:</label>
 												<?php if($purchase[0]->id_status==2){ ?>
 												<img id="qr" src = "" alt="">
@@ -106,12 +106,12 @@ function toFull(){
 														<label for="fname">ชำระเงินค่า:</label>
 														
 														<div class="col-3 col-12-small">
-															<input onclick="toMudjum()" type="radio" id="demo-priority-low" name="mf" value="1,<?php echo $deposit ?>">
+															<input required onclick="toMudjum()" type="radio" id="demo-priority-low" name="mf" value="1,<?php echo $deposit ?>">
 															<label for="demo-priority-low">เงินมัดจำ(40%)</label>
 														</div>
 
 														<div class="col-4 col-12-small">
-															<input onclick="toFull()" type="radio" id="demo-priority-high" name="mf" value="2,<?php echo $price1 ?>">
+															<input required onclick="toFull()" type="radio" id="demo-priority-high" name="mf" value="2,<?php echo $price1 ?>">
 															<label for="demo-priority-high">จ่ายเต็มจำนวน</label>
 														</div> 
 														<label >จำนวนเงิน : <span id="money123"></span> บาท</label>

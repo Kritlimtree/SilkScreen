@@ -21,7 +21,7 @@ class OrderfController extends Controller
         $shirtcolor = shirtcolor::all();
         $shirtsize = shirtsize::all();
         $shirtsize1 = shirtsize::all();
-        $oldimage = order::where('order_orderdate','>',date("Ymd", strtotime(" -3 Month ")))->get();
+        $oldimage = order::where('order_orderdate','>',date("Ymd", strtotime(" -3 Month ")))->where('id_user', session('id_user'))->get();
         return view('Frontend.order', compact(['shirtcolor','shirtsize','shirtsize1','oldimage']));
     }
 

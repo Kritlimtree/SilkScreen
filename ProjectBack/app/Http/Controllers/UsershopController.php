@@ -173,7 +173,7 @@ class UsershopController extends Controller
     {
         $password = Hash::make($request->pass);
         $credentials = $request->validate([
-            'email' => 'required|unique:usershops,user_email|email',
+            
             'name' => 'required',
             'fname' => 'required',
             'address' => 'required',
@@ -195,9 +195,7 @@ class UsershopController extends Controller
             ],
             'passConflim' => 'min:10',
         ],[
-            'email.required' => 'กรุณากรอก E-mail',
-            'email.unique' => 'E-mail นี้มีการใช้ไปแล้ว',
-            'email.email' => 'กรุณากรอก E-mail',
+            
             'name.required' => 'กรุณากรอก ชื่อ',
             'fname.required' => 'กรุณากรอก นามสกุล',
             'address.required' => 'กรุณากรอก ที่อยู่',

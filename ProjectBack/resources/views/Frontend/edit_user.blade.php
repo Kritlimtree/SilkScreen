@@ -33,7 +33,7 @@
 							<!-- Section -->
 								<section>
 									<header class="align-center">
-										<h2>สมัครสมาชิก</h2>
+										<h2>แก้ไขข้อมูลส่วนตัว</h2>
 									</header>
 									<!-- <h1>สมัครสมาชิก</h1> -->
 									<div class="features">
@@ -167,7 +167,7 @@
 											<!-- <input type="submit" value="Submit"> -->
 											<ul class="actions fit">
 												<li>
-												<button type="submit" class="button fit secondary" >สมัครสมาชิก</a>
+												<button type="submit" class="button fit secondary" >ยืนยัน</a>
 													 
 												</li>
 												<li>
