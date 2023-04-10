@@ -13,8 +13,19 @@
 		<?php 
 			session_start();
 		?>
+		<script>
+function hiddenn(pvar) {
+    if(pvar==0){
+		document.getElementById("boxCenter").style.display = 'none';
+		document.getElementById("demo-message").required;
+	}else if(pvar==1){
+		document.getElementById("boxCenter").style.display = '';
+
+	}
+}
+</script>
 	</head>
-	<body class="is-preload">
+	<body class="is-preload" onload="hiddenn('0')">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -29,7 +40,7 @@
 									<p>ยินดีต้อนรับ คุณ <?php echo session("user_name") ?></p>
 									<ul class="icons">
 									<?php if(session('is_admin')==1){ ?>
-											<li><a href="/index_back" class="logo">ไปหลังบ้าน</a></li>
+											<li><a href="indexLoginIsTrue" class="logo">ไปหลังบ้าน</a></li>
 											<?php } ?>
 										<li><a href="{{ route('edit_user') }}" class="logo">แก้ไขข้อมูลส่วนตัว</a></li>
 										<li><a href="{{ route('logout') }}" class="logo">logout</a></li>
@@ -44,7 +55,7 @@
 									<?php  if($order[0]->id_sample != ''){ ?>
 									<div class="row gtr-200">
 									<div class="col-6 col-12-medium">
-											<div id="boxCenter">
+											<div id="box">
 												<div class="displayShirt">												
 													<p><strong>ตัวอย่างสินค้า</strong></p>
 													<?php  if($order[0]->id_sample != ''){ ?>
@@ -68,14 +79,14 @@
 															</div>
 															 
 															<div class="col-8 col-12-small">
-																<input type="radio" id="demo-priority-low" name="fix" value="1" required>
+																<input onclick="hiddenn('0')" type="radio" id="demo-priority-low" name="fix" value="1" required>
 																<label for="demo-priority-low">ตัวอย่างถูกต้อง</label>
 															</div>
 															<div class="col-8 col-12-small">
-																<input type="radio" id="demo-priority-normal" name="fix" value="2" required>
+																<input onclick="hiddenn('1')" type="radio" id="demo-priority-normal" name="fix" value="2" required>
 																<label for="demo-priority-normal">ตัวอย่างไม่ถูกต้อง</label>
 															</div><br>
-                                                            <div class="col-10 col-12-small">
+                                                            <div class="col-10 col-12-small" id="boxCenter">
                                                                 <h4>หมายเหตุ / สาเหตุที่ตัวอย่างไม่ถูกต้อง</h4>
                                                                 <div class="col-12">
                                                                     <textarea name="message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
@@ -210,5 +221,18 @@
 			<script src="assets/js/main.js" defer></script>
 			<script src="assets/js/changecolor.js"></script>
 			
+			<script>
+
+$(document).ready(function() {
+     $(document).on('change','#examplee1',function(){
+		
+		var image = document.querySelector('#changesrc');
+		var id = $(this).val();
+		const myArray = id.split(",");
+		console.log(myArray[0]);
+        image.src = "assets/images/"+myArray[0];
+     });
+   });
+			</script>
 	</body>
 </html>

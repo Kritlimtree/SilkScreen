@@ -263,7 +263,7 @@
 													<div class="col-5 col-12-medium">
 														<div class="boxOrder">
 														<label >สถานะออเดอร์:</label>
-														<select name="option" id="8">
+														<select name="option" id="option">
 														<?php foreach($status as $key => $s){ 
 															if($s->id_status==$order[0]->id_status){ ?>
 															<option selected value="<?php echo $s->id_status; ?>"><?php echo $s->status_name; ?></option>
@@ -271,6 +271,7 @@
 																<option value="<?php echo $s->id_status; ?>"><?php echo $s->status_name; ?></option>
 															<?php }} ?>
 														</select>
+														<div id="boxCenter" style="display: none;">
 														<label for="lname">หมายเลขรหัสพัสดุ: -</label>
 														<?php if($order[0]->postcode == ''){ ?>
 														 
@@ -279,6 +280,7 @@
 															<label for="fname"><?php echo $order[0]->postcode; ?></label>
 															<?php } ?>
 														<br>
+														</div>
 														<?php foreach($order as $key => $idorder){ ?>
 															<input type="hidden" name="idorder[]" value="<?php echo $idorder->id_orderdetail; ?>"/>
 															<?php } ?>
@@ -288,7 +290,7 @@
 														<input type="hidden" name="type" value="<?php echo $order[0]->order_type; ?>"/>
 														
 														</div><p style="page-break-after:always;"></p>
-														<a href="order.html" id="cancle-btn" onclick="return confirm('คุณต้องการยกเลิกออเดอร์นี้')" class="button primary">ยกเลิก</a>
+														<button type="button" onclick="history.back()" style="float: left;" class="button primary" value="ยกเลิก">ยกเลิก</button>
 														<button type="submit" class="button secondary" id="enter-btn" name="action" value="check">บันทึก</button>
 														<button type="button" class="button secondary" id="print-btn" onclick="printPageArea('mainprint')" >Print</button>
 														</div>
@@ -612,7 +614,19 @@
     document.body.innerHTML = printContent;
     window.print();
     document.body.innerHTML = originalContent;
-}</script>
+	 
+}
+$('#option').change(function(){
+				var select=$(this).val();
+				console.log(select);
+				if(select==13){
+					document.getElementById("boxCenter").style.display = '';
+				}else{
+					document.getElementById("boxCenter").style.display = 'none';
+				}
+ 
+		});
+</script>
 
 	</body>
 </html>

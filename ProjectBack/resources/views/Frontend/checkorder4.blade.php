@@ -252,12 +252,16 @@ function slider5(){
 																				<?php } ?>
 																				<td>ตัว</td>
 																			</tr>
-																			<?php if($order[0]->id_status!=1) { ?>
+																			<?php if($order[0]->id_status!=1) {  ?>
 																			<tr>
 																				<td>ราคาต่อตัว(บาท)</td>
-																				<?php for($i=0;$i<count($price);$i++){  ?>
-																				<td><?php echo number_format($price[$i]/$quantity[$i] , 2) ?></td>
-																				<?php } ?>
+																				<?php for($i=0;$i<count($price);$i++){  
+																					if($quantity[$i]==0){ ?>
+
+																				<td><?php echo number_format($price[$i] , 2) ?></td>
+																				<?php }else{ ?>
+																					<td><?php echo number_format($price[$i]/$quantity[$i] , 2) ?></td>
+																					<?php }} ?>
 																				<td>บาท</td>
 																			</tr>
 																			<tr>
@@ -324,8 +328,10 @@ function slider5(){
 																			<?php } ?>
 																			<?php if($order[0]->id_color!=''){ ?>
 																			<label for="lname">สีที่จะใช้สกรีน: </label><div class="col-6 col-12-xsmall">
-																		<div class="img-resize"><span><img src="assets/images/<?php echo $screencolor[0]->color_code; ?>"  alt="" /></span></div>
-																		<?php } ?>
+																				<?php foreach($screencolor as $key => $color){ 
+																					if($color->id_color==$order[0]->id_color){ ?>
+																		<div class="img-resize"><span><img src="assets/images/<?php echo $color->color_code; ?>"  alt="" /></span></div>
+																		<?php }}} ?>
                                                                         <br>
                                                                         <!-- <input type="text" id="addr" name="addr" value="12 nowhere"><br> -->
                                                                         

@@ -13,6 +13,7 @@ use App\Models\freight;
 use App\Models\payment;
 use Illuminate\Database\DBAL\TimestampType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrderfController extends Controller
 {
@@ -49,6 +50,7 @@ class OrderfController extends Controller
             'demo-priority1.required' => 'กรุณากรอกสีเสื้อ',
         ]);
          $imageName="";
+          
          if (!empty($request->file('logofile'))) {
             $imageName = hexdec(uniqid()) . '.' . $request->file('logofile')->extension();
             $request->file('logofile')->move(public_path('assets/images/'), $imageName);
@@ -59,10 +61,14 @@ class OrderfController extends Controller
                 ],[
                     'logofile.required' => 'กรุณาเลือกรูปที่จะใช้สกรีน',
                 ]);
+            }else if($request->oldimage[0]==0){
+                $errors['oldimage'] = 'กรุณาเลือกรูปที่จะใช้สกรีน';
+                 return redirect()->route('orderf')->withErrors(['oldimage'=>'กรุณาเลือกรูปที่จะใช้สกรีน']);
             }
             $image=explode(',',$request->oldimage);
             $imageName=$image[0];
         }
+          
         $id = explode(",",$request->oldimage);
         $order = order::join('orderdetails','orderdetails.id_order','=','orders.id_order')
         ->where('orders.id_order',$id[1])->get();
@@ -74,7 +80,8 @@ class OrderfController extends Controller
     }
 
     public function checkorder(Request $request){
-         
+
+           
         $block = block::orderBy('block_wide')->get();
         $screencolor = color::where('id_color', $request->screen_color)->get();
         $transporter = transport::where('id_tramsport', $request->transport)->get();
@@ -165,6 +172,7 @@ class OrderfController extends Controller
     }
 
     public function storedetail(Request $request){  
+        
         $t=time();
         $lastUsedSerialNumber = order::query()->orderByDesc('order_id')->first();
         $order = order::create([
@@ -209,9 +217,19 @@ class OrderfController extends Controller
             'orderdetail_right' => $request->d[$i%count($request->d)],
             'orderdetail_wide' => $request->wide[0],
             'orderdetail_long' => $request->long[0],
-            'orderdetail_price' => $request->screen_color1[$i][3]/$request->screen_color1[$i][1],
+             
             'quantity' => $request->screen_color1[$i][1],
         ]);
+        if($request->screen_color1[$i][1]==0){
+            $model1 = orderdetail::where('id_orderdetail',$model->id)->update([
+                'orderdetail_price' => 0,
+            ]);
+        }else{
+            orderdetail::where('id_orderdetail',$model->id)->update([
+                'orderdetail_price' => $request->screen_color1[$i][3]/$request->screen_color1[$i][1],
+            ]);
+        }
+         
         order::where('id_order', $order->id)->update([
             'order_price' => $request->sum,
             'id_status' => '2',

@@ -140,7 +140,7 @@ vertical-align:"middle";
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 								</header>
 							
-									<form method="post" action="buy.php" enctype="multipart/form-data">
+									<form method="post" action="/buy.php" enctype="multipart/form-data">
 										@csrf
 							<!-- Content -->
 								<section>
@@ -194,6 +194,13 @@ vertical-align:"middle";
 											<div class="alert alert-danger">
 													<ul>
 															<li style="color: red;">{{ $errors->first('logofile') }}</li> 
+													</ul>
+												</div>
+											@endif
+											@if ($errors->has('oldimage'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('oldimage') }}</li> 
 													</ul>
 												</div>
 											@endif

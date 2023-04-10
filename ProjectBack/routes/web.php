@@ -75,7 +75,7 @@ Route::middleware(['auth.admin'])->group(function(){
 
 Route::get('orderf.php', [OrderfController::class, 'index'])->name('orderf');
 
-Route::post('buy.php', [OrderfController::class, 'buycolor'])->name('buy');
+Route::post('/buy.php', [OrderfController::class, 'buycolor'])->name('buy');
 
 Route::post('/color', [OrderfController::class, 'color'])->name('color');
 

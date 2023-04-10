@@ -159,18 +159,19 @@
 																				<?php } ?>
 																				<td>นิ้ว</td>
 																			</tr>
-																			<?php  foreach ($option as $value => $o) { ?>
+																			<?php $c5=0; foreach ($option as $value => $o) { ?>
 																			<tr>
 																			<?php foreach($shirtcolor as $key => $sc){ if($sc->id_shirtcolor==$o[1]){ ?>
 																				<td><span class="glyphicon glyphicon-trash"><img style="width:100px" class="img-fluid"  src="assets/images/<?php echo $sc->shirtcolor_picture ?>"></span></td>
 																				 
 																				<?php }}  ?>
-																				<?php foreach($size as $key => $size2) { 
+																				<?php  foreach($size as $key => $size2) { 
 																					foreach($shirtsize as $key => $sh1){ if($sh1->id_shirtsize==$size2){ ?>
 																					  
 																					<input type="hidden" name="count" value="<?php echo $c ?>" />
 																				<td><input required size="1" type="float" id="demo-name" required name="color[]" min="0" value="0" /></td>
-																				<?php }}} ?>
+																				
+																				<?php $c5++;}}} ?>
 																				<td>ตัว</td>
 																			</tr>
 																			<input type="hidden" name="option[]" value="<?php echo $o[1] ?>" />

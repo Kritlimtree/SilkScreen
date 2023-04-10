@@ -27,14 +27,15 @@
 			$c2=0;
 		    $quantity[$c2] = 0;
 		 
-		   foreach($_POST['color'] as $value){
+		   foreach($_POST['color'] as $key){
 			
 			   $screen_color1[] = array($_POST['size1'][$c2%$_POST['count']],$_POST['color'][$c2]);
 			   $quantity[$c2%$_POST['count']] = 0;
 				
 			   $c2++; 
 		   }$c2=0;
-		   foreach($_POST['color'] as $value){
+		    
+		   foreach($_POST['color'] as $key){
 			   $quantity[$c2%$_POST['count']] = $quantity[$c2%$_POST['count']]+$screen_color1[$c2][1];
 			   $c2++; 
 			}
@@ -406,7 +407,7 @@ function toFull(){
                                                                         <div class="col-6 col-12-xsmall">
 																		 
 																	</div>
-																	<input type="hidden" name="transport" value="<?php echo $_SESSION["number"]; ?>"/>					
+																	<input type="hidden" name="transport" value="<?php echo $_POST["transport"]; ?>"/>					
 												<input type="hidden" name="number" value="<?php echo $_SESSION["number"]; ?>"/>
                                                                          <?php $i = 0; foreach($size_id as $key => $size){ ?>
                                                                         <!-- <a href="purchase.html" class="button secondary">ชำระเงินคงเหลือ</a> -->
