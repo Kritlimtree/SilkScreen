@@ -178,37 +178,38 @@ hr {
 									</ul>
 									<!-- <i class="fa fa-user-circle" aria-hidden="true"></i> -->
 								</header>
-							<section id="banner">
+							<section>
 								<header>
 								</header>
 								<div class="Center">
-									<div class="row-cols-3">
-                                        <div class="col-6 col-12-medium"  >
+									<div class="row-cols-4">
+
+                                        <div class="col-2 " >
                                             <h3>จัดการค่าขนส่ง</h3>
                                         </div>
-                                        <div class="col-6 col-12-medium " >
-										<form  action="{{ route('managementTransport_search') }}" method="POST" enctype="multipart/form-data">
-										@csrf
-                                            <div class="col-6 float:left " style="margin: 20px 20px 20px 0px; wide: 100px;">
-                                                <select name="transportation_category" id="transportation-category" >
-												<option value="-1" selected disabled>บริษัทขนส่ง</option>
-												<?php foreach ($data2 as $key => $transport) { 
-													$selected = ($transport_category==$transport->id_tramsport) ? 'selected' : '';
-													?>
+
+                                        <div class="col-6 col-12-medium ">
+										
+											<form  action="{{ route('managementTransport_search') }}" method="POST" enctype="multipart/form-data">
+												@csrf
+                                            	<div class="col-6 " style="float:left; margin: 10px 10px 10px 0px;									">
+                                                	<select name="transportation_category" id="transportation-category" >
+														<option value="-1" selected disabled>บริษัทขนส่ง</option>
+														<?php foreach ($data2 as $key => $transport) { 
+														$selected = ($transport_category==$transport->id_tramsport) ? 'selected' : '';
+														?>
                                                     <option value="<?php echo $transport->id_tramsport  ?>"<?php echo $selected ?> ><?php echo $transport->transport_name  ?></option>
 													<?php } ?>
-                                                </select>
-													
-                                            </div>
-											<div class="col-6 col-12-medium " >
-												<button style="float: right;" type="submit" class="secondary" data-loading-text="Loading...">
-           									         <i class="bx bx-save text-4 mr-2"></i> เลือก
-               											 </button><br></div>
-												
-												
-													</form>
+                                            		</select>	
+                                            	</div>
+											</form>
+											<!-- <div class="col-6 col-12-medium " style="background-color: yellow;"> -->
+												<button style="margin: 5px 10px 10px 10px;" type="submit" class="secondary" data-loading-text="Loading...">
+													<i class="bx bx-save text-4 mr-2"></i> เลือก
+												</button>
+											<!-- </div> -->
                                         </div>
-                                        <button id="myBtn1" class="secondary createtransbtn float:left">เพิ่มบริษัทขนส่ง</button>
+                                        <button id="myBtn1" class="secondary createtransbtn float:left" style="margin: 0px 0px 10px 0px;">เพิ่มบริษัทขนส่ง</button>
                                     </div>
 
 									<!-- Create Transport Modal -->
@@ -321,7 +322,7 @@ hr {
 									</div>
 									<!-- End Delete Modal -->
 									
-									<button id="myBtn2" class="secondary createfrebtn float:left">เพิ่มเรทราคา</button>
+									<button id="myBtn2" class="secondary createfrebtn" style="margin: 0px 10px 20px 0px;">เพิ่มเรทราคา</button>
 									<div class="table-wrapper">
 										<table id="example" class="table table-striped" style="width:100%">
 											<thead>

@@ -114,14 +114,14 @@ class UsershopController extends Controller
             'pass' => [
                 'required',
                 'string',
-                'min:10',             // must be at least 10 characters in length
+                'min:6',             // must be at least 10 characters in length
                 'regex:/[a-z]/',      // must contain at least one lowercase letter
                 'regex:/[A-Z]/',      // must contain at least one uppercase letter
                 'regex:/[0-9]/',      // must contain at least one digit
                 'required_with:passConflim', 
                 'same:passConflim', 
             ],
-            'passConflim' => 'min:10',
+            'passConflim' => 'min:6',
         ],[
             'email.required' => 'กรุณากรอก E-mail',
             'email.unique' => 'E-mail นี้มีการใช้ไปแล้ว',
@@ -143,7 +143,7 @@ class UsershopController extends Controller
             'pass.regex:/[0-9]/' => 'รหัสผ่านต้องมีตตัวเลข',
             'required_with:passConflim' => 'กรุณายืนยันรหัสผ่าน',
             'same' => 'รหัสผ่านไม่ตรงกัน',
-            'passConflim.min:10' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',
+            'passConflim.min:6' => 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร',
         ]);
         usershop::create([
             'id_tumbon' => $request->district,
@@ -181,19 +181,18 @@ class UsershopController extends Controller
             'amphures' => 'required',
             'postcode' => 'required',
             'district' => 'required',
-            'phone' => 'required|numeric|min:10',
+            'phone' => 'required|numeric|min:6',
             'pass' => [
                 'required',
                 'string',
-                'min:10',             // must be at least 10 characters in length
+                'min:6',             // must be at least 10 characters in length
                 'regex:/[a-z]/',      // must contain at least one lowercase letter
                 'regex:/[A-Z]/',      // must contain at least one uppercase letter
                 'regex:/[0-9]/',      // must contain at least one digit
-                'regex:/[@$!%*#?&]/', // must contain a special character
                 'required_with:passConflim', 
                 'same:passConflim', 
             ],
-            'passConflim' => 'min:10',
+            'passConflim' => 'min:6',
         ],[
             
             'name.required' => 'กรุณากรอก ชื่อ',
@@ -207,14 +206,13 @@ class UsershopController extends Controller
             'phone.numeric' => 'เบอร์โทรไม่ถูกต้อง',
             'phone.min' => 'เบอร์โทรไม่ถูกต้อง',
             'pass.required' => 'กรุณากรอกรหัสผ่าน',
-            'pass.min' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',
-            'pass.regex' => 'ต้องมีตัวพิมพ์เล็ก ตัวพิมพ์ใหญ่ ตัวเลข ตัวอักษรพิเศษ',
+            'pass.min' => 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร',
+            'pass.regex' => 'ต้องมีตัวพิมพ์เล็ก ตัวพิมพ์ใหญ่ ตัวเลข',
             'pass.regex:/[A-Z]/' => 'รหัสผ่านต้องมีตัวพิมพ์ใหญ่',
             'pass.regex:/[0-9]/' => 'รหัสผ่านต้องมีตตัวเลข',
-            'pass.regex:/[@$!%*#?&]/' => 'รหัสผ่านต้องมีตัวอักษรพิเศษ',
             'required_with:passConflim' => 'กรุณายืนยันรหัสผ่าน',
             'same' => 'รหัสผ่านไม่ตรงกัน',
-            'passConflim.min:10' => 'รหัสผ่านต้องมีอย่างน้อย 10 ตัวอักษร',
+            'passConflim.min:6' => 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร',
         ]);
         usershop::where('usershops.id_user', session('id_user'))->update([
             'id_tumbon' => $request->district,
