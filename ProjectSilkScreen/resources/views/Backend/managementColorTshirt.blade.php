@@ -207,11 +207,25 @@ hr {
 										<form action="{{ route('shirtcolor_store') }}" method="POST" enctype="multipart/form-data">
 										@csrf
 											<label for="size">สี:</label>
-											<input type="text" id="file_upload" name="shirtcolor_name" value=""><br>
+											<input type="text" id="file_upload" name="shirtcolor_name" value="" required><br>
+											@if ($errors->has('shirtcolor_name'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtcolor_name') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">รูปเสื้อ:</label>
 											<div class="image">
    							 				  <label><h4>Add image</h4></label>
-   										   <input type="file" class="form-control" required name="shirtcolor_picture">
+   										   <input type="file" class="form-control" required name="shirtcolor_picture" >
+											  @if ($errors->has('shirtcolor_picture'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtcolor_picture') }}</li> 
+													</ul>
+												</div>
+											@endif
   											  </div>
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
@@ -264,11 +278,25 @@ hr {
 										@csrf
 										@method('PUT')
 											<label for="size">สี:</label>
-											<input type="text" id="shirtcolor_name_edit" name="shirtcolor_name" value=""><br>
+											<input type="text" id="shirtcolor_name_edit" name="shirtcolor_name" value="" required><br>
+											@if ($errors->has('shirtcolor_name'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtcolor_name') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price" >รูปเสื้อ:</label>
 											<div class="image">
 											
    										   <input type="file" id="shirtcolor_picture_edit" class="form-control" required name="shirtcolor_picture">
+											  @if ($errors->has('shirtcolor_picture'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtcolor_picture') }}</li> 
+													</ul>
+												</div>
+											@endif
   											  </div>
 												<input type="hidden" id="edit_id" name="id_shirtcolor">
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>

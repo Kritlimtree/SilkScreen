@@ -15,6 +15,15 @@ class FreightController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'min' => 'required',
+            'max' => 'required',
+            'price' => 'required',
+        ],[
+            'min.required' => 'กรุณาใส่รูปสี',
+            'max.required' => 'กรุณากรอกชื่อสี',
+            'price.required' => 'กรุณาใส่รูปสี',
+        ]);
         $model = freight::create([
             'id_transport' => $request->id_transport,
             'min' => $request->min,
@@ -44,6 +53,15 @@ class FreightController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'min' => 'required',
+            'max' => 'required',
+            'price' => 'required',
+        ],[
+            'min.required' => 'กรุณาใส่รูปสี',
+            'max.required' => 'กรุณากรอกชื่อสี',
+            'price.required' => 'กรุณาใส่รูปสี',
+        ]);
         freight::where('id_freight', $request->id_freight)->update([
             'id_transport' => $request->input('id_transport'),
             'min' => $request->input('min'),

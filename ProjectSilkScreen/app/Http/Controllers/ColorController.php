@@ -12,6 +12,13 @@ class ColorController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'color_name' => 'required',
+            'color_code' => 'required',
+        ],[
+            'color_name.required' => 'กรุณากรอกชื่อสี',
+            'color_code.required' => 'กรุณาใส่รูปสี',
+        ]);
         $imageName="";
         if (!empty($request->color_code)) {
             $generate = hexdec(uniqid());
@@ -36,6 +43,13 @@ class ColorController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'color_name' => 'required',
+            'color_code' => 'required',
+        ],[
+            'color_name.required' => 'กรุณากรอกชื่อสี',
+            'color_code.required' => 'กรุณาใส่รูป',
+        ]);
         $imageName="";
         if (!empty($request->color_code)) {
             $generate = hexdec(uniqid());

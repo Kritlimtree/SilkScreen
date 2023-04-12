@@ -190,13 +190,27 @@ hr {
 										@csrf
 											<label for="size">สี:</label>
 											<input type="text" id="file_upload" name="color_name" required ><br>
+											@if ($errors->has('color_name'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('color_name') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">โค้ดสี:</label>
 											 
    										    
 						 <label for="price">รูปเสื้อ:</label>
 											<div class="image">
    							 				  <label><h4>Add image</h4></label>
-   										   <input type="file" class="form-control" required name="color_code">
+   										   <input type="file" class="form-control" required name="color_code" required>
+											  @if ($errors->has('color_code'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('color_code') }}</li> 
+													</ul>
+												</div>
+											@endif
   											  </div>
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
@@ -221,12 +235,26 @@ hr {
 										@csrf
 										@method('PUT')
 											<label for="size">สี:</label>
-											<input type="text" id="color_name_edit" name="color_name" value=""><br>
-											<label for="price" >รูปเสื้อ:</label>
+											<input type="text" id="color_name_edit" name="color_name" value="" required><br>
+											@if ($errors->has('color_name'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('color_name') }}</li> 
+													</ul>
+												</div>
+											@endif
+											 
 											<label for="price">รูปเสื้อ:</label>
 											<div class="image">
    							 				  <label><h4>Add image</h4></label>
-   										   <input type="file" class="form-control" required name="color_code">
+   										   <input type="file" class="form-control" required name="color_code" required>
+											  @if ($errors->has('color_code'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('color_code') }}</li> 
+													</ul>
+												</div>
+											@endif
   											  </div>
 											 
 												<input type="hidden" id="edit_id" name="id_color">

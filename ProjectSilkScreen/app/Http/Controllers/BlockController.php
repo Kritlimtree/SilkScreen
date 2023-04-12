@@ -12,6 +12,17 @@ class BlockController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'block_name' => 'required',
+            'block_wide' => 'required',
+            'block_long' => 'required',
+            'block_price' => 'required',
+        ],[
+            'block_name.required' => 'กรุณากรอกชื่อบล็อค',
+            'block_wide.required' => 'กรุณากรอกความกว้างบล็อค',
+            'block_long.required' => 'กรุณากรอกความยาวบล็อค',
+            'block_price.required' => 'กรุณากรอกราคาบล็อค',
+        ]);
         $model = block::create([
             'block_name' => $request->block_name,
             'block_wide' => $request->block_wide,
@@ -32,6 +43,17 @@ class BlockController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'block_name' => 'required',
+            'block_wide' => 'required',
+            'block_long' => 'required',
+            'block_price' => 'required',
+        ],[
+            'block_name.required' => 'กรุณากรอกชื่อบล็อค',
+            'block_wide.required' => 'กรุณากรอกความกว้างบล็อค',
+            'block_long.required' => 'กรุณากรอกความยาวบล็อค',
+            'block_price.required' => 'กรุณากรอกราคาบล็อค',
+        ]);
         block::where('id_block', $request->id_block)->update([
             'block_name' => $request->input('block_name'),
             'block_wide' => $request->input('block_wide'),

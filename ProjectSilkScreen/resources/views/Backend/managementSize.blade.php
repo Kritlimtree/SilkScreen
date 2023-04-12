@@ -207,13 +207,41 @@ hr {
 										<form action="{{ route('managementSize_store') }}" method="POST" enctype="multipart/form-data">
 										@csrf
 											<label for="size">ไซส์เสื้อ:</label>
-											<input type="text" id="file_upload" name="shirtsize_size" value=""> 
+											<input type="text" id="file_upload" name="shirtsize_size" value="" required> 
+											@if ($errors->has('shirtsize_size'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtsize_size') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">รอบอก:(นิ้ว)</label><br>
-											<input type="number" step="0.01" id="file_upload" name="shirtsize_chest" value=""><br>
+											<input type="number" step="0.01" id="file_upload" name="shirtsize_chest" value="" required><br>
+											@if ($errors->has('shirtsize_chest'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtsize_chest') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="size">ความยาว:(นิ้ว)</label><br>
-											<input type="number" step="0.01" id="file_upload" name="shirtsize_long" value=""><br>
+											<input type="number" step="0.01" id="file_upload" name="shirtsize_long" value="" required><br>
+											@if ($errors->has('shirtsize_long'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtsize_long') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">ราคา:(บาท)</label><br>
-											<input type="number" step="0.01" id="file_upload" name="shirtsize_price" value=""><br><br>
+											<input type="number" step="0.01" id="file_upload" name="shirtsize_price" value="" required><br><br>
+											@if ($errors->has('shirtsize_price'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtsize_price') }}</li> 
+													</ul>
+												</div>
+											@endif
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
            									         <i class="bx bx-save text-4 mr-2"></i> บันทึกข้อมูล
@@ -237,14 +265,42 @@ hr {
 										@csrf
 										@method('PUT')
 										<label for="size">ไซส์เสื้อ:</label>
-											<input type="text" id="shirtsize_size_edit" name="shirtsize_size" value=""> 
+											<input type="text" id="shirtsize_size_edit" name="shirtsize_size" value="" required> 
+											@if ($errors->has('shirtsize_size'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtsize_size') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">รอบอก:(นิ้ว)</label><br>
-											<input type="number" step="0.01" id="shirtsize_chest_edit" name="shirtsize_chest" value=""><br>
+											<input type="number" step="0.01" id="shirtsize_chest_edit" name="shirtsize_chest" value="" required><br>
+											@if ($errors->has('shirtsize_chest'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtsize_chest') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="size">ความยาว:(นิ้ว)</label><br>
-											<input type="number" step="0.01" id="shirtsize_long_edit" name="shirtsize_long" value=""><br>
+											<input type="number" step="0.01" id="shirtsize_long_edit" name="shirtsize_long" value="" required><br>
+											@if ($errors->has('shirtsize_long'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtsize_long') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">ราคา:(บาท)</label><br>
-											<input type="number" step="0.01" id="shirtsize_price_edit" name="shirtsize_price" value=""><br><br>
-												<input type="hidden" id="edit_id" name="id_shirtsize">
+											<input type="number" step="0.01" id="shirtsize_price_edit" name="shirtsize_price" value="" required><br><br>
+											@if ($errors->has('shirtsize_price'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('shirtsize_price') }}</li> 
+													</ul>
+												</div>
+											@endif	
+											<input type="hidden" id="edit_id" name="id_shirtsize">
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
            									         <i class="bx bx-save text-4 mr-2"></i> บันทึกข้อมูล

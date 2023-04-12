@@ -207,13 +207,41 @@ hr {
 										<form action="{{ route('managementBlock_store') }}" method="POST" enctype="multipart/form-data">
 										@csrf
 											<label for="size">ชื่อบล็อก:</label>
-											<input type="text" id="file_upload" name="block_name" value=""> 
+											<input type="text" id="file_upload" name="block_name" value="" required> 
+											@if ($errors->has('block_name'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('block_name') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">ความกว้าง:(นิ้ว)</label><br>
-											<input type="number" step="0.01" id="file_upload" name="block_wide" value=""><br>
+											<input type="number" step="0.01" id="file_upload" name="block_wide" value="" required><br>
+											@if ($errors->has('block_wide'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('block_wide') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="size">ความยาว:(นิ้ว)</label><br>
-											<input type="number" step="0.01" id="file_upload" name="block_long" value=""><br>
+											<input type="number" step="0.01" id="file_upload" name="block_long" value="" required><br>
+											@if ($errors->has('block_long'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('block_long') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">ราคา:(บาท)</label><br>
-											<input type="number" step="0.01" id="file_upload" name="block_price" value=""><br><br>
+											<input type="number" step="0.01" id="file_upload" name="block_price" value="" required><br><br>
+											@if ($errors->has('block_price'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('block_price') }}</li> 
+													</ul>
+												</div>
+											@endif
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
            									         <i class="bx bx-save text-4 mr-2"></i> บันทึกข้อมูล
@@ -237,13 +265,41 @@ hr {
 										@csrf
 										@method('PUT')
 										<label for="size">ไซส์เสื้อ:</label>
-											<input type="text" id="block_name_edit" name="block_name" value=""> 
+											<input type="text" id="block_name_edit" name="block_name" value="" required> 
+											@if ($errors->has('block_name'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('block_name') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">รอบอก:(นิ้ว)</label><br>
-											<input type="number" step="0.01" id="block_wide_edit" name="block_wide" value=""><br>
+											<input type="number" step="0.01" id="block_wide_edit" name="block_wide" value="" required><br>
+											@if ($errors->has('block_wide'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('block_wide') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="size">ความยาว:(นิ้ว)</label><br>
-											<input type="number" step="0.01" id="block_long_edit" name="block_long" value=""><br>
+											<input type="number" step="0.01" id="block_long_edit" name="block_long" value="" required><br>
+											@if ($errors->has('block_long'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('block_long') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="price">ราคา:(บาท)</label><br>
-											<input type="number" step="0.01" id="block_price_edit" name="block_price" value=""><br><br>
+											<input type="number" step="0.01" id="block_price_edit" name="block_price" value="" required><br><br>
+											@if ($errors->has('block_price'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('block_price') }}</li> 
+													</ul>
+												</div>
+											@endif
 												<input type="hidden" id="edit_id" name="id_block">
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">

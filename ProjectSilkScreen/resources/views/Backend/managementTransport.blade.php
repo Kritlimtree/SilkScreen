@@ -224,7 +224,14 @@ hr {
 										<form action="{{ route('Transport_store') }}" method="POST" enctype="multipart/form-data">
 										@csrf
 											<label for="size">บริษัทขนส่ง:</label>
-											<input type="text" id="file_upload" name="transport_name" value=""> <br>
+											<input type="text" id="file_upload" name="transport_name" value="" required> <br>
+											@if ($errors->has('transport_name'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('transport_name') }}</li> 
+													</ul>
+												</div>
+											@endif
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
            									         <i class="bx bx-save text-4 mr-2"></i> บันทึกข้อมูล
@@ -248,11 +255,32 @@ hr {
 										<form action="{{ route('managementTransport_store') }}" method="POST" enctype="multipart/form-data">
 										@csrf
 											<label for="size">น้ำหนักอย่างน้อย(กิโลกรัม):</label><br>
-											<input type="number" step="0.001" id="file_upload" name="min" value=""> <br>
+											<input type="number" step="0.001" id="file_upload" name="min" value="" required> <br>
+											@if ($errors->has('min'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('min') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="size">น้ำหนักไม่เกิน(กิโลกรัม):</label><br>
-											<input type="number" step="0.001" id="file_upload" name="max" value=""> <br>
+											<input type="number" step="0.001" id="file_upload" name="max" value="" required> <br>
+											@if ($errors->has('max'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('max') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="size">ราคา(บาท):</label><br>
-											<input type="number" step="0.001" id="file_upload" name="price" value=""> <br><br>
+											<input type="number" step="0.001" id="file_upload" name="price" value="" required> <br><br>
+											@if ($errors->has('price'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('price') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<input type="hidden" id="transport_id" name="id_transport" value="<?php echo $transport_category ?>">
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>
 										<button type="submit" class="secondary" data-loading-text="Loading...">
@@ -277,11 +305,32 @@ hr {
 										@csrf
 										@method('PUT')
 										<label for="size">น้ำหนักอย่างน้อย(กิโลกรัม):</label><br>
-											<input type="number" id="min_edit" step="0.001" id="file_upload" name="min" value=""> <br>
+											<input type="number" id="min_edit" step="0.001" id="file_upload" name="min" value="" required> <br>
+											@if ($errors->has('min'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('min') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="size">น้ำหนักไม่เกิน(กิโลกรัม):</label><br>
-											<input type="number" id="max_edit" step="0.001" id="file_upload" name="max" value=""> <br>
+											<input type="number" id="max_edit" step="0.001" id="file_upload" name="max" value="" required> <br>
+											@if ($errors->has('max'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('max') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<label for="size">ราคา(บาท):</label><br>
-											<input type="number" id="price_edit" step="0.001" id="file_upload" name="price" value=""> <br><br>
+											<input type="number" id="price_edit" step="0.001" id="file_upload" name="price" value="" required> <br><br>
+											@if ($errors->has('price'))
+											<div class="alert alert-danger">
+													<ul>
+															<li style="color: red;">{{ $errors->first('price') }}</li> 
+													</ul>
+												</div>
+											@endif
 											<input type="hidden" id="transport_id" name="id_transport" value="<?php echo $transport_category ?>">
 												<input type="hidden" id="edit_id" name="id_freight">
 												<button type="button" class=" danger" data-bs-dismiss="modal">Close</button>

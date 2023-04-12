@@ -13,11 +13,13 @@ class TransportController extends Controller
     }
     
     public function store(Request $request){
-         
+        $request->validate([
+            'transport_name' => 'required',
+        ],[
+            'transport_name.required' => 'กรุณากรอกบริษัทขนส่ง',
+        ]);
         $model = transport::create([
-
             'transport_name' => $request->transport_name,
-            
         ]);
         return redirect()->route('managementTransport');
     }

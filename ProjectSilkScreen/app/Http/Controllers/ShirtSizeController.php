@@ -12,6 +12,17 @@ class ShirtSizeController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'shirtsize_size' => 'required',
+            'shirtsize_chest' => 'required',
+            'shirtsize_long' => 'required',
+            'shirtsize_price' => 'required',
+        ],[
+            'shirtsize_size.required' => 'กรุณากรอกไซส์เสื้อ',
+            'shirtsize_chest.required' => 'กรุณากรอกขนาดอกเสื้อ',
+            'shirtsize_long.required' => 'กรุณากรอกคามยาวเสื้อ',
+            'shirtsize_price.required' => 'กรุณากรอกราคาไซส์เสื้อ',
+        ]);
         $model = shirtsize::create([
             'shirtsize_size' => $request->shirtsize_size,
             'shirtsize_chest' => $request->shirtsize_chest,
@@ -33,6 +44,17 @@ class ShirtSizeController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'shirtsize_size' => 'required',
+            'shirtsize_chest' => 'required',
+            'shirtsize_long' => 'required',
+            'shirtsize_price' => 'required',
+        ],[
+            'shirtsize_size.required' => 'กรุณากรอกไซส์เสื้อ',
+            'shirtsize_chest.required' => 'กรุณากรอกขนาดอกเสื้อ',
+            'shirtsize_long.required' => 'กรุณากรอกคามยาวเสื้อ',
+            'shirtsize_price.required' => 'กรุณากรอกราคาไซส์เสื้อ',
+        ]);
         shirtsize::where('id_shirtsize', $request->id_shirtsize)->update([
             'shirtsize_size' => $request->input('shirtsize_size'),
             'shirtsize_chest' => $request->input('shirtsize_chest'),

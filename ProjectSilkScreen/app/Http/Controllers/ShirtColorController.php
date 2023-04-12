@@ -12,6 +12,13 @@ class ShirtColorController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'shirtcolor_name' => 'required',
+            'shirtcolor_picture' => 'required',
+        ],[
+            'shirtcolor_name.required' => 'กรุณากรอกสีเสื้อ',
+            'shirtcolor_picture.required' => 'กรุณาใส่รูปสีเสื้อ',
+        ]);
         $imageName="";
         if (!empty($request->shirtcolor_picture)) {
             $generate = hexdec(uniqid());
