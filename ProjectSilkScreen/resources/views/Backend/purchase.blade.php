@@ -213,7 +213,7 @@ hr {
 									<table id="example" class="table table-striped" style="width:100%">
 											<thead>
 												<tr>
-													<td>id order</td>
+													<td>id order1</td>
 													<td>ราคาเต็ม</td>
 													<td>ราคามัดจำ (ขั้นต่ำ)</td>
 													<td>ราคาที่ลูกค้าจ่าย</td>
